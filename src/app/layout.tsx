@@ -87,6 +87,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerAuthSession();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
