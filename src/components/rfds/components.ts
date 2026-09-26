@@ -26,21 +26,9 @@ export { RISLibraryRankings } from "@/components/ris/ris-library-rankings";
 
 // Home Components
 export { EcosystemLibraries } from "@/components/home/ecosystem-libraries";
-export { ByTheNumbers } from "@/components/home/by-the-numbers";
-export { LimitedDrops } from "@/components/home/limited-drops";
-export { FeaturedLook } from "@/components/home/featured-look";
-export { FoundationHero } from "@/components/home/foundation-hero";
-export { MissionStatement } from "@/components/home/mission-statement";
-export { PastDropsCollections } from "@/components/home/past-drops-collections";
 export { ExecutiveMessage } from "@/components/home/executive-message";
 export { BecomeContributor } from "@/components/home/become-contributor";
-export { FeaturedCollections } from "@/components/home/featured-collections";
-export { JoinMovementCTA } from "@/components/home/join-movement-cta";
-export { HeroBadges } from "@/components/home/hero-badges";
-export { ThreePillars } from "@/components/home/three-pillars";
-export { Hero } from "@/components/home/hero";
 export { FoundingMembers } from "@/components/home/founding-members";
-export { PastDrops } from "@/components/home/past-drops";
 
 // Feature Components
 export { UsernameInput } from "@/features/maintainer-progress/username-input";
@@ -70,21 +58,9 @@ import { LibraryCard } from "@/components/ui/library-card";
 import { RISScoreBreakdown } from "@/components/ris/ris-score-breakdown";
 import { RISLibraryRankings } from "@/components/ris/ris-library-rankings";
 import { EcosystemLibraries } from "@/components/home/ecosystem-libraries";
-import { ByTheNumbers } from "@/components/home/by-the-numbers";
-import { LimitedDrops } from "@/components/home/limited-drops";
-import { FeaturedLook } from "@/components/home/featured-look";
-import { FoundationHero } from "@/components/home/foundation-hero";
-import { MissionStatement } from "@/components/home/mission-statement";
-import { PastDropsCollections } from "@/components/home/past-drops-collections";
 import { ExecutiveMessage } from "@/components/home/executive-message";
 import { BecomeContributor } from "@/components/home/become-contributor";
-import { FeaturedCollections } from "@/components/home/featured-collections";
-import { JoinMovementCTA } from "@/components/home/join-movement-cta";
-import { HeroBadges } from "@/components/home/hero-badges";
-import { ThreePillars } from "@/components/home/three-pillars";
-import { Hero } from "@/components/home/hero";
 import { FoundingMembers } from "@/components/home/founding-members";
-import { PastDrops } from "@/components/home/past-drops";
 import { UsernameInput } from "@/features/maintainer-progress/username-input";
 import { MaintainerProgress } from "@/features/maintainer-progress/maintainer-progress";
 import { ImpactSection } from "@/features/impact/impact-section";
@@ -117,21 +93,9 @@ export const Components = {
   
   // Home
   EcosystemLibraries,
-  ByTheNumbers,
-  LimitedDrops,
-  FeaturedLook,
-  FoundationHero,
-  MissionStatement,
-  PastDropsCollections,
   ExecutiveMessage,
   BecomeContributor,
-  FeaturedCollections,
-  JoinMovementCTA,
-  HeroBadges,
-  ThreePillars,
-  Hero,
   FoundingMembers,
-  PastDrops,
   
   // Features
   UsernameInput,
