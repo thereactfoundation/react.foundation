@@ -52,13 +52,12 @@ Orchestrates:
 - `/admin/ingest/inspect` - Inspect stored vectors
 
 ### 6. GitHub Actions Workflow
-**File**: `.github/workflows/ingest-content.yml`
+**File**: `.github/workflows/trigger-ingestion.yml`
 
-Auto-triggers after production deploy:
-- Waits for deployment to stabilize
-- Starts ingestion via API
-- Monitors progress (polls every 10s)
-- Reports success/failure
+Runs nightly at 2 AM UTC, or manually from the Actions tab:
+- Starts a full ingestion via `POST /api/ingest/full`, the only route that stores the content map
+- Polls `GET /api/ingest/full?ingestionId=X` every 15s
+- Fails unless the run reaches `completed` within 15 minutes
 
 ### 7. Access Control Bypass
 **File**: `src/proxy.ts`
@@ -254,7 +253,7 @@ curl -H "Authorization: Bearer your-token" \
 
 ### GitHub Actions Logs:
 ```bash
-gh run list --workflow=ingest-content.yml
+gh run list --workflow=trigger-ingestion.yml
 gh run view --log
 ```
 
@@ -298,7 +297,7 @@ Check function logs for ingestion API calls
 
 ### New Files:
 - `src/lib/chatbot/crawler-enhanced.ts` - Puppeteer-based crawler
-- `.github/workflows/ingest-content.yml` - Auto-ingestion workflow
+- `.github/workflows/trigger-ingestion.yml` - Nightly ingestion workflow
 - `docs/AUTO_INGESTION_SETUP.md` - Setup guide
 - `docs/CRAWLER_BYPASS_SETUP.md` - Bypass guide
 - `docs/INGESTION_TROUBLESHOOTING.md` - Troubleshooting
