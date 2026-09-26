@@ -52,7 +52,7 @@ export class LibrariesLoader implements ContentLoader {
 
     // Routing (3 repositories)
     { repo: 'remix-run/react-router', name: 'React Router', category: 'Routing', tier: 'Tier 1' },
-    { repo: 'TanStack/router', name: 'TanStack Router', category: 'Routing', tier: 'Tier 2' },
+    { repo: 'TanStack/router', name: 'TanStack Router / Start', category: 'Routing', tier: 'Tier 2' },
     { repo: 'molefrog/wouter', name: 'Wouter', category: 'Routing', tier: 'Tier 3' },
 
     // Meta-frameworks (6 repositories)

@@ -187,4 +187,23 @@ describe('ecosystemLibraries', () => {
       })
     );
   });
+
+  it('labels the TanStack/router entry as covering TanStack Start', async () => {
+    // TanStack Start ships from the TanStack/router monorepo, and the registry
+    // allows one entry per repository, so the existing entry covers both.
+    expect(findLibrary('TanStack', 'router')).toMatchObject({
+      category: 'routing',
+      tier: 2,
+    });
+    expect(libraryDisplayNames.router).toBe('TanStack Router / Start');
+
+    const loader = new LibrariesLoader();
+    const records = await loader.load();
+    expect(records).toContainEqual(
+      expect.objectContaining({
+        id: 'library-tanstack-router',
+        title: 'TanStack Router / Start',
+      })
+    );
+  });
 });
