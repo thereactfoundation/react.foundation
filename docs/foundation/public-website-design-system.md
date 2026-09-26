@@ -108,7 +108,6 @@ replaced:
 | `Button` / `ButtonLink` | Primary, secondary, quiet, and text actions |
 | `ThemeToggleWrapper` | Light/dark/system control |
 | `ScrollReveal` | Restrained section entrances |
-| `FoundationHero` | Home hero content source |
 | `FoundingMembers` | Member-logo strip |
 | `ExecutiveMessage` | About editorial letter |
 | `BecomeContributor` | Contributor pathways |

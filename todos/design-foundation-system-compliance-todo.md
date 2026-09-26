@@ -22,14 +22,12 @@ Audit against `docs/foundation/design-principles.md`, public surfaces only.
 - Button hover opacity (`hover:bg-primary/88`) — system button pattern
 - `store/opengraph-image.tsx` hex — OG image renderer has no CSS tokens
 
-## Obsolete (flagged, not fixed)
-- `src/components/home/`: by-the-numbers, featured-collections, featured-look, foundation-hero, hero, hero-badges, join-movement-cta, limited-drops, mission-statement, past-drops, past-drops-collections, three-pillars — only re-exported by `rfds/components.ts` + `rfds/index.ts`, never rendered
-- `src/components/communities/VerificationBadge.tsx` — no importers
+## Removed
+- [x] 12 unused `src/components/home/` components + `communities/VerificationBadge.tsx` (only RFDS re-exports, never rendered); hidden pages kept
 
 ## Pre-existing failures (not from this branch's edits)
 - Storybook: Layouts Header, Header And Footer, RFDS All Components — no `ThemeProvider` decorator in `.storybook/preview.ts`
 - `npm run lint`: 62 errors in untouched files (scripts/, stories/, src/*)
 
 ## Next Steps
-- Decide: delete obsolete home components
 - Commit, push, open PR
