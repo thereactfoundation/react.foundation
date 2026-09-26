@@ -63,10 +63,8 @@ export function LondonMap() {
     [leaflet],
   );
 
-  const tileUrl =
-    effectiveTheme === "dark"
-      ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-      : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+  const tileStyle = effectiveTheme === "dark" ? "Dark" : "Light";
+  const tileBase = `https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_${tileStyle}_Gray`;
 
   return (
     <figure className="overflow-hidden rounded-2xl border border-border bg-muted/30">
@@ -81,9 +79,13 @@ export function LondonMap() {
             className="h-full w-full"
           >
             <TileLayer
-              key={tileUrl}
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-              url={tileUrl}
+              key={`${tileStyle}-base`}
+              attribution="Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; OpenStreetMap contributors"
+              url={`${tileBase}_Base/MapServer/tile/{z}/{y}/{x}`}
+            />
+            <TileLayer
+              key={`${tileStyle}-reference`}
+              url={`${tileBase}_Reference/MapServer/tile/{z}/{y}/{x}`}
             />
             <Marker
               position={centralLondon}
