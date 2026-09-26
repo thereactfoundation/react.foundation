@@ -83,7 +83,7 @@ export const libraryIcons: Record<string, IconComponent | null> = {
 
   // Routing
   "react-router": SiReactrouter,
-  router: null, // TanStack Router
+  router: null, // TanStack Router / Start
   wouter: null,
 
   // Meta-frameworks
@@ -167,7 +167,7 @@ export const libraryDisplayNames: Record<string, string> = {
   urql: "urql",
   "react-native-firebase": "React Native Firebase",
   "react-router": "React Router",
-  router: "TanStack Router",
+  router: "TanStack Router / Start",
   wouter: "Wouter",
   "next.js": "Next.js",
   remix: "Remix",
