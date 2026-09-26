@@ -1,0 +1,12 @@
+{
+  "$comment": "Gzip KB of first-load JS per app route. Baseline measured 2026-09-26 on main (Next 16.3, Turbopack), with about 5% headroom. See issue #89.",
+  "defaultKb": 175,
+  "routes": {
+    "/communities*": 285,
+    "/summit": 285,
+    "/profile*": 285,
+    "/theme-test/toc-demo": 285,
+    "/admin*": 290,
+    "/ee/coming-soon": 650
+  }
+}
