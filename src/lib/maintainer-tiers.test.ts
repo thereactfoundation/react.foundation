@@ -206,4 +206,24 @@ describe('ecosystemLibraries', () => {
       })
     );
   });
+
+  it('includes React Native Gifted Charts in related library datasets', async () => {
+    expect(findLibrary('Abhinandan-Kushwaha', 'react-native-gifted-charts')).toMatchObject({
+      category: 'ui',
+      tier: 3,
+    });
+    expect(NPMCollector.getPackageName('Abhinandan-Kushwaha', 'react-native-gifted-charts')).toBe(
+      'react-native-gifted-charts'
+    );
+    expect(libraryDisplayNames['react-native-gifted-charts']).toBe('React Native Gifted Charts');
+
+    const loader = new LibrariesLoader();
+    const records = await loader.load();
+    expect(records).toContainEqual(
+      expect.objectContaining({
+        id: 'library-abhinandan-kushwaha-react-native-gifted-charts',
+        title: 'React Native Gifted Charts',
+      })
+    );
+  });
 });

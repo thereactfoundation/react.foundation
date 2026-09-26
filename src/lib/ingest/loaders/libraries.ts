@@ -77,7 +77,7 @@ export class LibrariesLoader implements ContentLoader {
     { repo: 'testing-library/react-hooks-testing-library', name: 'React Hooks Testing Library', category: 'Testing', tier: 'Tier 2' },
     { repo: 'callstack/react-native-testing-library', name: 'React Native Testing Library', category: 'Testing', tier: 'Tier 2' },
 
-    // UI/Component Libraries (8 repositories)
+    // UI/Component Libraries (9 repositories)
     { repo: 'radix-ui/primitives', name: 'Radix UI', category: 'UI Libraries', tier: 'Tier 1' },
     { repo: 'ant-design/ant-design', name: 'Ant Design', category: 'UI Libraries', tier: 'Tier 1' },
     { repo: 'tailwindlabs/headlessui', name: 'Headless UI', category: 'UI Libraries', tier: 'Tier 1' },
@@ -86,6 +86,7 @@ export class LibrariesLoader implements ContentLoader {
     { repo: 'adobe/react-spectrum', name: 'React Spectrum', category: 'UI Libraries', tier: 'Tier 2' },
     { repo: 'ariakit/ariakit', name: 'Ariakit', category: 'UI Libraries', tier: 'Tier 2' },
     { repo: 'chakra-ui/chakra-ui', name: 'Chakra UI', category: 'UI Libraries', tier: 'Tier 2' },
+    { repo: 'Abhinandan-Kushwaha/react-native-gifted-charts', name: 'React Native Gifted Charts', category: 'UI Libraries', tier: 'Tier 3' },
 
     // Animation (4 repositories)
     { repo: 'framer/motion', name: 'Framer Motion', category: 'Animation', tier: 'Tier 1' },

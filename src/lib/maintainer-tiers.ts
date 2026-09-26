@@ -103,7 +103,7 @@ export const ecosystemLibraries: RepoTarget[] = [
   { owner: "testing-library", name: "react-hooks-testing-library", category: "testing", tier: 2 },
   { owner: "callstack", name: "react-native-testing-library", category: "testing", tier: 2 },
 
-  // UI/Component Libraries (8 repos)
+  // UI/Component Libraries (9 repos)
   { owner: "radix-ui", name: "primitives", category: "ui", tier: 1 },
   { owner: "tailwindlabs", name: "headlessui", category: "ui", tier: 1 },
   { owner: "adobe", name: "react-spectrum", category: "ui", tier: 2 },
@@ -112,6 +112,7 @@ export const ecosystemLibraries: RepoTarget[] = [
   { owner: "mui", name: "base-ui", category: "ui", tier: 2 },
   { owner: "chakra-ui", name: "chakra-ui", category: "ui", tier: 2 },
   { owner: "ant-design", name: "ant-design", category: "ui", tier: 1 },
+  { owner: "Abhinandan-Kushwaha", name: "react-native-gifted-charts", category: "ui", tier: 3 },
 
   // Animation (4 repos)
   { owner: "framer", name: "motion", category: "animation", tier: 1 },
