@@ -4,7 +4,7 @@
  * Based on AUTO_INGESTION_SETUP.md specification
  */
 
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { UserManagementService } from '@/lib/admin/user-management-service';
@@ -273,6 +273,11 @@ export async function POST(request: Request) {
     })();
 
     runningIngestions.set(ingestionId, ingestionPromise);
+
+    // Keep the function alive until the run finishes. Without this, the
+    // platform can stop the function once the response is sent, and the run
+    // never reaches 'completed' or stores the content map.
+    after(ingestionPromise);
 
     // Store as latest ingestion ID in Redis for all admins to see
     await redis.set('rf:latest-ingestion-id', ingestionId);
