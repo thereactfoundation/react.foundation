@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import {
+  Eyebrow,
   PageIntro,
   PublicPageShell,
   Section,
@@ -59,8 +60,8 @@ export default function ScoringPage() {
         <Section className="pt-12 sm:pt-16" measure="standard">
           <Surface className="grid gap-8 p-7 sm:p-10 md:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <p className="text-sm font-semibold text-primary">Method status</p>
-              <h2 className="mt-3 text-2xl font-semibold text-foreground">
+              <Eyebrow>Method status</Eyebrow>
+              <h2 className="mt-4 text-2xl font-semibold text-foreground">
                 Published inputs before rankings
               </h2>
             </div>
@@ -73,9 +74,9 @@ export default function ScoringPage() {
         </Section>
 
         <Section className="py-20 sm:py-24" measure="standard">
-          <div className="grid gap-10 md:grid-cols-[0.75fr_1.25fr]">
+          <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <p className="text-sm font-semibold text-primary">Scoring model</p>
+              <Eyebrow>Scoring model</Eyebrow>
               <h2 className="mt-4 text-3xl font-semibold leading-tight text-foreground">
                 Evidence is useful only when its limits are visible.
               </h2>

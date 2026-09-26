@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import {
+  Eyebrow,
   PublicPageShell,
   Section,
   Surface,
@@ -48,7 +49,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </Surface>
 
             <div>
-              <p className="text-sm font-semibold text-primary">Store preview</p>
+              <Eyebrow>Store preview</Eyebrow>
               <h1 className="mt-4 text-title font-semibold leading-tight text-foreground">
                 {product.name}
               </h1>

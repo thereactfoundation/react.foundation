@@ -64,7 +64,7 @@ export default function StartCommunityPage() {
                 key={step.title}
                 className="grid gap-4 py-7 sm:grid-cols-[3rem_minmax(0,1fr)]"
               >
-                <span className="text-sm font-semibold text-primary">
+                <span className="foundation-eyebrow pt-2 text-primary">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div>

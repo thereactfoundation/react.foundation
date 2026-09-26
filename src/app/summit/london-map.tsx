@@ -69,7 +69,7 @@ export function LondonMap() {
       : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
 
   return (
-    <figure className="overflow-hidden rounded-2xl border border-border bg-muted/30">
+    <figure className="overflow-hidden rounded-card border border-border bg-surface-subtle">
       <div className="summit-map h-64 w-full bg-muted">
         {leaflet && markerIcon ? (
           <MapContainer

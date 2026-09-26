@@ -39,7 +39,7 @@ function SectionHeading({
 }) {
   return (
     <div className="max-w-3xl">
-      <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+      <p className="mb-4 foundation-eyebrow text-primary">
         {eyebrow}
       </p>
       <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
@@ -73,7 +73,7 @@ export default function SummitPage() {
               return (
                 <RFDS.ScrollReveal key={goal.title} animation="fade-up" delay={index * 90}>
                   <RFDS.SemanticCard variant="outlined" hover className="group h-full overflow-hidden p-6">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary transition-transform group-hover:-translate-y-1">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-field border border-border bg-brand-soft text-primary transition-transform group-hover:-translate-y-1">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </div>
                     <p className="mt-7 font-mono text-xs text-muted-foreground">0{index + 1}</p>
@@ -87,7 +87,7 @@ export default function SummitPage() {
         </div>
       </section>
 
-      <section id="program" className="scroll-mt-36 border-y border-border/60 bg-muted/35 py-24 sm:py-32">
+      <section id="program" className="scroll-mt-36 border-y border-border bg-surface-subtle py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
           <RFDS.ScrollReveal animation="fade-up">
             <SectionHeading
@@ -102,9 +102,9 @@ export default function SummitPage() {
               <RFDS.ScrollReveal key={summitDay.day} animation="fade-up" delay={index * 80}>
                 <RFDS.SemanticCard
                   variant="outlined"
-                  className={`h-full p-6 ${summitDay.isTravel ? "border-dashed border-border/70 bg-transparent" : "bg-card"}`}
+                  className={`h-full p-6 ${summitDay.isTravel ? "border-dashed border-border bg-transparent" : "bg-card"}`}
                 >
-                  <p className={`font-mono text-xs font-semibold uppercase tracking-[0.18em] ${summitDay.isTravel ? "text-muted-foreground" : "text-primary"}`}>
+                  <p className={`foundation-eyebrow ${summitDay.isTravel ? "text-muted-foreground" : "text-primary"}`}>
                     {summitDay.day}
                   </p>
                   <p className={`mt-7 font-semibold tracking-[-0.06em] ${summitDay.isTravel ? "text-3xl text-muted-foreground" : "text-5xl text-foreground"}`}>
@@ -116,7 +116,7 @@ export default function SummitPage() {
                   </h3>
                   <p className="mt-3 text-sm leading-6 text-muted-foreground">{summitDay.focus}</p>
                   {summitDay.audience ? (
-                    <p className="mt-6 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                    <p className="mt-6 foundation-eyebrow text-muted-foreground">
                       {summitDay.audience}
                     </p>
                   ) : null}
@@ -129,7 +129,7 @@ export default function SummitPage() {
 
       <section id="joining" className="scroll-mt-36 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-20">
+          <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-20">
             <RFDS.ScrollReveal animation="slide-right">
               <SectionHeading
                 eyebrow="Joining the Summit"
@@ -143,7 +143,7 @@ export default function SummitPage() {
 
             <RFDS.ScrollReveal animation="slide-left" delay={100}>
               <RFDS.SemanticCard variant="outlined" className="p-7 sm:p-9">
-                <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                <p className="foundation-eyebrow text-primary">
                   Self-nominations
                 </p>
                 <h3 className="mt-4 text-2xl font-semibold text-foreground">
@@ -157,7 +157,7 @@ export default function SummitPage() {
                   target="_blank"
                   rel="noreferrer"
                   variant="tertiary"
-                  className="mt-7 border-primary/30 bg-primary/5 hover:bg-primary/10"
+                  className="mt-7"
                 >
                   Self-nomination form
                 </RFDS.ButtonLink>
@@ -167,7 +167,7 @@ export default function SummitPage() {
         </div>
       </section>
 
-      <section id="plan" className="scroll-mt-36 border-y border-border/60 bg-muted/35 py-24 sm:py-32">
+      <section id="plan" className="scroll-mt-36 border-y border-border bg-surface-subtle py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
           <RFDS.ScrollReveal animation="fade-up">
             <SectionHeading
@@ -180,7 +180,7 @@ export default function SummitPage() {
           <div className="mt-14 grid gap-5 lg:grid-cols-3">
             <RFDS.SemanticCard variant="outlined" className="p-7 lg:col-span-2">
               <div className="flex items-center justify-between gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <div className="flex h-12 w-12 items-center justify-center rounded-field bg-brand-soft text-primary">
                   <MapPin className="h-6 w-6" aria-hidden="true" />
                 </div>
                 <RFDS.SemanticBadge variant="warning">Venue to be confirmed</RFDS.SemanticBadge>
@@ -210,7 +210,7 @@ export default function SummitPage() {
       </section>
 
       <section id="faq" className="scroll-mt-36 py-24 sm:py-32">
-        <div className="mx-auto grid max-w-7xl gap-14 px-6 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:px-12">
+        <div className="mx-auto grid max-w-7xl gap-14 px-6 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-12">
           <div className="lg:sticky lg:top-40 lg:self-start">
             <RFDS.ScrollReveal animation="fade-up">
               <SectionHeading
@@ -226,9 +226,9 @@ export default function SummitPage() {
         </div>
       </section>
 
-      <section className="border-t border-border/60 bg-muted/35 py-24">
+      <section className="border-t border-border bg-surface-subtle py-24">
         <RFDS.ScrollReveal animation="scale" className="mx-auto max-w-4xl px-6 text-center sm:px-8">
-          <RFDS.SemanticBadge variant="outline" className="border-primary/30 bg-background/50">10–12 November · London</RFDS.SemanticBadge>
+          <RFDS.SemanticBadge variant="outline" className="border-primary/30">10–12 November · London</RFDS.SemanticBadge>
           <h2 className="mt-7 text-4xl font-semibold tracking-tight text-foreground sm:text-6xl">Let’s shape what comes next.</h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
             Bring your context and expertise to help build the future of React.

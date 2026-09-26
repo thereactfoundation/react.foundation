@@ -42,21 +42,21 @@ export function SummitHero() {
               <SummitCalendarMenu variant="tertiary" />
             </div>
 
-            <dl className="mt-12 grid max-w-2xl gap-6 border-t border-border/70 pt-7 sm:grid-cols-3">
+            <dl className="mt-12 grid max-w-2xl gap-6 border-t border-border pt-7 sm:grid-cols-3">
               <div>
-                <dt className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
+                <dt className="flex items-center gap-2 foundation-eyebrow text-muted-foreground">
                   <CalendarDays className="h-4 w-4 text-primary" aria-hidden="true" /> Dates
                 </dt>
                 <dd className="mt-2 font-semibold text-foreground">10–12 Nov 2026</dd>
               </div>
               <div>
-                <dt className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
+                <dt className="flex items-center gap-2 foundation-eyebrow text-muted-foreground">
                   <MapPin className="h-4 w-4 text-primary" aria-hidden="true" /> Location
                 </dt>
                 <dd className="mt-2 font-semibold text-foreground">London, UK</dd>
               </div>
               <div>
-                <dt className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
+                <dt className="flex items-center gap-2 foundation-eyebrow text-muted-foreground">
                   <UsersRound className="h-4 w-4 text-primary" aria-hidden="true" /> Attendance
                 </dt>
                 <dd className="mt-2 font-semibold text-foreground">Invite only</dd>
@@ -76,10 +76,10 @@ export function SummitHero() {
                 height={96}
               />
             </div>
-            <span className="absolute left-[10%] top-[22%] rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-lg backdrop-blur">align</span>
-            <span className="absolute right-[10%] top-[18%] rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-lg backdrop-blur">share</span>
-            <span className="absolute bottom-[18%] right-[6%] rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-lg backdrop-blur">build</span>
-            <span className="absolute bottom-[12%] left-[12%] rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-lg backdrop-blur">connect</span>
+            <span className="absolute left-[10%] top-[22%] rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-card backdrop-blur">align</span>
+            <span className="absolute right-[10%] top-[18%] rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-card backdrop-blur">share</span>
+            <span className="absolute bottom-[18%] right-[6%] rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-card backdrop-blur">build</span>
+            <span className="absolute bottom-[12%] left-[12%] rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-card backdrop-blur">connect</span>
           </div>
         </div>
       </section>

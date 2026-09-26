@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { EcosystemLibraries } from "@/components/home/ecosystem-libraries";
 import {
+  Eyebrow,
   PageIntro,
   PublicPageShell,
   Section,
@@ -56,10 +57,10 @@ export default function LibrariesPage() {
         <Section className="pt-12 sm:pt-16" measure="standard">
           <Surface className="grid gap-8 p-7 sm:p-10 md:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <p className="text-sm font-semibold text-primary">
+              <Eyebrow>
                 {ecosystemLibraries.length} tracked repositories
-              </p>
-              <h2 className="mt-3 text-2xl font-semibold text-foreground">
+              </Eyebrow>
+              <h2 className="mt-4 text-2xl font-semibold text-foreground">
                 A curated ecosystem list, not a leaderboard
               </h2>
             </div>
@@ -72,9 +73,9 @@ export default function LibrariesPage() {
         </Section>
 
         <Section className="py-20 sm:py-24" measure="standard">
-          <div className="grid gap-10 md:grid-cols-[0.75fr_1.25fr]">
+          <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <p className="text-sm font-semibold text-primary">How to read this list</p>
+              <Eyebrow>How to read this list</Eyebrow>
               <h2 className="mt-4 text-3xl font-semibold leading-tight text-foreground">
                 The list explains scope before scores.
               </h2>
