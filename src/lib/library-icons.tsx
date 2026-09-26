@@ -117,6 +117,7 @@ export const libraryIcons: Record<string, IconComponent | null> = {
   "base-ui": SiMui,
   "chakra-ui": SiChakraui,
   "ant-design": SiAntdesign,
+  "react-native-gifted-charts": null,
 
   // Animation
   motion: SiFramer,
@@ -193,6 +194,7 @@ export const libraryDisplayNames: Record<string, string> = {
   "base-ui": "Base UI",
   "chakra-ui": "Chakra UI",
   "ant-design": "Ant Design",
+  "react-native-gifted-charts": "React Native Gifted Charts",
   motion: "Framer Motion",
   "react-spring": "React Spring",
   "react-three-fiber": "React Three Fiber",

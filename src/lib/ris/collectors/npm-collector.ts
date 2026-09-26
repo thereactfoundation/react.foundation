@@ -223,6 +223,7 @@ export class NPMCollector {
       'mui/material-ui': '@mui/material',
       'mui/base-ui': '@base-ui/react',
       'chakra-ui/chakra-ui': '@chakra-ui/react',
+      'Abhinandan-Kushwaha/react-native-gifted-charts': 'react-native-gifted-charts',
       'ant-design/ant-design': 'antd',
       'framer/motion': 'framer-motion',
       'formkit/auto-animate': '@formkit/auto-animate',
