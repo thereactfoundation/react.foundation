@@ -25,7 +25,10 @@ describe('React Foundation theme contract', () => {
     expect(globalsCss).toContain('--foundation-content-reading: 40.5rem;');
     expect(globalsCss).toContain('--foundation-page-gutter: clamp(1.25rem, 4vw, 3rem);');
     expect(globalsCss).toContain('--foundation-section-space: clamp(4.5rem, 9vw, 8rem);');
-    expect(globalsCss).toContain('--foundation-radius-panel: 1.75rem;');
+    expect(globalsCss).toMatch(/--foundation-radius-field: 0\.625rem;/);
+    expect(globalsCss).toMatch(/--foundation-radius-card: 1rem;/);
+    expect(globalsCss).toMatch(/--foundation-radius-panel: 1\.5rem;/);
+    expect(globalsCss).toMatch(/--foundation-radius-control: 999px;/);
     expect(globalsCss).toContain('--foundation-shadow-soft:');
   });
 

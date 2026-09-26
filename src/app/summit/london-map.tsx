@@ -67,7 +67,7 @@ export function LondonMap() {
   const tileBase = `https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_${tileStyle}_Gray`;
 
   return (
-    <figure className="overflow-hidden rounded-2xl border border-border bg-muted/30">
+    <figure className="overflow-hidden rounded-card border border-border bg-surface-subtle">
       <div className="summit-map h-64 w-full bg-muted">
         {leaflet && markerIcon ? (
           <MapContainer

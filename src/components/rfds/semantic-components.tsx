@@ -24,7 +24,7 @@ export function SemanticButton({
   children, 
   ...props 
 }: SemanticButtonProps) {
-  const baseClasses = "inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50";
+  const baseClasses = "inline-flex items-center justify-center gap-2 rounded-control font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50";
   
   const variantClasses = {
     primary: "bg-primary text-primary-foreground hover:bg-primary/90",
@@ -70,12 +70,12 @@ export function SemanticCard({
   children, 
   ...props 
 }: SemanticCardProps) {
-  const baseClasses = "rounded-lg transition-colors";
+  const baseClasses = "rounded-card transition-colors";
   
   const variantClasses = {
     default: "bg-card text-card-foreground",
     outlined: "bg-card text-card-foreground border border-border",
-    elevated: "bg-card text-card-foreground shadow-md",
+    elevated: "bg-card text-card-foreground shadow-card",
     glass: "bg-card/80 text-card-foreground backdrop-blur border border-border/20",
   };
   
@@ -148,7 +148,7 @@ export function SemanticInput({
   className, 
   ...props 
 }: SemanticInputProps) {
-  const baseClasses = "flex h-10 w-full rounded-md border px-3 py-2 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
+  const baseClasses = "flex h-10 w-full rounded-field border px-3 py-2 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
   
   const variantClasses = {
     default: "border-input bg-background text-foreground",
@@ -194,7 +194,7 @@ export function SemanticAlert({
   children, 
   ...props 
 }: SemanticAlertProps) {
-  const baseClasses = "relative w-full rounded-lg border p-4";
+  const baseClasses = "relative w-full rounded-card border p-4";
   
   const variantClasses = {
     default: "bg-background text-foreground border-border",

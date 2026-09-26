@@ -156,7 +156,7 @@ export default async function CommunityPage({ params }: CommunityPageProps) {
             </div>
 
             <aside>
-              <h2 className="text-sm font-semibold text-primary">
+              <h2 className="foundation-eyebrow text-primary">
                 Community details
               </h2>
               <dl className="mt-4 divide-y divide-border border-y border-border">

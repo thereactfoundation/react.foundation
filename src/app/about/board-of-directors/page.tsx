@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import {
+  Eyebrow,
   PageIntro,
   PublicPageShell,
   Section,
@@ -42,10 +43,10 @@ export default function BoardOfDirectorsPage() {
         </Section>
 
         <Section className="pt-12 sm:pt-16" measure="standard">
-          <Surface className="grid gap-8 p-7 sm:p-10 md:grid-cols-[0.7fr_1.3fr]">
+          <Surface className="grid gap-8 p-7 sm:p-10 md:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <p className="text-sm font-semibold text-primary">Current status</p>
-              <h2 className="mt-3 text-2xl font-semibold text-foreground">
+              <Eyebrow>Current status</Eyebrow>
+              <h2 className="mt-4 text-2xl font-semibold text-foreground">
                 Appointments are in progress
               </h2>
             </div>
@@ -64,9 +65,9 @@ export default function BoardOfDirectorsPage() {
         </Section>
 
         <Section className="py-20 sm:py-24" measure="standard">
-          <div className="grid gap-10 md:grid-cols-[0.75fr_1.25fr]">
+          <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <p className="text-sm font-semibold text-primary">Board remit</p>
+              <Eyebrow>Board remit</Eyebrow>
               <h2 className="mt-4 text-3xl font-semibold leading-tight text-foreground">
                 Oversight with a clear public purpose.
               </h2>

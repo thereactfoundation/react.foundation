@@ -1,3 +1,4 @@
+import { Eyebrow } from "@/components/public-site/layout";
 import { ButtonLink } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ecosystemLibraries } from "@/lib/maintainer-tiers";
@@ -104,11 +105,11 @@ owner/repo:
         id={id}
         className="scroll-mt-32 space-y-10"
       >
-        <div className="grid gap-6 md:grid-cols-[0.75fr_1.25fr]">
+        <div className="grid gap-6 md:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <p className="text-sm font-semibold text-primary">
+            <Eyebrow>
               {libraryCount} tracked repositories
-            </p>
+            </Eyebrow>
             <h2 className="mt-4 text-3xl font-semibold leading-tight text-foreground sm:text-4xl">
               {title}
             </h2>

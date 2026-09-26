@@ -101,7 +101,7 @@ function FiltersSkeleton() {
 }
 
 function SortDropdownSkeleton() {
-  return <div aria-hidden className="h-10 w-40 animate-pulse rounded-lg bg-muted" />;
+  return <div aria-hidden className="h-10 w-40 animate-pulse rounded-field bg-muted" />;
 }
 
 function ListSkeleton() {

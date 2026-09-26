@@ -43,7 +43,7 @@ function SignInShell({ callbackUrl }: { callbackUrl: string | null }) {
               type="button"
               disabled={!callbackUrl}
               onClick={callbackUrl ? () => signIn("github", { callbackUrl }) : undefined}
-              className="flex min-h-12 w-full items-center justify-center gap-3 rounded-control bg-[#24292f] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#32383f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:cursor-wait disabled:opacity-70"
+              className="flex min-h-12 w-full items-center justify-center gap-3 rounded-control bg-foreground px-5 py-3 text-sm font-semibold text-background transition hover:bg-foreground/88 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:cursor-wait disabled:opacity-70"
             >
               <GitHubMark />
               Continue with GitHub

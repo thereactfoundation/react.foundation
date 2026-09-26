@@ -41,21 +41,21 @@ export function SummitHero() {
               <SummitCalendarMenu variant="tertiary" />
             </div>
 
-            <dl className="mt-12 grid max-w-2xl gap-6 border-t border-border/70 pt-7 sm:grid-cols-3">
+            <dl className="mt-12 grid max-w-2xl gap-6 border-t border-border pt-7 sm:grid-cols-3">
               <div>
-                <dt className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
+                <dt className="flex items-center gap-2 foundation-eyebrow text-muted-foreground">
                   <CalendarDays className="h-4 w-4 text-primary" aria-hidden="true" /> Dates
                 </dt>
                 <dd className="mt-2 font-semibold text-foreground">10–12 Nov 2026</dd>
               </div>
               <div>
-                <dt className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
+                <dt className="flex items-center gap-2 foundation-eyebrow text-muted-foreground">
                   <MapPin className="h-4 w-4 text-primary" aria-hidden="true" /> Location
                 </dt>
                 <dd className="mt-2 font-semibold text-foreground">Meta King&apos;s Cross, London</dd>
               </div>
               <div>
-                <dt className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
+                <dt className="flex items-center gap-2 foundation-eyebrow text-muted-foreground">
                   <UsersRound className="h-4 w-4 text-primary" aria-hidden="true" /> Attendance
                 </dt>
                 <dd className="mt-2 font-semibold text-foreground">Invite only</dd>
