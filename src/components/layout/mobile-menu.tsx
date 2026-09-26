@@ -175,7 +175,7 @@ export function MobileMenu({ session, status }: MobileMenuProps) {
           )}
 
           {/* Navigation Links */}
-          <nav className="p-6">
+          <nav aria-label="Mobile navigation" className="p-6">
             <div className="space-y-2">
               {navigationLinks.map((link) => (
                 <Link
