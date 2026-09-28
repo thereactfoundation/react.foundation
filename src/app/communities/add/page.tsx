@@ -18,7 +18,7 @@ export default function AddCommunityPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-12 sm:pt-16" measure="standard">
+        <Section spacing="intro">
           <Link
             href="/communities"
             className="text-sm text-muted-foreground transition hover:text-foreground"
@@ -26,7 +26,7 @@ export default function AddCommunityPage() {
             <span aria-hidden>←</span> Back to communities
           </Link>
         </Section>
-        <Section className="pt-10" measure="standard">
+        <Section spacing="attached">
           <PageIntro
             align="left"
             eyebrow="Community directory"

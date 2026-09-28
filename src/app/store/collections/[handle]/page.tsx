@@ -48,7 +48,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-12 sm:pt-16" measure="standard">
+        <Section spacing="intro">
           <Link
             href="/store/collections"
             className="text-sm text-muted-foreground transition hover:text-foreground"
@@ -56,7 +56,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
             <span aria-hidden>←</span> All collections
           </Link>
         </Section>
-        <Section className="pt-10" measure="standard">
+        <Section spacing="attached">
           <PageIntro
             align="left"
             eyebrow="Store preview"
@@ -68,7 +68,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
           />
         </Section>
 
-        <Section className="py-16" measure="standard">
+        <Section>
           {products.length ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {products.map((product) => (

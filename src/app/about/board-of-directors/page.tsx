@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import {
-  Eyebrow,
+  FeatureGrid,
+  FeatureItem,
   PageIntro,
   PublicPageShell,
   Section,
-  Surface,
+  SectionHeader,
+  SummaryPanel,
 } from "@/components/public-site/layout";
-import { ButtonLink } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Board of Directors",
@@ -34,7 +36,7 @@ export default function BoardOfDirectorsPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Governance"
             title="Board of Directors"
@@ -42,55 +44,39 @@ export default function BoardOfDirectorsPage() {
           />
         </Section>
 
-        <Section className="pt-12 sm:pt-16" measure="standard">
-          <Surface className="grid gap-8 p-7 sm:p-10 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <Eyebrow>Current status</Eyebrow>
-              <h2 className="mt-4 text-2xl font-semibold text-foreground">
-                Appointments are in progress
-              </h2>
-            </div>
-            <div className="space-y-4 text-sm leading-6 text-muted-foreground">
-              <p>
-                Named directors will be published only after appointments are
-                complete. Placeholder profiles are intentionally not presented as
-                members of the board.
-              </p>
-              <p>
-                This page will be updated with confirmed directors, terms, and
-                governance documents as they become public.
-              </p>
-            </div>
-          </Surface>
+        <Section spacing="attached">
+          <SummaryPanel eyebrow="Current status" title="Appointments are in progress">
+            <p>
+              Named directors will be published only after appointments are
+              complete. Placeholder profiles are intentionally not presented as
+              members of the board.
+            </p>
+            <p>
+              This page will be updated with confirmed directors, terms, and
+              governance documents as they become public.
+            </p>
+          </SummaryPanel>
         </Section>
 
-        <Section className="py-20 sm:py-24" measure="standard">
-          <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <Eyebrow>Board remit</Eyebrow>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight text-foreground">
-                Oversight with a clear public purpose.
-              </h2>
-            </div>
-            <div className="divide-y divide-border border-y border-border">
-              {responsibilities.map((item) => (
-                <article key={item.title} className="py-6">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    {item.body}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
+        <Section>
+          <SectionHeader eyebrow="Board remit" title="Oversight with a clear public purpose." />
+          <FeatureGrid>
+            {responsibilities.map((item, index) => (
+              <FeatureItem key={item.title} index={index + 1} title={item.title}>
+                {item.body}
+              </FeatureItem>
+            ))}
+          </FeatureGrid>
         </Section>
 
-        <Section className="pb-8 text-center" measure="standard">
-          <ButtonLink href="/about" variant="secondary">
+        <Section spacing="attached">
+          <Link
+            href="/about"
+            className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary"
+          >
+            <span aria-hidden>←</span>
             Back to about
-          </ButtonLink>
+          </Link>
         </Section>
       </main>
     </PublicPageShell>

@@ -9,7 +9,7 @@ import { CommunitySortDropdown } from "@/components/communities/CommunitySortDro
 import { CommunityStats } from "@/components/communities/CommunityStats";
 import { CommunitySearch } from "@/components/communities/CommunitySearch";
 import {
-  Eyebrow,
+  SectionHeader,
   PageIntro,
   PublicPageShell,
   Section,
@@ -36,7 +36,7 @@ export default function CommunitiesPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Global network"
             title="Find your React community"
@@ -44,11 +44,11 @@ export default function CommunitiesPage() {
           />
         </Section>
 
-        <Section className="pt-10 sm:pt-12">
+        <Section spacing="attached">
           <CommunityStats {...communityStats} />
         </Section>
 
-        <Section className="pt-4 sm:pt-6" measure="standard">
+        <Section spacing="attached">
           <div className="overflow-hidden rounded-panel border border-border bg-map-water/35 shadow-card">
             <CommunityMap communities={REACT_COMMUNITIES} />
           </div>
@@ -57,17 +57,10 @@ export default function CommunitiesPage() {
           </div>
         </Section>
 
-        <Section
-          id="communities"
-          className="scroll-mt-24 border-t border-border pt-20 sm:pt-24"
-          measure="standard"
-        >
-          <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <Section id="communities" className="scroll-mt-24">
+          <div className="mb-10 flex flex-col gap-5 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <Eyebrow className="mb-3">Community directory</Eyebrow>
-              <h2 className="text-3xl font-semibold tracking-[-0.02em] text-foreground">
-                Find a community
-              </h2>
+              <SectionHeader eyebrow="Community directory" title="Find a community" />
             </div>
             <Suspense fallback={<SortDropdownSkeleton />}>
               <CommunitySortDropdown />

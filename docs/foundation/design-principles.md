@@ -41,10 +41,13 @@ elevation model, a mono technical voice). Restraint is the product.
    labels use the mono **eyebrow** (`.foundation-eyebrow` / the `<Eyebrow>`
    component): uppercase Geist Mono, 11px, `0.16em` tracking.
 
-5. **One eyebrow, one heading rhythm.** Section intros are always
-   `Eyebrow → heading → optional lead`. The two-column intro+list pattern uses a
-   single ratio (`0.8fr / 1.2fr`). No more hand-written `text-sm font-semibold
-   text-primary` labels scattered per page.
+5. **One eyebrow, one heading rhythm, three compositions.** Every section
+   opens with `SectionHeader` (`Eyebrow → heading → optional lead/actions`),
+   then uses exactly one of three bodies: a `FeatureGrid` of unboxed
+   `FeatureItem`s, a grid of `Surface` cards (only for independent objects), or
+   narrow prose. `SummaryPanel` (once, under the intro) and `CtaBand` (once,
+   last) are the only emphasized moments. The old sidebar-heading-plus-ruled-list
+   layout (`0.8fr / 1.2fr`) is retired.
 
 6. **Deliberate color, never opacity soup.** Text uses `foreground`,
    `muted-foreground`, and the `text-subtle`/`text-strong` roles — not ad-hoc
@@ -61,10 +64,12 @@ elevation model, a mono technical voice). Restraint is the product.
    only when its content is a genuinely independent, grouped object (the
    executive letter, a news item, the map, the reporting-status panel).
 
-9. **Consistent, generous vertical rhythm.** Large gaps between bands, tight
-   stacks inside them. One shared content spine: header, page content, and
-   footer all align to the `standard` measure; long-form prose narrows to the
-   `reading` measure.
+9. **One spine, two widths, one rhythm.** Header, every section, and footer
+   align to the `standard` measure (64rem). `narrow` (40.5rem) only caps prose
+   line length *inside* that spine — it is never a separately centered box.
+   A `Section` owns only the space above it: `intro`, `section`, or `attached`.
+   Pages never set their own padding, max-widths, section borders, or
+   background bands.
 
 10. **Photography and the map are the visual anchors.** They carry warmth and
     proof; the chrome around them stays quiet. Media has fixed dimensions to
@@ -93,5 +98,8 @@ elevation model, a mono technical voice). Restraint is the product.
 - [ ] Section label is an `<Eyebrow>` (mono), not a hand-rolled teal label.
 - [ ] Text/surface colors are semantic tokens, not opacity variants.
 - [ ] No second decorative gradient; hero glow only.
-- [ ] New section aligns to the shared measure and vertical rhythm.
+- [ ] New section is a `Section` with a `spacing` step — no page-level padding.
+- [ ] Content aligns to the standard spine; only prose uses `narrow`.
+- [ ] Section body is one of the three compositions; no new row layouts.
+- [ ] No rules or background bands between sections.
 - [ ] `npx tsc --noEmit` clean; changed files lint clean.

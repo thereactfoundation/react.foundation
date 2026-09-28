@@ -4,7 +4,7 @@ import Image from "next/image";
 export function ExecutiveMessage() {
   return (
     <ScrollReveal animation="fade-up">
-      <section className="scroll-mt-32 rounded-panel border border-border bg-surface-raised px-7 py-9 shadow-soft sm:px-12 sm:py-12">
+      <section className="scroll-mt-32">
         <p className="foundation-eyebrow text-primary">
           A message from our Executive Director
         </p>
@@ -85,7 +85,7 @@ export function ExecutiveMessage() {
           </p>
         </div>
 
-        <div className="mt-9 flex items-center gap-3 border-t border-border pt-7">
+        <div className="mt-10 flex items-center gap-3">
           <Image
             src="/seth-webster-headshot.jpeg"
             alt=""

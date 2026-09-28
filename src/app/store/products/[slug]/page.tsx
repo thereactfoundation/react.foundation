@@ -33,7 +33,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-12 sm:pt-16" measure="standard">
+        <Section spacing="intro">
           <Link
             href="/store/collections"
             className="text-sm text-muted-foreground transition hover:text-foreground"
@@ -42,7 +42,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </Link>
         </Section>
 
-        <Section className="pt-10" measure="standard">
+        <Section spacing="attached">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
             <Surface className="p-4 sm:p-7">
               <ProductGallery images={product.images} />
@@ -86,7 +86,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
         </Section>
 
-        <Section className="py-16" measure="standard">
+        <Section>
           <div className="grid gap-10 md:grid-cols-2">
             <div>
               <h2 className="text-xl font-semibold text-foreground">Features</h2>
