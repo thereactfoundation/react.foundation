@@ -131,11 +131,21 @@ html {
 
   /* Layout, shape, and motion */
   --foundation-header-height: 4.5rem;
-  --foundation-content-wide: 72rem;
+  /*
+   * Two widths only. `standard` is the spine every section aligns to (header,
+   * content, footer). `narrow` caps prose line length inside that spine.
+   */
   --foundation-content-standard: 64rem;
-  --foundation-content-reading: 40.5rem;
+  --foundation-content-narrow: 40.5rem;
   --foundation-page-gutter: clamp(1.25rem, 4vw, 3rem);
-  --foundation-section-space: clamp(4.5rem, 9vw, 8rem);
+  /*
+   * One vertical rhythm. A section owns only the space above it:
+   * intro (below the header) · section (between sections) · attached (content
+   * that continues the section above it).
+   */
+  --foundation-space-intro: clamp(4rem, 8vw, 6rem);
+  --foundation-space-section: clamp(4.5rem, 9vw, 8rem);
+  --foundation-space-attached: clamp(2.5rem, 4vw, 3.5rem);
   /*
    * One radius system. Four steps only:
    * field (inputs, chips, small controls) · card (list + feature cards) ·
@@ -278,9 +288,11 @@ html {
     "Segoe UI", sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
     monospace;
-  --text-display: clamp(2.75rem, 6vw, 4.5rem);
+  --text-display: clamp(2.25rem, 5.4vw, 3.25rem);
   --text-title: clamp(2.25rem, 4.5vw, 2.75rem);
+  --text-heading: clamp(1.75rem, 3.4vw, 2.25rem);
   --text-lead: clamp(1.0625rem, 2vw, 1.25rem);
+  --container-narrow: var(--foundation-content-narrow);
 }
 
 body {
@@ -297,21 +309,9 @@ body {
     color var(--foundation-duration-base) ease-in-out;
 }
 
-.foundation-measure-reading {
-  max-width: calc(
-    var(--foundation-content-reading) + 2 * var(--foundation-page-gutter)
-  );
-}
-
 .foundation-measure-standard {
   max-width: calc(
     var(--foundation-content-standard) + 2 * var(--foundation-page-gutter)
-  );
-}
-
-.foundation-measure-wide {
-  max-width: calc(
-    var(--foundation-content-wide) + 2 * var(--foundation-page-gutter)
   );
 }
 
@@ -350,10 +350,14 @@ button {
   isolation: isolate;
 }
 
+/* Full-bleed: spans the viewport regardless of the section's measure. */
 .foundation-hero-glow::before {
   content: "";
   position: absolute;
-  inset: -8rem -20% auto -20%;
+  inset-block-start: calc(-1 * var(--foundation-space-intro) - 2rem);
+  inset-inline-start: 50%;
+  inline-size: 100vw;
+  translate: -50% 0;
   block-size: 34rem;
   z-index: -1;
   background:

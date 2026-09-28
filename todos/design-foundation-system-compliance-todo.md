@@ -29,5 +29,15 @@ Audit against `docs/foundation/design-principles.md`, public surfaces only.
 - Storybook: Layouts Header, Header And Footer, RFDS All Components — no `ThemeProvider` decorator in `.storybook/preview.ts`
 - `npm run lint`: 62 errors in untouched files (scripts/, stories/, src/*)
 
+## Designer feedback pass (Nico, 2026-09-28)
+- [x] Hero glow is full-bleed (was clipped to the content box on wide screens)
+- [x] Two widths only: `standard` spine + `narrow` prose cap inside it; removed `wide`/`reading` and ad-hoc `max-w-*` containers
+- [x] One rhythm: `Section spacing` = intro · section · attached; removed page-level padding from ~50 sections; shell owns the gap before the footer
+- [x] Three section compositions (`SectionHeader` + `FeatureGrid` / cards / narrow prose) + `SummaryPanel` + `CtaBand`; retired the sidebar-heading + ruled-list layout
+- [x] Removed decorative rules/bands between sections and inside lists
+- [x] Page intros left-aligned on the spine (Home hero is the only centered moment)
+- [x] Summit rebuilt on the shared primitives (dropped orbital graphic, gray bands, max-w-7xl frame, bespoke cards, summit.module.css)
+- [x] Docs updated: design-principles.md (#5, #9, checklist), public-website-design-system.md (composition)
+
 ## Next Steps
-- Commit, push, open PR
+- Ask Nico to review the preview

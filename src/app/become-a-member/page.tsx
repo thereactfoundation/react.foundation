@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 
 import {
-  Eyebrow,
+  FeatureGrid,
+  FeatureItem,
   PageIntro,
   PublicPageShell,
   Section,
-  Surface,
+  SectionHeader,
+  SummaryPanel,
 } from "@/components/public-site/layout";
 import { ButtonLink } from "@/components/ui/button";
 
@@ -29,7 +31,7 @@ export default function BecomeMemberPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Organizations"
             title="Membership"
@@ -42,38 +44,29 @@ export default function BecomeMemberPage() {
           />
         </Section>
 
-        <Section className="pt-12 sm:pt-16" measure="standard">
-          <Surface className="grid gap-8 p-7 sm:p-10 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <Eyebrow>Enrollment</Eyebrow>
-              <h2 className="mt-4 text-2xl font-semibold text-foreground">
-                Membership is handled by the Linux Foundation
-              </h2>
-            </div>
-            <p className="text-sm leading-6 text-muted-foreground">
-              The external enrollment form opens with the React Foundation selected.
-              It is the authoritative place for current membership terms, levels, and
+        <Section spacing="attached">
+          <SummaryPanel
+            eyebrow="Enrollment"
+            title="Membership is handled by the Linux Foundation"
+          >
+            <p>
+              The external enrollment form opens with the React Foundation selected. It
+              is the authoritative place for current membership terms, levels, and
               organization details.
             </p>
-          </Surface>
+          </SummaryPanel>
         </Section>
 
-        <Section className="py-20 sm:py-24" measure="standard">
-          <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <Eyebrow>What support enables</Eyebrow>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight text-foreground">
-                Capacity for work no single project should carry alone.
-              </h2>
-            </div>
-            <ul className="divide-y divide-border border-y border-border">
-              {supportAreas.map((area) => (
-                <li key={area} className="py-5 text-base text-foreground">
-                  {area}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <Section>
+          <SectionHeader
+            eyebrow="What support enables"
+            title="Capacity for work no single project should carry alone."
+          />
+          <FeatureGrid columns={4}>
+            {supportAreas.map((area, index) => (
+              <FeatureItem key={area} index={index + 1} title={area} />
+            ))}
+          </FeatureGrid>
         </Section>
       </main>
     </PublicPageShell>

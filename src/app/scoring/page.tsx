@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 
 import {
-  Eyebrow,
+  FeatureGrid,
+  FeatureItem,
   PageIntro,
   PublicPageShell,
   Section,
-  Surface,
+  SectionHeader,
+  SummaryPanel,
 } from "@/components/public-site/layout";
 import { ButtonLink } from "@/components/ui/button";
 import { ecosystemLibraries, tierWeights } from "@/lib/maintainer-tiers";
@@ -39,7 +41,7 @@ export default function ScoringPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Assessment methodology"
             title="How ecosystem support is assessed"
@@ -57,48 +59,28 @@ export default function ScoringPage() {
           />
         </Section>
 
-        <Section className="pt-12 sm:pt-16" measure="standard">
-          <Surface className="grid gap-8 p-7 sm:p-10 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <Eyebrow>Method status</Eyebrow>
-              <h2 className="mt-4 text-2xl font-semibold text-foreground">
-                Published inputs before rankings
-              </h2>
-            </div>
-            <p className="text-sm leading-6 text-muted-foreground">
-              Scores and allocations should not appear as public rankings until
-              their data sources, time window, eligibility policy, and review limits
-              are documented for the relevant reporting period.
+        <Section spacing="attached">
+          <SummaryPanel eyebrow="Method status" title="Published inputs before rankings">
+            <p>
+              Scores and allocations should not appear as public rankings until their
+              data sources, time window, eligibility policy, and review limits are
+              documented for the relevant reporting period.
             </p>
-          </Surface>
+          </SummaryPanel>
         </Section>
 
-        <Section className="py-20 sm:py-24" measure="standard">
-          <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <Eyebrow>Scoring model</Eyebrow>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight text-foreground">
-                Evidence is useful only when its limits are visible.
-              </h2>
-            </div>
-            <div className="divide-y divide-border border-y border-border">
-              {methods.map((method, index) => (
-                <article key={method.title} className="grid gap-4 py-6 sm:grid-cols-[4rem_1fr]">
-                  <p className="text-xs font-semibold text-primary">
-                    0{index + 1}
-                  </p>
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {method.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                      {method.body}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
+        <Section>
+          <SectionHeader
+            eyebrow="Scoring model"
+            title="Evidence is useful only when its limits are visible."
+          />
+          <FeatureGrid columns={2}>
+            {methods.map((method, index) => (
+              <FeatureItem key={method.title} index={index + 1} title={method.title}>
+                {method.body}
+              </FeatureItem>
+            ))}
+          </FeatureGrid>
         </Section>
       </main>
     </PublicPageShell>

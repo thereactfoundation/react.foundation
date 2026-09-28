@@ -31,14 +31,14 @@ function SignInShell({ callbackUrl }: { callbackUrl: string | null }) {
   return (
     <PublicPageShell>
       <main>
-        <Section className="py-16 sm:py-24">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Contributor access"
             title="Sign in to the React Foundation"
             description="Use GitHub to manage your profile and access contributor tools."
           />
 
-          <Surface className="mx-auto mt-10 max-w-[28rem] p-6 sm:p-8">
+          <Surface className="mt-10 max-w-md p-6 sm:p-8">
             <button
               type="button"
               disabled={!callbackUrl}

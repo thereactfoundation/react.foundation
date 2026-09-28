@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import {
   PublicPageShell,
   Section,
-  Surface,
 } from "@/components/public-site/layout";
 
 export const metadata: Metadata = {
@@ -15,9 +14,9 @@ export default function TermsPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="py-16 sm:py-24">
-          <Surface className="p-7 sm:p-12">
-            <h1 className="text-4xl font-semibold tracking-[-0.03em] text-foreground">
+        <Section spacing="intro" measure="narrow">
+          <div>
+            <h1 className="text-title font-semibold leading-[1.04] tracking-[-0.03em] text-foreground">
               Terms of Service
             </h1>
             <p className="mt-2 text-base text-muted-foreground">
@@ -161,7 +160,7 @@ export default function TermsPage() {
                 </p>
               </section>
             </div>
-          </Surface>
+          </div>
         </Section>
       </main>
     </PublicPageShell>

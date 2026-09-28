@@ -42,7 +42,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-border">
+    <footer className="border-t border-border">
       <div className="mx-auto foundation-measure-standard px-[var(--foundation-page-gutter)] py-14 sm:py-16">
         <div className="grid gap-12 sm:grid-cols-[1.4fr_1fr_1fr]">
           {/* Brand */}

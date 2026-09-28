@@ -14,9 +14,9 @@ export function CommunityStats({
   ];
 
   return (
-    <dl className="mx-auto grid max-w-xl grid-cols-3 divide-x divide-border">
+    <dl className="grid max-w-narrow grid-cols-3 gap-6">
       {stats.map((stat) => (
-        <div key={stat.label} className="px-2 text-center sm:px-6">
+        <div key={stat.label}>
           <dd className="text-3xl font-semibold tracking-[-0.03em] text-foreground sm:text-4xl">
             {stat.value}
           </dd>

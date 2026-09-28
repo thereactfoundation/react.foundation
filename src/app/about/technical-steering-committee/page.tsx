@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import {
-  Eyebrow,
+  FeatureGrid,
+  FeatureItem,
   PageIntro,
   PublicPageShell,
   Section,
-  Surface,
+  SectionHeader,
+  SummaryPanel,
 } from "@/components/public-site/layout";
-import { ButtonLink } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Technical Steering Committee",
@@ -34,7 +36,7 @@ export default function TechnicalSteeringCommitteePage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Technical governance"
             title="Technical Steering Committee"
@@ -42,55 +44,39 @@ export default function TechnicalSteeringCommitteePage() {
           />
         </Section>
 
-        <Section className="pt-12 sm:pt-16" measure="standard">
-          <Surface className="grid gap-8 p-7 sm:p-10 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <Eyebrow>Current status</Eyebrow>
-              <h2 className="mt-4 text-2xl font-semibold text-foreground">
-                Committee formation is in progress
-              </h2>
-            </div>
-            <div className="space-y-4 text-sm leading-6 text-muted-foreground">
-              <p>
-                Membership, terms, and decision-making practices will be published
-                after they are confirmed. The site does not use fictional profiles
-                to fill open committee roles.
-              </p>
-              <p>
-                Future updates will identify confirmed participants and explain how
-                maintainers can bring work to the committee.
-              </p>
-            </div>
-          </Surface>
+        <Section spacing="attached">
+          <SummaryPanel eyebrow="Current status" title="Committee formation is in progress">
+            <p>
+              Membership, terms, and decision-making practices will be published
+              after they are confirmed. The site does not use fictional profiles
+              to fill open committee roles.
+            </p>
+            <p>
+              Future updates will identify confirmed participants and explain how
+              maintainers can bring work to the committee.
+            </p>
+          </SummaryPanel>
         </Section>
 
-        <Section className="py-20 sm:py-24" measure="standard">
-          <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <Eyebrow>Committee remit</Eyebrow>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight text-foreground">
-                Technical guidance without invented authority.
-              </h2>
-            </div>
-            <div className="divide-y divide-border border-y border-border">
-              {responsibilities.map((item) => (
-                <article key={item.title} className="py-6">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    {item.body}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
+        <Section>
+          <SectionHeader eyebrow="Committee remit" title="Technical guidance without invented authority." />
+          <FeatureGrid>
+            {responsibilities.map((item, index) => (
+              <FeatureItem key={item.title} index={index + 1} title={item.title}>
+                {item.body}
+              </FeatureItem>
+            ))}
+          </FeatureGrid>
         </Section>
 
-        <Section className="pb-8 text-center" measure="standard">
-          <ButtonLink href="/about" variant="secondary">
+        <Section spacing="attached">
+          <Link
+            href="/about"
+            className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary"
+          >
+            <span aria-hidden>←</span>
             Back to about
-          </ButtonLink>
+          </Link>
         </Section>
       </main>
     </PublicPageShell>

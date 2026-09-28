@@ -20,7 +20,7 @@ export default function AuthorsPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Foundation updates"
             title="Authors and contributors"
@@ -28,7 +28,7 @@ export default function AuthorsPage() {
           />
         </Section>
 
-        <Section className="py-16 sm:py-20" measure="standard">
+        <Section spacing="attached">
           <div className="grid gap-px overflow-hidden rounded-panel border border-border bg-border sm:grid-cols-2">
             {authors.map((author) => (
               <Link

@@ -50,8 +50,8 @@ export default async function UpdatePage({ params }: UpdatePageProps) {
 
   return (
     <article>
-      <Section as="div" className="pb-24 pt-14 sm:pb-32 sm:pt-24">
-        <header className="animate-page-appear border-b border-border pb-10 sm:pb-14">
+      <Section as="div" spacing="intro" measure="narrow">
+        <header className="animate-page-appear">
           <Link
             href="/updates"
             className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary"
@@ -66,10 +66,10 @@ export default async function UpdatePage({ params }: UpdatePageProps) {
           >
             {formatUpdateDate(update.metadata.date)}
           </time>
-          <h1 className="mt-4 max-w-[38rem] text-title font-semibold leading-[1.04] text-foreground">
+          <h1 className="mt-4 text-title font-semibold leading-[1.04] text-foreground">
             {update.metadata.title}
           </h1>
-          <p className="mt-5 max-w-[36rem] text-lead leading-8 text-muted-foreground">
+          <p className="mt-5 text-lead leading-8 text-muted-foreground">
             {update.metadata.description}
           </p>
 
@@ -104,7 +104,7 @@ export default async function UpdatePage({ params }: UpdatePageProps) {
           <MDXRemote source={update.content} />
         </div>
 
-        <footer className="mt-14 border-t border-border pt-8 sm:mt-20">
+        <footer className="mt-14 sm:mt-20">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
             Keep reading
           </p>

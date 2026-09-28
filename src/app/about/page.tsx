@@ -5,10 +5,13 @@ import { BecomeContributor } from "@/components/home/become-contributor";
 import { ExecutiveMessage } from "@/components/home/executive-message";
 import { FoundingMembers } from "@/components/home/founding-members";
 import {
-  Eyebrow,
+  FeatureGrid,
+  FeatureItem,
   PageIntro,
   PublicPageShell,
   Section,
+  SectionHeader,
+  SummaryPanel,
   Surface,
 } from "@/components/public-site/layout";
 import { ButtonLink } from "@/components/ui/button";
@@ -54,11 +57,24 @@ const governanceDetails = [
   },
 ];
 
+const governanceBodies = [
+  {
+    href: "/about/board-of-directors",
+    title: "Board of Directors",
+    body: "Strategic leadership, fiduciary oversight, and long-term stewardship.",
+  },
+  {
+    href: "/about/technical-steering-committee",
+    title: "Technical Steering Committee",
+    body: "Technical direction grounded in the needs of React and its ecosystem.",
+  },
+];
+
 export default function AboutPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Who we are"
             title="About The React Foundation"
@@ -66,102 +82,73 @@ export default function AboutPage() {
           />
         </Section>
 
-        <Section className="pt-10 sm:pt-14">
+        <Section spacing="attached" measure="narrow">
           <ExecutiveMessage />
         </Section>
 
-        <Section className="py-20 sm:py-28" measure="standard">
-          <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-20">
-            <div>
-              <Eyebrow className="mb-4">What we are here to do</Eyebrow>
-              <h2 className="text-3xl font-semibold leading-tight tracking-[-0.02em] text-foreground sm:text-4xl">
-                Keep React open, supported, and ready for what comes next.
-              </h2>
-            </div>
-            <div className="divide-y divide-border border-y border-border">
-              {commitments.map((commitment) => (
-                <article key={commitment.title} className="py-6">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {commitment.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    {commitment.body}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
+        <Section>
+          <SectionHeader
+            eyebrow="What we are here to do"
+            title="Keep React open, supported, and ready for what comes next."
+          />
+          <FeatureGrid>
+            {commitments.map((commitment, index) => (
+              <FeatureItem key={commitment.title} index={index + 1} title={commitment.title}>
+                {commitment.body}
+              </FeatureItem>
+            ))}
+          </FeatureGrid>
         </Section>
 
-        <Section className="border-t border-border py-20 sm:py-24" measure="standard">
+        <Section>
           <FoundingMembers />
         </Section>
 
-        <Section className="pb-20 sm:pb-24" measure="standard">
-          <Surface className="grid gap-8 p-7 sm:p-10 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <Eyebrow className="mb-3">Supported ecosystem</Eyebrow>
-              <h2 className="text-2xl font-semibold tracking-[-0.02em] text-foreground">
-                {ecosystemLibraries.length} tracked repositories across React.
-              </h2>
-            </div>
-            <div>
-              <p className="text-sm leading-6 text-muted-foreground">
-                The foundation tracks React infrastructure, libraries, frameworks,
-                testing tools, UI systems, and styling projects to make contribution
-                recognition and support methodology easier to inspect.
-              </p>
-              <ButtonLink href="/libraries" variant="secondary" className="mt-5">
+        <Section>
+          <SummaryPanel
+            eyebrow="Supported ecosystem"
+            title={`${ecosystemLibraries.length} tracked repositories across React.`}
+            actions={
+              <ButtonLink href="/libraries" variant="secondary">
                 Explore supported libraries
               </ButtonLink>
-            </div>
-          </Surface>
+            }
+          >
+            <p>
+              The foundation tracks React infrastructure, libraries, frameworks, testing
+              tools, UI systems, and styling projects to make contribution recognition and
+              support methodology easier to inspect.
+            </p>
+          </SummaryPanel>
         </Section>
 
-        <Section className="pb-20 sm:pb-24" measure="standard">
-          <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
-            <div>
-              <Eyebrow className="mb-4">Governance</Eyebrow>
-              <h2 className="text-3xl font-semibold leading-tight tracking-[-0.02em] text-foreground sm:text-4xl">
-                Transparent governance
-              </h2>
-              <p className="mt-4 text-sm leading-6 text-muted-foreground">
+        <Section>
+          <SectionHeader
+            eyebrow="Governance"
+            title="Transparent governance"
+            lead={
+              <p>
                 Governance work combines formal leadership, technical direction, and
-                public accountability without claiming reports that have not yet
-                been published.
+                public accountability without claiming reports that have not yet been
+                published.
               </p>
-            </div>
-            <div className="divide-y divide-border border-y border-border">
-              {governanceDetails.map((detail) => (
-                <article key={detail.title} className="py-6">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {detail.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    {detail.body}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
+            }
+          />
+          <FeatureGrid columns={2}>
+            {governanceDetails.map((detail) => (
+              <FeatureItem key={detail.title} title={detail.title}>
+                {detail.body}
+              </FeatureItem>
+            ))}
+          </FeatureGrid>
+          <FeatureGrid columns={2} className="mt-12">
+            {governanceBodies.map((body) => (
+              <GovernanceLink key={body.href} {...body} />
+            ))}
+          </FeatureGrid>
         </Section>
 
-        <Section className="pb-20 sm:pb-24" measure="standard">
-          <div className="grid gap-px overflow-hidden rounded-panel border border-border bg-border sm:grid-cols-2">
-            <GovernanceLink
-              href="/about/board-of-directors"
-              title="Board of Directors"
-              body="Strategic leadership, fiduciary oversight, and long-term stewardship."
-            />
-            <GovernanceLink
-              href="/about/technical-steering-committee"
-              title="Technical Steering Committee"
-              body="Technical direction grounded in the needs of React and its ecosystem."
-            />
-          </div>
-        </Section>
-
-        <Section className="pb-8 sm:pb-14" measure="standard">
+        <Section>
           <BecomeContributor />
         </Section>
       </main>
@@ -169,27 +156,24 @@ export default function AboutPage() {
   );
 }
 
-function GovernanceLink({
-  href,
-  title,
-  body,
-}: {
-  href: string;
-  title: string;
-  body: string;
-}) {
+function GovernanceLink({ href, title, body }: { href: string; title: string; body: string }) {
   return (
-    <Link
-      href={href}
-      className="group block bg-background p-7 hover:bg-muted sm:p-9"
-    >
-      <div className="flex items-center justify-between gap-4">
-        <h2 className="text-xl font-semibold text-foreground">{title}</h2>
-        <span className="text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary">
-          →
-        </span>
-      </div>
-      <p className="mt-3 text-sm leading-6 text-muted-foreground">{body}</p>
+    <Link href={href} className="group block">
+      <Surface
+        radius="card"
+        className="h-full p-6 transition hover:-translate-y-0.5 hover:border-border-strong hover:shadow-raised sm:p-7"
+      >
+        <div className="flex items-center justify-between gap-4">
+          <h3 className="text-lg font-semibold tracking-[-0.01em] text-foreground">{title}</h3>
+          <span
+            aria-hidden
+            className="text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary"
+          >
+            →
+          </span>
+        </div>
+        <p className="mt-2 text-sm leading-6 text-muted-foreground">{body}</p>
+      </Surface>
     </Link>
   );
 }
