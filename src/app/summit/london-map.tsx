@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import type * as Leaflet from "leaflet";
 
+import { summitVenue } from "./summit-data";
+
 const MapContainer = dynamic(
   () => import("react-leaflet").then((module) => module.MapContainer),
   { ssr: false },
@@ -16,8 +18,6 @@ const TileLayer = dynamic(
   () => import("react-leaflet").then((module) => module.TileLayer),
   { ssr: false },
 );
-
-const centralLondon: [number, number] = [51.5074, -0.1278];
 
 function subscribeToTheme(onChange: () => void) {
   const observer = new MutationObserver(onChange);
@@ -71,8 +71,8 @@ export function LondonMap() {
       <div className="summit-map h-64 w-full bg-muted">
         {leaflet && markerIcon ? (
           <MapContainer
-            center={centralLondon}
-            zoom={11}
+            center={summitVenue.coordinates}
+            zoom={14}
             minZoom={9}
             maxZoom={16}
             scrollWheelZoom={false}
@@ -88,9 +88,9 @@ export function LondonMap() {
               url={`${tileBase}_Reference/MapServer/tile/{z}/{y}/{x}`}
             />
             <Marker
-              position={centralLondon}
+              position={summitVenue.coordinates}
               icon={markerIcon}
-              title="Central London"
+              title={summitVenue.name}
               keyboard={false}
             />
           </MapContainer>
@@ -101,7 +101,7 @@ export function LondonMap() {
         )}
       </div>
       <figcaption className="border-t border-border px-4 py-3 text-xs text-muted-foreground">
-        Central London · Exact venue to be confirmed
+        {summitVenue.name} · {summitVenue.address}
       </figcaption>
     </figure>
   );

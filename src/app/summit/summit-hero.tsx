@@ -14,7 +14,7 @@ const navigation = [
 
 const facts = [
   { icon: CalendarDays, label: "Dates", value: "10–12 Nov 2026" },
-  { icon: MapPin, label: "Location", value: "London, UK" },
+  { icon: MapPin, label: "Location", value: "Meta King's Cross, London" },
   { icon: UsersRound, label: "Attendance", value: "Invite only" },
 ] as const;
 

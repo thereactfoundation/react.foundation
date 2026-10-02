@@ -12,7 +12,7 @@ import {
 import { RFDS } from "@/components/rfds";
 import { ButtonLink } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
-import { faqItems, summitDays, summitGoals } from "./summit-data";
+import { faqItems, summitDays, summitGoals, summitVenue } from "./summit-data";
 import { LondonMap } from "./london-map";
 import { SummitCalendarMenu } from "./summit-calendar-menu";
 import { SummitFaq } from "./summit-faq";
@@ -144,25 +144,30 @@ export default function SummitPage() {
             eyebrow="Plan your Summit"
             title="Logistics"
             lead={
-              <p>
-                London and the dates are set. Venue details will be published here once
-                confirmed.
-              </p>
+              <p>The dates and venue are confirmed: Meta King&apos;s Cross, London.</p>
             }
           />
           <div className="grid gap-5 lg:grid-cols-3">
             <Surface radius="card" className="p-6 sm:p-7 lg:col-span-2">
               <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_18rem] md:items-start">
                 <div>
-                  <RFDS.SemanticBadge variant="warning">Venue to be confirmed</RFDS.SemanticBadge>
+                  <RFDS.SemanticBadge variant="success">Venue confirmed</RFDS.SemanticBadge>
                   <h3 className="mt-5 text-lg font-semibold tracking-[-0.01em] text-foreground">
-                    London, United Kingdom
+                    {summitVenue.name}
                   </h3>
+                  <p className="mt-1 text-sm font-medium text-foreground">{summitVenue.address}</p>
                   <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    London offers direct international connections and a strong local
-                    React community. The final venue is being coordinated; capacity,
-                    accessibility, and breakout space are part of that decision.
+                    The Summit takes place at Meta&apos;s King&apos;s Cross office, a short walk
+                    from King&apos;s Cross St Pancras station.
                   </p>
+                  <a
+                    href={summitVenue.directionsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-4 inline-flex text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                  >
+                    Get directions
+                  </a>
                 </div>
                 <LondonMap />
               </div>
@@ -174,8 +179,6 @@ export default function SummitPage() {
               </h3>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 Plan to arrive on Monday 9 November and depart on Friday 13 November.
-                More information about the venue will be shared once it has been
-                confirmed.
               </p>
               <SummitCalendarMenu variant="secondary" size="sm" className="mt-6" />
             </Surface>
@@ -192,7 +195,7 @@ export default function SummitPage() {
                   This is the source of truth for Summit participants. Confirmed
                   information is stated plainly; open logistics are marked as such.
                 </p>
-                <p className="text-xs">Last updated 13 August 2026</p>
+                <p className="text-xs">Last updated 2 October 2026</p>
               </>
             }
           />
