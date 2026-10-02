@@ -51,6 +51,7 @@ export const FOUNDATION_EVENTS: readonly FoundationEvent[] = [
     endDate: "2026-11-12",
     city: "London",
     country: "United Kingdom",
+    venue: "Meta King's Cross, 11-21 Canal Reach",
     summary:
       "Three days for the React Foundation working groups to align, collaborate, and build the roadmap of what comes next for React.",
     attendance: "Invite only",
