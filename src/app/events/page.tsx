@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowUpRight, CalendarDays, MapPin, UsersRound } from "lucide-react";
+import { ArrowUpRight, Building2, CalendarDays, MapPin, UsersRound } from "lucide-react";
 
 import {
   Eyebrow,
@@ -88,6 +88,7 @@ function EventCard({ event, happening = false }: { event: FoundationEvent; happe
       ),
     },
     { icon: MapPin, label: "Location", value: `${event.city}, ${event.country}` },
+    ...(event.venue ? [{ icon: Building2, label: "Venue", value: event.venue }] : []),
     { icon: UsersRound, label: "Attendance", value: event.attendance },
   ];
 
