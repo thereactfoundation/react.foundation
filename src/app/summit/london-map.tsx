@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import type * as Leaflet from "leaflet";
 
+import { summitVenue } from "./summit-data";
+
 const MapContainer = dynamic(
   () => import("react-leaflet").then((module) => module.MapContainer),
   { ssr: false },
@@ -16,8 +18,6 @@ const TileLayer = dynamic(
   () => import("react-leaflet").then((module) => module.TileLayer),
   { ssr: false },
 );
-
-const centralLondon: [number, number] = [51.5074, -0.1278];
 
 function subscribeToTheme(onChange: () => void) {
   const observer = new MutationObserver(onChange);
@@ -63,32 +63,34 @@ export function LondonMap() {
     [leaflet],
   );
 
-  const tileUrl =
-    effectiveTheme === "dark"
-      ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-      : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+  const tileStyle = effectiveTheme === "dark" ? "Dark" : "Light";
+  const tileBase = `https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_${tileStyle}_Gray`;
 
   return (
     <figure className="overflow-hidden rounded-card border border-border bg-surface-subtle">
       <div className="summit-map h-64 w-full bg-muted">
         {leaflet && markerIcon ? (
           <MapContainer
-            center={centralLondon}
-            zoom={11}
+            center={summitVenue.coordinates}
+            zoom={14}
             minZoom={9}
             maxZoom={16}
             scrollWheelZoom={false}
             className="h-full w-full"
           >
             <TileLayer
-              key={tileUrl}
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-              url={tileUrl}
+              key={`${tileStyle}-base`}
+              attribution="Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; OpenStreetMap contributors"
+              url={`${tileBase}_Base/MapServer/tile/{z}/{y}/{x}`}
+            />
+            <TileLayer
+              key={`${tileStyle}-reference`}
+              url={`${tileBase}_Reference/MapServer/tile/{z}/{y}/{x}`}
             />
             <Marker
-              position={centralLondon}
+              position={summitVenue.coordinates}
               icon={markerIcon}
-              title="Central London"
+              title={summitVenue.name}
               keyboard={false}
             />
           </MapContainer>
@@ -99,7 +101,7 @@ export function LondonMap() {
         )}
       </div>
       <figcaption className="border-t border-border px-4 py-3 text-xs text-muted-foreground">
-        Central London · Exact venue to be confirmed
+        {summitVenue.name} · {summitVenue.address}
       </figcaption>
     </figure>
   );

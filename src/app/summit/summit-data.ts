@@ -1,3 +1,11 @@
+export const summitVenue = {
+  name: "Meta King's Cross",
+  address: "11-21 Canal Reach, London, UK",
+  coordinates: [51.5385924, -0.1276989] as [number, number],
+  directionsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Meta%20King%27s%20Cross%2C%2011-21%20Canal%20Reach%2C%20London",
+};
+
 export interface SummitGoal {
   description: string;
   title: string;
@@ -89,7 +97,7 @@ export const summitDays: readonly SummitDay[] = [
 export const faqItems: readonly FaqItem[] = [
   {
     question: "When and where is the Summit?",
-    answer: "The Summit sessions take place in London from Tuesday 10 to Thursday 12 November 2026. Monday 9 and Friday 13 November are travel days. The exact London venue is still to be confirmed.",
+    answer: "The Summit sessions take place at Meta King's Cross, 11-21 Canal Reach, London, from Tuesday 10 to Thursday 12 November 2026. Monday 9 and Friday 13 November are travel days.",
   },
   {
     question: "Who is invited?",
@@ -121,7 +129,7 @@ export const faqItems: readonly FaqItem[] = [
   },
   {
     question: "Will meals be provided?",
-    answer: "Catering and dietary-request details for the event will be shared when the venue and logistics plan are confirmed.",
+    answer: "Catering and dietary-request details for the event will be shared when the logistics plan is confirmed.",
   },
   {
     question: "When will the detailed agenda be available?",
@@ -129,7 +137,7 @@ export const faqItems: readonly FaqItem[] = [
   },
   {
     question: "Where will updates be published?",
-    answer: "This page is the participant source of truth and will be updated as venue, logistics, travel, and detailed scheduling decisions are finalized.",
-    updatedAt: "13 August 2026",
+    answer: "This page is the participant source of truth and will be updated as logistics, travel, and detailed scheduling decisions are finalized.",
+    updatedAt: "2 October 2026",
   },
 ];
