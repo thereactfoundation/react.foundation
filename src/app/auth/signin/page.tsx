@@ -31,19 +31,19 @@ function SignInShell({ callbackUrl }: { callbackUrl: string | null }) {
   return (
     <PublicPageShell>
       <main>
-        <Section className="py-16 sm:py-24">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Contributor access"
             title="Sign in to the React Foundation"
             description="Use GitHub to manage your profile and access contributor tools."
           />
 
-          <Surface className="mx-auto mt-10 max-w-[28rem] p-6 sm:p-8">
+          <Surface className="mt-10 max-w-md p-6 sm:p-8">
             <button
               type="button"
               disabled={!callbackUrl}
               onClick={callbackUrl ? () => signIn("github", { callbackUrl }) : undefined}
-              className="flex min-h-12 w-full items-center justify-center gap-3 rounded-control bg-[#24292f] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#32383f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:cursor-wait disabled:opacity-70"
+              className="flex min-h-12 w-full items-center justify-center gap-3 rounded-control bg-foreground px-5 py-3 text-sm font-semibold text-background transition hover:bg-foreground/88 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:cursor-wait disabled:opacity-70"
             >
               <GitHubMark />
               Continue with GitHub

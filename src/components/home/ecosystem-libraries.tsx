@@ -1,3 +1,4 @@
+import { SectionHeader } from "@/components/public-site/layout";
 import { ButtonLink } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ecosystemLibraries } from "@/lib/maintainer-tiers";
@@ -100,23 +101,12 @@ owner/repo:
 
   return (
     <ScrollReveal animation="fade-up">
-      <section
-        id={id}
-        className="scroll-mt-32 space-y-10"
-      >
-        <div className="grid gap-6 md:grid-cols-[0.75fr_1.25fr]">
-          <div>
-            <p className="text-sm font-semibold text-primary">
-              {libraryCount} tracked repositories
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold leading-tight text-foreground sm:text-4xl">
-              {title}
-            </h2>
-          </div>
-          <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
-            {displayDescription}
-          </p>
-        </div>
+      <section id={id} className="scroll-mt-32">
+        <SectionHeader
+          eyebrow={`${libraryCount} tracked repositories`}
+          title={title}
+          lead={<p>{displayDescription}</p>}
+        />
 
         <div className="space-y-10">
           {categorizedLibraries.map((cat) => {
@@ -146,15 +136,13 @@ owner/repo:
           })}
         </div>
 
-        <div className="border-y border-border py-5">
-          <p className="text-sm text-muted-foreground">
-            Total: {ecosystemLibraries.length} libraries tracked. Contribution
-            tracking uses GitHub repository activity for supported projects.
-          </p>
-        </div>
+        <p className="mt-12 text-sm text-muted-foreground">
+          Total: {ecosystemLibraries.length} libraries tracked. Contribution
+          tracking uses GitHub repository activity for supported projects.
+        </p>
 
         {showMissingLibraryIssue ? (
-          <div className="border-t border-border pt-6">
+          <div className="mt-6">
             <p className="text-sm text-muted-foreground">
               Don&apos;t see a library?
             </p>

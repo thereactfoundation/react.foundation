@@ -64,7 +64,7 @@ export default async function CommunityPage({ params }: CommunityPageProps) {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-12 sm:pt-16" measure="standard">
+        <Section spacing="intro">
           <Link
             href="/communities"
             className="text-sm text-muted-foreground transition hover:text-foreground"
@@ -73,7 +73,7 @@ export default async function CommunityPage({ params }: CommunityPageProps) {
           </Link>
         </Section>
 
-        <Section className="pt-10" measure="standard">
+        <Section spacing="attached">
           <PageIntro
             align="left"
             eyebrow={community.verified ? "Verified community" : "Community profile"}
@@ -97,11 +97,11 @@ export default async function CommunityPage({ params }: CommunityPageProps) {
           />
         </Section>
 
-        <Section className="py-16 sm:py-20" measure="standard">
+        <Section>
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
             <div className="space-y-8">
               <Surface className="p-7 sm:p-9">
-                <h2 className="text-2xl font-semibold text-foreground">
+                <h2 className="text-lg font-semibold tracking-[-0.01em] text-foreground">
                   About this community
                 </h2>
                 <p className="mt-4 text-base leading-7 text-muted-foreground">
@@ -121,7 +121,7 @@ export default async function CommunityPage({ params }: CommunityPageProps) {
 
               {community.organizers.length ? (
                 <section>
-                  <h2 className="text-2xl font-semibold text-foreground">
+                  <h2 className="text-lg font-semibold tracking-[-0.01em] text-foreground">
                     Organizers
                   </h2>
                   <div className="mt-5 divide-y divide-border border-y border-border">
@@ -156,7 +156,7 @@ export default async function CommunityPage({ params }: CommunityPageProps) {
             </div>
 
             <aside>
-              <h2 className="text-sm font-semibold text-primary">
+              <h2 className="foundation-eyebrow text-primary">
                 Community details
               </h2>
               <dl className="mt-4 divide-y divide-border border-y border-border">

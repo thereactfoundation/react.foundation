@@ -2,9 +2,9 @@ import type { FaqItem } from "./summit-data";
 
 function SummitFaqItem({ item }: { item: FaqItem }) {
   return (
-    <article className="py-7">
+    <article>
       <h3 className="font-semibold text-foreground sm:text-lg">{item.question}</h3>
-      <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
+      <p className="mt-2 text-sm leading-7 text-muted-foreground sm:text-base">
         {item.answer}
         {item.link ? (
           <>
@@ -30,7 +30,7 @@ function SummitFaqItem({ item }: { item: FaqItem }) {
 
 export function SummitFaq({ items }: { items: readonly FaqItem[] }) {
   return (
-    <div className="divide-y divide-border border-y border-border">
+    <div className="space-y-8">
       {items.map((item) => (
         <SummitFaqItem key={item.question} item={item} />
       ))}

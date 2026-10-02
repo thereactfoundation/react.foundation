@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 
 import {
+  FeatureGrid,
+  FeatureItem,
   PageIntro,
   PublicPageShell,
   Section,
@@ -39,7 +41,7 @@ export default function StartCommunityPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Organizer guide"
             title="Start a React community"
@@ -57,27 +59,14 @@ export default function StartCommunityPage() {
           />
         </Section>
 
-        <Section className="py-20 sm:py-24" measure="standard">
-          <ol className="divide-y divide-border border-y border-border">
+        <Section spacing="attached">
+          <FeatureGrid>
             {steps.map((step, index) => (
-              <li
-                key={step.title}
-                className="grid gap-4 py-7 sm:grid-cols-[3rem_minmax(0,1fr)]"
-              >
-                <span className="text-sm font-semibold text-primary">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h2 className="text-xl font-semibold text-foreground">
-                    {step.title}
-                  </h2>
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-                    {step.body}
-                  </p>
-                </div>
-              </li>
+              <FeatureItem key={step.title} index={index + 1} title={step.title}>
+                {step.body}
+              </FeatureItem>
             ))}
-          </ol>
+          </FeatureGrid>
         </Section>
       </main>
     </PublicPageShell>

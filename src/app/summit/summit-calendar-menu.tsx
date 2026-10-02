@@ -100,14 +100,14 @@ export function SummitCalendarMenu({
         <div
           id={menuId}
           aria-label="Calendar options"
-          className="absolute left-0 top-[calc(100%+0.5rem)] z-50 w-72 overflow-hidden rounded-2xl border border-border bg-background p-2 shadow-soft"
+          className="absolute left-0 top-[calc(100%+0.5rem)] z-50 w-72 overflow-hidden rounded-card border border-border bg-background p-2 shadow-soft"
         >
           <a
             href={googleCalendarUrl}
             target="_blank"
             rel="noreferrer"
             onClick={() => setIsOpen(false)}
-            className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-foreground transition hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            className="flex items-center justify-between rounded-field px-4 py-3 text-sm font-medium text-foreground transition hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
             Google Calendar
             <ExternalLink className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
@@ -117,7 +117,7 @@ export function SummitCalendarMenu({
             target="_blank"
             rel="noreferrer"
             onClick={() => setIsOpen(false)}
-            className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-foreground transition hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            className="flex items-center justify-between rounded-field px-4 py-3 text-sm font-medium text-foreground transition hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
             Outlook
             <ExternalLink className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
@@ -126,7 +126,7 @@ export function SummitCalendarMenu({
             href="/summit-2026.ics"
             download
             onClick={() => setIsOpen(false)}
-            className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-foreground transition hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            className="flex items-center justify-between rounded-field px-4 py-3 text-sm font-medium text-foreground transition hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
             Apple or other calendar
             <Download className="h-4 w-4 text-muted-foreground" aria-hidden="true" />

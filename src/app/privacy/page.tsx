@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import {
   PublicPageShell,
   Section,
-  Surface,
 } from "@/components/public-site/layout";
 
 export const metadata: Metadata = {
@@ -15,12 +14,12 @@ export default function PrivacyPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="py-16 sm:py-24">
-          <Surface className="p-7 sm:p-12">
-            <h1 className="text-4xl font-bold text-foreground">
+        <Section spacing="intro" measure="narrow">
+          <div>
+            <h1 className="text-title font-semibold leading-[1.04] tracking-[-0.03em] text-foreground">
               Privacy Policy
             </h1>
-            <p className="mt-2 text-base text-foreground/70">
+            <p className="mt-2 text-base text-muted-foreground">
               Last updated: October 21, 2025
             </p>
 
@@ -29,13 +28,13 @@ export default function PrivacyPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   1. Introduction
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   React Foundation ("we", "our", or "us") is committed to
                   protecting your privacy. This Privacy Policy explains how we
                   collect, use, disclose, and safeguard your information when
                   you visit our website and use our services.
                 </p>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   Please read this Privacy Policy carefully. If you do not agree
                   with the terms of this Privacy Policy, please do not access
                   the site.
@@ -50,11 +49,11 @@ export default function PrivacyPage() {
                 <h3 className="mt-6 text-xl font-semibold text-foreground">
                   2.1 Personal Information
                 </h3>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   When you authenticate using GitHub or GitLab OAuth, we
                   collect:
                 </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 text-foreground/80">
+                <ul className="mt-4 list-disc space-y-2 pl-6 text-muted-foreground">
                   <li>Your name</li>
                   <li>Your email address</li>
                   <li>Your GitHub or GitLab username</li>
@@ -66,7 +65,7 @@ export default function PrivacyPage() {
                 <h3 className="mt-6 text-xl font-semibold text-foreground">
                   2.2 Local Storage
                 </h3>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   We use browser local storage to save your contributor username
                   preference for convenience. This data is stored only on your
                   device and is not transmitted to our servers.
@@ -75,7 +74,7 @@ export default function PrivacyPage() {
                 <h3 className="mt-6 text-xl font-semibold text-foreground">
                   2.3 Session Data
                 </h3>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   We use session cookies to maintain your authenticated state.
                   These are essential for the functionality of the
                   authentication system.
@@ -86,10 +85,10 @@ export default function PrivacyPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   3. How We Use Your Information
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   We use the information we collect in the following ways:
                 </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 text-foreground/80">
+                <ul className="mt-4 list-disc space-y-2 pl-6 text-muted-foreground">
                   <li>To provide, operate, and maintain our website</li>
                   <li>To authenticate and authorize your access to features</li>
                   <li>To display your contributor status and progress</li>
@@ -104,18 +103,18 @@ export default function PrivacyPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   4. Data Sharing and Disclosure
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   <strong>
                     We do not share, sell, rent, or trade your personal
                     information with third parties for their commercial
                     purposes.
                   </strong>
                 </p>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   We may share information only in the following limited
                   circumstances:
                 </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 text-foreground/80">
+                <ul className="mt-4 list-disc space-y-2 pl-6 text-muted-foreground">
                   <li>
                     <strong>Service Providers:</strong> We use third-party
                     services for authentication, hosting, and aggregate site
@@ -138,12 +137,12 @@ export default function PrivacyPage() {
                 <h3 className="mt-6 text-xl font-semibold text-foreground">
                   Authentication
                 </h3>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   We use GitHub and GitLab OAuth for authentication. When you
                   authenticate, you are subject to their respective privacy
                   policies:
                 </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 text-foreground/80">
+                <ul className="mt-4 list-disc space-y-2 pl-6 text-muted-foreground">
                   <li>
                     <a
                       href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement"
@@ -171,7 +170,7 @@ export default function PrivacyPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   6. Tracking and Analytics
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   We use first-party, aggregate site analytics to understand
                   traffic and improve the website. We do not use third-party
                   advertising services or collect data to build advertising
@@ -183,13 +182,13 @@ export default function PrivacyPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   7. Data Security
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   We implement appropriate technical and organizational security
                   measures to protect your personal information. However, please
                   note that no method of transmission over the internet or
                   method of electronic storage is 100% secure.
                 </p>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   Your authentication is handled by NextAuth.js, a secure
                   authentication library, and we rely on GitHub and GitLab's
                   OAuth implementations for secure authentication.
@@ -200,7 +199,7 @@ export default function PrivacyPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   8. Data Retention
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   We retain your personal information only for as long as
                   necessary to provide you with our services and as described in
                   this Privacy Policy. Session data is retained only for the
@@ -212,10 +211,10 @@ export default function PrivacyPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   9. Your Rights
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   You have the right to:
                 </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 text-foreground/80">
+                <ul className="mt-4 list-disc space-y-2 pl-6 text-muted-foreground">
                   <li>Access the personal information we hold about you</li>
                   <li>Request correction of inaccurate information</li>
                   <li>Request deletion of your personal information</li>
@@ -231,7 +230,7 @@ export default function PrivacyPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   10. Children's Privacy
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   Our Service does not address anyone under the age of 13. We do
                   not knowingly collect personally identifiable information from
                   children under 13. If you are a parent or guardian and you are
@@ -244,13 +243,13 @@ export default function PrivacyPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   11. Changes to This Privacy Policy
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   We may update our Privacy Policy from time to time. We will
                   notify you of any changes by posting the new Privacy Policy on
                   this page and updating the "Last updated" date at the top of
                   this Privacy Policy.
                 </p>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   You are advised to review this Privacy Policy periodically for
                   any changes. Changes to this Privacy Policy are effective when
                   they are posted on this page.
@@ -261,14 +260,14 @@ export default function PrivacyPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   12. Contact Us
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   If you have any questions about this Privacy Policy, please
                   contact us through our GitHub repository or official
                   communication channels.
                 </p>
               </section>
             </div>
-          </Surface>
+          </div>
         </Section>
       </main>
     </PublicPageShell>

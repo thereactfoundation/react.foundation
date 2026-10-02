@@ -9,6 +9,7 @@ import { CommunitySortDropdown } from "@/components/communities/CommunitySortDro
 import { CommunityStats } from "@/components/communities/CommunityStats";
 import { CommunitySearch } from "@/components/communities/CommunitySearch";
 import {
+  SectionHeader,
   PageIntro,
   PublicPageShell,
   Section,
@@ -35,25 +36,19 @@ export default function CommunitiesPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24">
+        <Section spacing="intro">
           <PageIntro
-            title={
-              <>
-                Find Your React
-                <br />
-                Community
-              </>
-            }
+            eyebrow="Global network"
+            title="Find your React community"
             description="Connect with React developers through meetups, conferences, and study groups around the world."
-            descriptionClassName="!mt-4 max-w-[27rem] text-[0.9375rem] leading-6"
           />
         </Section>
 
-        <Section className="pt-4 sm:pt-6">
+        <Section spacing="attached">
           <CommunityStats {...communityStats} />
         </Section>
 
-        <Section className="pt-4 sm:pt-6" measure="standard">
+        <Section spacing="attached">
           <div className="overflow-hidden rounded-panel border border-border bg-map-water/35 shadow-card">
             <CommunityMap communities={REACT_COMMUNITIES} />
           </div>
@@ -62,17 +57,10 @@ export default function CommunitiesPage() {
           </div>
         </Section>
 
-        <Section
-          id="communities"
-          className="scroll-mt-24 border-t border-border pt-20 sm:pt-24"
-          measure="standard"
-        >
-          <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <Section id="communities" className="scroll-mt-24">
+          <div className="mb-10 flex flex-col gap-5 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm font-semibold text-primary">Community directory</p>
-              <h2 className="mt-3 text-3xl font-semibold text-foreground">
-                Find a community
-              </h2>
+              <SectionHeader eyebrow="Community directory" title="Find a community" />
             </div>
             <Suspense fallback={<SortDropdownSkeleton />}>
               <CommunitySortDropdown />
@@ -106,14 +94,17 @@ function FiltersSkeleton() {
 }
 
 function SortDropdownSkeleton() {
-  return <div aria-hidden className="h-10 w-40 animate-pulse rounded-lg bg-muted" />;
+  return <div aria-hidden className="h-10 w-40 animate-pulse rounded-field bg-muted" />;
 }
 
 function ListSkeleton() {
   return (
-    <div className="space-y-4">
-      {[1, 2, 3].map((item) => (
-        <div key={item} className="h-40 animate-pulse rounded-panel bg-muted" />
+    <div className="grid gap-4 sm:grid-cols-2">
+      {[1, 2, 3, 4].map((item) => (
+        <div
+          key={item}
+          className="h-52 animate-pulse rounded-card border border-border bg-muted"
+        />
       ))}
     </div>
   );

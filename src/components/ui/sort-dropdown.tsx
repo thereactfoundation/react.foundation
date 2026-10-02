@@ -34,7 +34,7 @@ export function SortDropdown({ options, value, onChange, label }: SortDropdownPr
       <button
         onClick={() => setIsOpen(!isOpen)}
         onBlur={() => setTimeout(() => setIsOpen(false), 200)}
-        className="flex items-center justify-between w-full min-w-0 px-4 py-2 bg-card border border-border rounded-lg text-foreground text-sm font-medium hover:bg-muted transition focus:outline-none focus:ring-2 focus:ring-primary"
+        className="flex items-center justify-between w-full min-w-0 px-4 py-2 bg-card border border-border rounded-field text-foreground text-sm font-medium hover:bg-muted transition focus:outline-none focus:ring-2 focus:ring-primary"
       >
         <span>{selectedOption.label}</span>
         <svg
@@ -48,7 +48,7 @@ export function SortDropdown({ options, value, onChange, label }: SortDropdownPr
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg shadow-lg z-50 overflow-hidden max-h-64 overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-card shadow-soft z-50 overflow-hidden max-h-64 overflow-y-auto">
           {options.map((option) => (
             <button
               key={option.value || 'empty'}

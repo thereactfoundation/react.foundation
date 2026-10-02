@@ -69,7 +69,7 @@ export function RfcPopover() {
           aria-label="RFC repositories"
           className={cn(
             "absolute left-0 top-full z-50 mt-2 w-60 overflow-hidden",
-            "rounded-2xl border border-border bg-background shadow-lg",
+            "rounded-card border border-border bg-background shadow-soft",
             "animate-in fade-in-0 zoom-in-95 duration-100",
           )}
         >

@@ -26,7 +26,7 @@ import { Layouts } from "./layouts";
 
 // Import individual components for direct access
 import { Button, ButtonLink, Pill, Rating, Collapsible, ScrollReveal, SegmentedControl, ThemeSegmentedControl, AccordionContent, Input, Textarea, Select, Label, Checkbox, Radio, Switch, Separator, Dialog, Tooltip } from "./primitives";
-import { ProductCard, ProductGallery, UserAvatar, LibraryCard, RISScoreBreakdown, RISLibraryRankings, EcosystemLibraries, ByTheNumbers, LimitedDrops, FeaturedLook, FoundationHero, MissionStatement, PastDropsCollections, ExecutiveMessage, BecomeContributor, FeaturedCollections, JoinMovementCTA, HeroBadges, ThreePillars, Hero, FoundingMembers, PastDrops, UsernameInput, MaintainerProgress, ImpactSection, SignInButton, ErrorBoundary, Table, StatCard, FormInput, SearchInput, type TableColumn, type TableProps, type SortDirection } from "./components";
+import { ProductCard, ProductGallery, UserAvatar, LibraryCard, RISScoreBreakdown, RISLibraryRankings, EcosystemLibraries, ExecutiveMessage, BecomeContributor, FoundingMembers, UsernameInput, MaintainerProgress, ImpactSection, SignInButton, ErrorBoundary, Table, StatCard, FormInput, SearchInput, type TableColumn, type TableProps, type SortDirection } from "./components";
 import { Header, Footer } from "./layouts";
 import { SemanticButton, SemanticCard, SemanticBadge, SemanticInput, SemanticAlert, SemanticAvatar, SemanticSeparator, ContributorIcon, ContributorCard } from "./semantic-components";
 import { Timeline, TimelineItem, TimelineStep, TimelineProgress } from "./timeline";
@@ -69,21 +69,9 @@ export const RFDS = {
   RISScoreBreakdown,
   RISLibraryRankings,
   EcosystemLibraries,
-  ByTheNumbers,
-  LimitedDrops,
-  FeaturedLook,
-  FoundationHero,
-  MissionStatement,
-  PastDropsCollections,
   ExecutiveMessage,
   BecomeContributor,
-  FeaturedCollections,
-  JoinMovementCTA,
-  HeroBadges,
-  ThreePillars,
-  Hero,
   FoundingMembers,
-  PastDrops,
   UsernameInput,
   MaintainerProgress,
   ImpactSection,

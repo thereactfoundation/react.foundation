@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import {
   PublicPageShell,
   Section,
-  Surface,
 } from "@/components/public-site/layout";
 
 export const metadata: Metadata = {
@@ -15,12 +14,12 @@ export default function TermsPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="py-16 sm:py-24">
-          <Surface className="p-7 sm:p-12">
-            <h1 className="text-4xl font-bold text-foreground">
+        <Section spacing="intro" measure="narrow">
+          <div>
+            <h1 className="text-title font-semibold leading-[1.04] tracking-[-0.03em] text-foreground">
               Terms of Service
             </h1>
-            <p className="mt-2 text-base text-foreground/70">
+            <p className="mt-2 text-base text-muted-foreground">
               Last updated: October 21, 2025
             </p>
 
@@ -29,7 +28,7 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   1. Acceptance of Terms
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   By accessing and using the React Foundation website (the
                   "Service"), you accept and agree to be bound by the terms and
                   provision of this agreement. If you do not agree to these
@@ -41,13 +40,13 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   2. Description of Service
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   React Foundation provides information and services that
                   support the React ecosystem through independent stewardship,
                   community programs, and transparent governance. The Service
                   includes:
                 </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 text-foreground/80">
+                <ul className="mt-4 list-disc space-y-2 pl-6 text-muted-foreground">
                   <li>Information about React Foundation and its mission</li>
                   <li>User authentication via GitHub and GitLab</li>
                   <li>Contributor progress tracking and status information</li>
@@ -59,7 +58,7 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   3. User Accounts
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   To access certain features of the Service, you may be required
                   to authenticate using your GitHub or GitLab account. You are
                   responsible for maintaining the confidentiality of your
@@ -72,13 +71,13 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   4. Acceptable Use
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   You agree to use the Service only for lawful purposes and in a
                   way that does not infringe the rights of, restrict, or inhibit
                   anyone else's use and enjoyment of the Service. Prohibited
                   behavior includes:
                 </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 text-foreground/80">
+                <ul className="mt-4 list-disc space-y-2 pl-6 text-muted-foreground">
                   <li>
                     Harassing or causing distress or inconvenience to any other
                     user
@@ -98,7 +97,7 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   5. Intellectual Property
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   The Service and its original content, features, and
                   functionality are owned by React Foundation and are protected
                   by international copyright, trademark, patent, trade secret,
@@ -112,7 +111,7 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   6. Limitation of Liability
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   In no event shall React Foundation, nor its directors,
                   employees, partners, agents, suppliers, or affiliates, be
                   liable for any indirect, incidental, special, consequential,
@@ -127,7 +126,7 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   7. Disclaimer
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   Your use of the Service is at your sole risk. The Service is
                   provided on an "AS IS" and "AS AVAILABLE" basis. The Service
                   is provided without warranties of any kind, whether express or
@@ -141,7 +140,7 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   8. Changes to Terms
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   We reserve the right, at our sole discretion, to modify or
                   replace these Terms at any time. If a revision is material, we
                   will provide at least 30 days' notice prior to any new terms
@@ -154,14 +153,14 @@ export default function TermsPage() {
                 <h2 className="text-2xl font-semibold text-foreground">
                   9. Contact Information
                 </h2>
-                <p className="mt-4 text-foreground/80">
+                <p className="mt-4 text-muted-foreground">
                   If you have any questions about these Terms of Service, please
                   contact us through our GitHub repository or official
                   communication channels.
                 </p>
               </section>
             </div>
-          </Surface>
+          </div>
         </Section>
       </main>
     </PublicPageShell>

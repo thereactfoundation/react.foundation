@@ -72,7 +72,7 @@ export function MobileMenu({ session, status }: MobileMenuProps) {
                 className="object-cover"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary to-primary/80 text-xs font-bold text-primary-foreground">
+              <div className="flex h-full w-full items-center justify-center bg-primary text-xs font-bold text-primary-foreground">
                 {session.user.name?.charAt(0) || session.user.email?.charAt(0) || "U"}
               </div>
             )}
@@ -160,7 +160,7 @@ export function MobileMenu({ session, status }: MobileMenuProps) {
                       className="object-cover"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary to-primary/80 text-lg font-bold text-primary-foreground">
+                    <div className="flex h-full w-full items-center justify-center bg-primary text-lg font-bold text-primary-foreground">
                       {session.user.name?.charAt(0) || "U"}
                     </div>
                   )}
@@ -175,14 +175,14 @@ export function MobileMenu({ session, status }: MobileMenuProps) {
           )}
 
           {/* Navigation Links */}
-          <nav className="p-6">
+          <nav aria-label="Mobile navigation" className="p-6">
             <div className="space-y-2">
               {navigationLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={closeMenu}
-                  className="block rounded-xl px-4 py-3 text-base font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground"
+                  className="block rounded-field px-4 py-3 text-base font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground"
                 >
                   {link.label}
                 </Link>
@@ -203,7 +203,7 @@ export function MobileMenu({ session, status }: MobileMenuProps) {
                 <Link
                   href="/admin/users"
                   onClick={closeMenu}
-                  className="block rounded-xl border-2 border-accent/30 bg-accent/10 px-4 py-3 text-base font-medium text-purple-300 transition hover:border-accent/50 hover:bg-accent/20"
+                  className="block rounded-field border border-border bg-surface-subtle px-4 py-3 text-base font-medium text-foreground transition hover:border-border-strong hover:bg-muted"
                 >
                   👑 Admin Panel
                 </Link>
@@ -214,7 +214,7 @@ export function MobileMenu({ session, status }: MobileMenuProps) {
                     closeMenu();
                     signOut({ callbackUrl: "/" });
                   }}
-                  className="w-full rounded-xl px-4 py-3 text-left text-base font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground"
+                  className="w-full rounded-field px-4 py-3 text-left text-base font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground"
                 >
                   Sign Out
                 </button>
@@ -223,7 +223,7 @@ export function MobileMenu({ session, status }: MobileMenuProps) {
                 <Link
                   href="/auth/signin"
                   onClick={closeMenu}
-                  className="block rounded-xl bg-primary px-4 py-3 text-center text-base font-semibold text-primary-foreground transition hover:bg-primary/90"
+                  className="block rounded-control bg-primary px-4 py-3 text-center text-base font-semibold text-primary-foreground transition hover:bg-primary/88"
                 >
                   Sign in with GitHub
                 </Link>

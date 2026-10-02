@@ -59,7 +59,7 @@ export function AddCommunityForm({ fullPage, onSuccess }: Props = {}) {
     return (
       <div className="text-center py-12">
         <div className="text-5xl mb-4">🔐</div>
-        <h2 className="text-2xl font-bold mb-3">Login Required</h2>
+        <h2 className="text-2xl font-semibold mb-3">Login Required</h2>
         <p className="text-muted-foreground mb-6">Please sign in</p>
         <RFDS.SemanticButton variant="primary" onClick={() => router.push('/api/auth/signin')}>
           Sign In
@@ -111,7 +111,7 @@ export function AddCommunityForm({ fullPage, onSuccess }: Props = {}) {
         </div>
       </div>
       {result && (
-        <div className={`p-4 rounded-lg border ${result.success ? 'bg-success/10 border-success/20' : 'bg-destructive/10 border-destructive/20'}`}>
+        <div className={`p-4 rounded-field border ${result.success ? 'bg-success/10 border-success/20' : 'bg-destructive/10 border-destructive/20'}`}>
           <p className={`text-sm font-medium ${result.success ? 'text-success' : 'text-destructive'}`}>{result.message}</p>
           {result.success && result.confirmationId && (
             <p className="mt-2 text-xs text-muted-foreground">

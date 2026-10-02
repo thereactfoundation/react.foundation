@@ -17,7 +17,7 @@ export default function StorePage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Store"
             title="The foundation store is not open yet"
@@ -35,12 +35,12 @@ export default function StorePage() {
           />
         </Section>
 
-        <Section className="pt-12" measure="standard">
+        <Section spacing="attached">
           <Surface className="p-7 text-center sm:p-10">
             <h2 className="text-xl font-semibold text-foreground">
               No orders or waitlist registrations are being accepted
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mx-auto mt-3 max-w-narrow text-sm leading-6 text-muted-foreground">
               Availability, pricing, fulfillment, and any relationship between store
               revenue and foundation programs will be published before checkout opens.
             </p>

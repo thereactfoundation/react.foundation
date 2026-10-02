@@ -39,7 +39,7 @@ export default async function CollectionsPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24" measure="standard">
+        <Section spacing="intro">
           <PageIntro
             align="left"
             eyebrow="Store preview"
@@ -48,7 +48,7 @@ export default async function CollectionsPage() {
           />
         </Section>
 
-        <Section className="py-16 sm:py-20" measure="standard">
+        <Section spacing="attached">
           <div className="grid gap-px overflow-hidden rounded-panel border border-border bg-border sm:grid-cols-2">
             {collections.map((collection) => (
               <Link

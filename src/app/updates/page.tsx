@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Section } from "@/components/public-site/layout";
+import { PageIntro, Section } from "@/components/public-site/layout";
+import { ButtonLink } from "@/components/ui/button";
 import { getAuthorBySlug } from "@/lib/authors";
 import { getAllUpdates } from "@/lib/updates";
 
@@ -16,32 +17,28 @@ export default function UpdatesPage() {
 
   return (
     <main>
-      <Section className="pt-16 sm:pt-24">
-        <div className="animate-page-appear flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="text-[2.25rem] font-semibold leading-none text-foreground">
-            Latest news
-          </h1>
-          <div className="flex flex-wrap gap-2">
-            <a
-              href="https://x.com/reactjs"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-10 items-center gap-2 rounded-full bg-muted px-4 text-xs font-semibold text-foreground hover:bg-secondary"
-            >
-              <XIcon />
-              Follow
-            </a>
-            <Link
-              href="/updates/welcome-to-react-foundation"
-              className="inline-flex min-h-10 items-center gap-2 rounded-full bg-muted px-4 text-xs font-semibold text-foreground hover:bg-secondary"
-            >
-              <MailIcon />
-              Read the latest
-            </Link>
-          </div>
-        </div>
+      <Section spacing="intro">
+        <PageIntro
+          eyebrow="News & announcements"
+          title="Latest news"
+          description="Announcements, milestones, and updates from across the React Foundation and its communities."
+          actions={
+            <>
+              <ButtonLink href="https://x.com/reactjs" variant="tertiary" target="_blank" rel="noreferrer">
+                <XIcon />
+                Follow
+              </ButtonLink>
+              <ButtonLink href="/updates/welcome-to-react-foundation" variant="ghost">
+                <MailIcon />
+                Read the latest
+              </ButtonLink>
+            </>
+          }
+        />
+      </Section>
 
-        <div className="mt-12 space-y-5 sm:mt-16">
+      <Section spacing="attached">
+        <div className="space-y-5">
           {updates.map((update) => {
             const author = getAuthorBySlug(update.metadata.author);
 
@@ -49,21 +46,21 @@ export default function UpdatesPage() {
               <Link
                 key={update.slug}
                 href={`/updates/${update.slug}`}
-                className="group block rounded-panel border border-border bg-surface-raised p-6 shadow-card hover:border-border-strong hover:shadow-soft sm:px-7 sm:py-6"
+                className="group block rounded-card border border-border bg-surface-raised p-6 shadow-card transition hover:-translate-y-0.5 hover:border-border-strong hover:shadow-raised sm:p-7"
               >
                 <time
                   dateTime={update.metadata.date}
-                  className="text-xs font-medium text-muted-foreground"
+                  className="foundation-eyebrow text-muted-foreground"
                 >
                   {formatUpdateDate(update.metadata.date)}
                 </time>
-                <h2 className="mt-4 text-lg font-semibold leading-tight text-foreground sm:text-xl">
+                <h2 className="mt-4 text-lg font-semibold leading-tight tracking-[-0.01em] text-foreground sm:text-xl">
                   {update.metadata.title}
                 </h2>
-                <p className="mt-2 max-w-[34rem] text-xs leading-5 text-muted-foreground">
+                <p className="mt-2 max-w-narrow text-sm leading-6 text-muted-foreground">
                   {update.metadata.description}
                 </p>
-                <div className="mt-4 flex items-center justify-between gap-4">
+                <div className="mt-5 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-2.5">
                     {author?.avatar ? (
                       <Image
@@ -79,7 +76,10 @@ export default function UpdatesPage() {
                       {author?.name ?? update.metadata.author}
                     </span>
                   </div>
-                  <span className="text-sm text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary">
+                  <span
+                    aria-hidden
+                    className="text-sm text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary"
+                  >
                     →
                   </span>
                 </div>

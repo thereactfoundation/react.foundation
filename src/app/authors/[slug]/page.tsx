@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import {
   PublicPageShell,
   Section,
+  SectionHeader,
   Surface,
 } from "@/components/public-site/layout";
 import { getAllAuthors, getAuthorBySlug } from "@/lib/authors";
@@ -45,7 +46,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24" measure="standard">
+        <Section spacing="intro">
           <Link
             href="/authors"
             className="text-sm text-muted-foreground transition hover:text-foreground"
@@ -70,7 +71,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
               <p className="mt-3 text-base text-muted-foreground">
                 {author.title}
               </p>
-              <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground">
+              <p className="mt-6 max-w-narrow text-base leading-7 text-muted-foreground">
                 {author.bio}
               </p>
               {socialLinks.length ? (
@@ -93,11 +94,9 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
         </Section>
 
         {updates.length ? (
-          <Section className="py-20" measure="standard">
-            <h2 className="text-2xl font-semibold text-foreground">
-              Updates by {author.name}
-            </h2>
-            <div className="mt-7 space-y-4">
+          <Section>
+            <SectionHeader title={`Updates by ${author.name}`} />
+            <div className="space-y-4">
               {updates.map((update) => (
                 <Surface key={update.slug} className="p-6">
                   <time
