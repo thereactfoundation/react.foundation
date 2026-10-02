@@ -5,9 +5,10 @@ import { useEffect, useId, useRef, useState } from "react";
 
 import { RFDS } from "@/components/rfds";
 import { cn } from "@/lib/cn";
+import { summitVenue } from "./summit-data";
 
 const eventName = "React Foundation Contributors Summit 2026";
-const eventLocation = "London, United Kingdom";
+const eventLocation = `${summitVenue.name}, ${summitVenue.address}`;
 const summitUrl = "https://react.foundation/summit";
 
 const googleCalendarUrl = `https://calendar.google.com/calendar/render?${new URLSearchParams({
