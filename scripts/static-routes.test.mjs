@@ -6,7 +6,7 @@ const manifestPath = new URL('../.next/prerender-manifest.json', import.meta.url
 const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
 
 test('routes with a personalized header are server-rendered', () => {
-  const publicRoutes = ['/', '/about', '/communities', '/libraries', '/updates'];
+  const publicRoutes = ['/', '/about', '/communities', '/events', '/libraries', '/updates'];
 
   for (const route of publicRoutes) {
     assert.equal(
