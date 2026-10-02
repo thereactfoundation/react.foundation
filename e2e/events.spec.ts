@@ -28,3 +28,14 @@ test('desktop navigation links to events', async ({ page }) => {
   await eventsLink.click();
   await expect(page).toHaveURL('/events');
 });
+
+test('timeline pins jump to their event cards', async ({ page }) => {
+  await page.goto('/events');
+
+  const timeline = page.locator('ol[aria-label="Event timeline"]:visible');
+  await expect(timeline.getByRole('link')).toHaveCount(5);
+
+  await timeline.getByRole('link', { name: /^Contributors Summit 2026, / }).click();
+  await expect(page).toHaveURL(/#event-contributors-summit-2026$/);
+  await expect(page.locator('#event-contributors-summit-2026')).toBeInViewport();
+});

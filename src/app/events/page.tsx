@@ -11,6 +11,7 @@ import {
   Surface,
 } from "@/components/public-site/layout";
 import { EventCover } from "@/components/events/event-covers";
+import { EventTimeline } from "@/components/events/event-timeline";
 import { SemanticBadge } from "@/components/rfds/semantic-components";
 import { ButtonLink } from "@/components/ui/button";
 import {
@@ -45,7 +46,11 @@ export default function EventsPage() {
           />
         </Section>
 
-        <Section id="upcoming" spacing="attached" className="scroll-mt-24">
+        <Section spacing="attached">
+          <EventTimeline events={FOUNDATION_EVENTS} today={today} />
+        </Section>
+
+        <Section id="upcoming" className="scroll-mt-24">
           <SectionHeader title="Upcoming" />
           {upcoming.length ? (
             <FeatureGrid columns={2}>
@@ -94,7 +99,7 @@ function EventCard({ event, happening = false }: { event: FoundationEvent; happe
   ];
 
   return (
-    <Surface radius="card" className="flex h-full flex-col overflow-hidden">
+    <Surface id={`event-${event.slug}`} radius="card" className="flex h-full scroll-mt-28 flex-col overflow-hidden">
       <EventCover slug={event.slug} />
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <div className="flex items-center justify-between gap-3">
