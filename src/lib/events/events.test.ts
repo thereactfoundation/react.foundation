@@ -12,6 +12,7 @@ const event = (slug: string, startDate: string, endDate: string): FoundationEven
   slug,
   name: slug,
   format: "conference",
+  host: "Host",
   startDate,
   endDate,
   city: "City",

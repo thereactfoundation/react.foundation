@@ -1,17 +1,21 @@
 /**
- * React Foundation events.
+ * Events on /events: React Foundation events plus community events across the
+ * React ecosystem. Every entry needs confirmed dates, the host, and an official
+ * link. An event moves from "upcoming" to "past" automatically the day after it
+ * ends, so entries are never edited to change their status.
  *
- * Only list events the foundation runs or presents, with confirmed dates. An
- * event moves from "upcoming" to "past" automatically the day after it ends,
- * so entries are never edited to change their status.
+ * Each slug also needs a branded cover in `src/components/events/event-covers.tsx`
+ * (enforced by the type checker).
  */
 
-export type EventFormat = "conference" | "summit";
+export type EventFormat = "conference" | "summit" | "meetup";
 
 export interface FoundationEvent {
   slug: string;
   name: string;
   format: EventFormat;
+  /** Who runs the event, as shown on the card ("Hosted by …"). */
+  host: string;
   /** Local calendar dates at the event, `YYYY-MM-DD`. */
   startDate: string;
   endDate: string;
@@ -26,13 +30,15 @@ export interface FoundationEvent {
 export const EVENT_FORMAT_LABELS: Record<EventFormat, string> = {
   conference: "Conference",
   summit: "Contributors summit",
+  meetup: "Meetup",
 };
 
-export const FOUNDATION_EVENTS: readonly FoundationEvent[] = [
+export const FOUNDATION_EVENTS = [
   {
     slug: "react-conf-ghana-2026",
     name: "React Conf Ghana 2026",
     format: "conference",
+    host: "the React Foundation",
     startDate: "2026-11-04",
     endDate: "2026-11-05",
     city: "Accra",
@@ -47,6 +53,7 @@ export const FOUNDATION_EVENTS: readonly FoundationEvent[] = [
     slug: "contributors-summit-2026",
     name: "Contributors Summit 2026",
     format: "summit",
+    host: "the React Foundation",
     startDate: "2026-11-10",
     endDate: "2026-11-12",
     city: "London",
@@ -57,7 +64,53 @@ export const FOUNDATION_EVENTS: readonly FoundationEvent[] = [
     attendance: "Invite only",
     link: { href: "/summit", label: "Read the participant guide", external: false },
   },
-];
+  {
+    slug: "rendercon-kenya-2026",
+    name: "RenderCon Kenya 2026",
+    format: "conference",
+    host: "ReactDevsKe",
+    startDate: "2026-10-17",
+    endDate: "2026-10-17",
+    city: "Nairobi",
+    country: "Kenya",
+    summary:
+      "East Africa's community-first React conference: a day of deep talks, community, and connection for 200+ developers, engineers, and designers.",
+    attendance: "Tickets available",
+    link: { href: "https://www.rendercon.org", label: "Visit the event site", external: true },
+  },
+  {
+    slug: "react-india-2026",
+    name: "React India 2026",
+    format: "conference",
+    host: "React India",
+    startDate: "2026-10-29",
+    endDate: "2026-10-31",
+    city: "Goa",
+    country: "India",
+    venue: "Planet Hollywood Beach Resort",
+    summary:
+      "The final edition: a day of workshops, then two days of keynotes, talks, and lightning sessions for 1,000+ developers on the Goa coast.",
+    attendance: "Tickets available",
+    link: { href: "https://www.reactindia.io", label: "Visit the event site", external: true },
+  },
+  {
+    slug: "okthink-cdmx-2026",
+    name: "okthink in CDMX: AI, React, and the Future of Software Development",
+    format: "meetup",
+    host: "okthink, sponsored by Expo and the React Foundation",
+    startDate: "2026-10-29",
+    endDate: "2026-10-29",
+    city: "Mexico City",
+    country: "Mexico",
+    venue: "Colonia Juárez (address shared with registered guests)",
+    summary:
+      "A bilingual evening on AI, React, and the future of software development during Día de los Muertos season and Mexico Tech Week, with MC Beto Moedano and Expo's Keith Kurak and Jacob Clausen.",
+    attendance: "Register on Luma",
+    link: { href: "https://okthink.ai/mexico-2026/", label: "Event details", external: true },
+  },
+] as const satisfies readonly FoundationEvent[];
+
+export type EventSlug = (typeof FOUNDATION_EVENTS)[number]["slug"];
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
