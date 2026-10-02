@@ -53,7 +53,7 @@ export function SummitHero() {
                 <dt className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
                   <MapPin className="h-4 w-4 text-primary" aria-hidden="true" /> Location
                 </dt>
-                <dd className="mt-2 font-semibold text-foreground">London, UK</dd>
+                <dd className="mt-2 font-semibold text-foreground">Meta King&apos;s Cross, London</dd>
               </div>
               <div>
                 <dt className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
