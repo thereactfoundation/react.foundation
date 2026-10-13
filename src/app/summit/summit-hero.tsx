@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   ArrowDown,
   CalendarDays,
@@ -8,7 +7,7 @@ import {
 
 import { RFDS } from "@/components/rfds";
 import { SummitCalendarMenu } from "./summit-calendar-menu";
-import styles from "./summit.module.css";
+import { SummitMotion } from "./summit-motion";
 
 const navigation = [
   { href: "#why", label: "Purpose" },
@@ -64,23 +63,7 @@ export function SummitHero() {
             </dl>
           </div>
 
-          <div className={`${styles.orbital} relative mx-auto hidden aspect-square w-full max-w-[34rem] lg:block`} aria-hidden="true">
-            <div className={styles.orbitOne} />
-            <div className={styles.orbitTwo} />
-            <div className={styles.orbitThree} />
-            <div className="absolute inset-1/2 flex h-36 w-36 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-primary/25 bg-card/75 backdrop-blur-xl">
-              <Image
-                src="/react-logo.svg"
-                alt=""
-                width={96}
-                height={96}
-              />
-            </div>
-            <span className="absolute left-[10%] top-[22%] rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-lg backdrop-blur">align</span>
-            <span className="absolute right-[10%] top-[18%] rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-lg backdrop-blur">share</span>
-            <span className="absolute bottom-[18%] right-[6%] rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-lg backdrop-blur">build</span>
-            <span className="absolute bottom-[12%] left-[12%] rounded-full border border-border bg-card/80 px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-lg backdrop-blur">connect</span>
-          </div>
+          <SummitMotion />
         </div>
       </section>
 
