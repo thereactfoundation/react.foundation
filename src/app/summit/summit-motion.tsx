@@ -1,43 +1,49 @@
 "use client";
 
-import { PHASE_SECONDS } from "./particle-scene";
 import styles from "./summit.module.css";
 import { useParticleScene } from "./use-particle-scene";
 
 export function SummitMotion() {
-  const { canvasRef, phase, formationIds, goTo, onPointerMove, onPointerLeave } = useParticleScene();
+  const { canvasRef, timelineRef, phase, formationIds, goTo, onPointerMove, onPointerLeave } = useParticleScene();
 
   return (
     <div
-      className="relative mx-auto hidden aspect-square w-full max-w-[34rem] lg:block"
+      className="relative mx-auto aspect-square w-full max-w-md lg:max-w-[34rem]"
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
     >
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
-      <div role="group" aria-label="Summit themes" className="absolute inset-x-0 bottom-0 flex justify-center gap-2">
-        {formationIds.map((id, index) => (
-          <button
-            key={id}
-            type="button"
-            aria-pressed={index === phase}
-            onClick={() => goTo(index)}
-            className={`relative overflow-hidden rounded-full border px-3 py-1.5 font-mono text-xs backdrop-blur transition-colors ${
-              index === phase
-                ? "border-primary/40 bg-card/90 text-foreground"
-                : "border-border bg-card/60 text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {index === phase ? (
+      <div ref={timelineRef} role="group" aria-label="Summit themes" className="absolute inset-x-[6%] bottom-0">
+        <div className="absolute inset-x-0 top-3 h-px bg-border" aria-hidden="true" />
+        <div className={`${styles.timelineFill} absolute inset-x-0 top-3 h-px bg-primary`} aria-hidden="true" />
+        <div className="relative grid grid-cols-4">
+          {formationIds.map((id, index) => (
+            <button
+              key={id}
+              type="button"
+              aria-pressed={index === phase}
+              onClick={() => goTo(index)}
+              className="group flex flex-col items-center gap-2.5 pt-[0.4375rem] font-mono text-xs"
+            >
               <span
-                key={phase}
-                className={`${styles.chipProgress} absolute inset-0 bg-primary/15`}
-                style={{ animationDuration: `${PHASE_SECONDS}s` }}
+                className={`h-2.5 w-2.5 rounded-full border transition-colors ${
+                  index === phase ? "border-primary bg-primary/25" : "border-border bg-background group-hover:border-primary/60"
+                }`}
                 aria-hidden="true"
               />
-            ) : null}
-            <span className="relative">{id}</span>
-          </button>
-        ))}
+              <span
+                className={`transition-colors ${
+                  index === phase ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
+                }`}
+              >
+                {id}
+              </span>
+            </button>
+          ))}
+        </div>
+        <div className={`${styles.timelineBall} pointer-events-none absolute inset-x-0 top-3`} aria-hidden="true">
+          <span className="absolute left-0 top-0 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary shadow-[0_0_0_5px_hsl(var(--primary)/0.18),0_0_14px_hsl(var(--primary)/0.55)]" />
+        </div>
       </div>
     </div>
   );

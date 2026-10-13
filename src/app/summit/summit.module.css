@@ -2,25 +2,14 @@
   isolation: isolate;
 }
 
-.chipProgress {
-  animation-name: chip-progress;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
+/* --ball (0–1 along the track) and --ball-opacity are written by ParticleScene. */
+.timelineFill {
+  opacity: var(--ball-opacity, 1);
+  transform: scaleX(var(--ball, 0));
   transform-origin: left;
 }
 
-@keyframes chip-progress {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .chipProgress {
-    animation: none;
-    transform: none;
-  }
+.timelineBall {
+  opacity: var(--ball-opacity, 1);
+  transform: translateX(calc(var(--ball, 0) * 100%));
 }

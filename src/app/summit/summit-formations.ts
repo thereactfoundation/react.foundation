@@ -230,7 +230,7 @@ export function createFormations(count: number, random: () => number): Formation
         const [a, b] = CUBE_EDGES[Math.floor(i / CUBE_CORNERS.length) % CUBE_EDGES.length];
         const p = Math.floor(i / blockEdgeCount) / Math.max(1, pointsPerEdge - 1);
         const phase = 0.5 + 0.5 * Math.cos(t * 0.9 - block * 0.18);
-        const offset = BLOCK_HALF + 0.015 + 0.2 * phase ** 4;
+        const offset = BLOCK_HALF + 0.015 + 0.2 * phase ** 2;
         const center = CUBE_CORNERS[block];
         rotate(
           out,

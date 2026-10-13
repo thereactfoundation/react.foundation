@@ -8,9 +8,11 @@ export function useParticleScene() {
   const [scene] = useState(() => new ParticleScene());
   const phase = useSyncExternalStore(scene.subscribe, scene.getPhase, () => 0);
   const canvasRef = useCallback((canvas: HTMLCanvasElement) => scene.attach(canvas), [scene]);
+  const timelineRef = useCallback((track: HTMLDivElement) => scene.attachTimeline(track), [scene]);
 
   return {
     canvasRef,
+    timelineRef,
     phase,
     formationIds: scene.formations.map((formation) => formation.id),
     goTo: scene.goTo,

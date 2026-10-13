@@ -6,15 +6,30 @@ import {
 } from "./summit-formations";
 
 const PARTICLE_COUNT = 1400;
+/** Roughly how long a particle takes to settle into a new formation. */
 const TRANSITION = 1.6;
-const STAGGER = 0.7;
+/** Seconds over which the formation switch sweeps across the field, left to right. */
+const STAGGER = 0.9;
 const HOLD = 5.2;
-const SWIRL = 0.4;
+/** Spring angular frequency range, per particle, so arrivals spread out. */
+const SPRING_MIN = 2.4;
+const SPRING_MAX = 4;
+const DAMPING_RATIO = 0.8;
+/** Peak swirl acceleration while a particle changes formation, and how long it lasts. */
+const SWIRL = 3.5;
+const SWIRL_SECONDS = 1.4;
+/** Time offset used to measure formation velocity for the spring's feed-forward. */
+const VELOCITY_PROBE = 1 / 60;
+const MAX_STEP = 1 / 60;
 const CAMERA_DISTANCE = 3;
 const REPEL_RADIUS = 80;
 const REPEL_FORCE = 26;
-/** Seconds each formation is on screen, transition included. */
-export const PHASE_SECONDS = TRANSITION + STAGGER + HOLD;
+const SETTLE = TRANSITION + STAGGER;
+const PHASE_SECONDS = SETTLE + HOLD;
+/** How far, in stops, the timeline ball creeps toward the next stop while holding. */
+const BALL_CREEP = 0.25;
+/** Track fraction at each end over which the ball fades as it wraps. */
+const BALL_FADE = 0.06;
 
 /** Particle tones, by share of the total: primary, muted, success. */
 const TONE_SHARES = [0.72, 0.18, 0.1] as const;
@@ -44,11 +59,15 @@ function readColors(): SceneColors {
  */
 export class ParticleScene {
   readonly formations: Formation[];
-  private readonly from = new Float32Array(PARTICLE_COUNT * 3);
   private readonly target = new Float32Array(PARTICLE_COUNT * 3);
+  private readonly targetBehind = new Float32Array(PARTICLE_COUNT * 3);
   private readonly current = new Float32Array(PARTICLE_COUNT * 3);
+  private readonly velocity = new Float32Array(PARTICLE_COUNT * 3);
   private readonly swirl = new Float32Array(PARTICLE_COUNT * 3);
+  /** Seconds after a switch before each particle starts chasing the new formation. */
   private readonly delay = new Float32Array(PARTICLE_COUNT);
+  private readonly jitter = new Float32Array(PARTICLE_COUNT);
+  private readonly omega = new Float32Array(PARTICLE_COUNT);
   private readonly size = new Float32Array(PARTICLE_COUNT);
   /** Particle indices grouped by tone, so fillStyle is set once per group. */
   private readonly toneGroups: Uint16Array[];
@@ -75,6 +94,13 @@ export class ParticleScene {
   private width = 0;
   private height = 0;
   private dpr = 1;
+  /** Shrinks dots on small canvases so the field doesn't clot on phones. */
+  private dotScale = 1;
+  private timeline: HTMLElement | null = null;
+  /** Ball position in stop units, unwrapped. Stop i sits at (i + 0.5) / count of the track. */
+  private ballPosition = -0.5;
+  private ballFrom = -0.5;
+  private ballTarget = 0;
 
   constructor() {
     const random = mulberry32(2026);
@@ -88,18 +114,19 @@ export class ParticleScene {
       const a = random() * Math.PI * 2;
       const r = 1.4 + random() * 0.9;
       const s = Math.sqrt(1 - u * u) * r;
-      this.from[o] = Math.cos(a) * s;
-      this.from[o + 1] = u * r;
-      this.from[o + 2] = Math.sin(a) * s;
+      this.current[o] = Math.cos(a) * s;
+      this.current[o + 1] = u * r;
+      this.current[o + 2] = Math.sin(a) * s;
       this.swirl[o] = random() - 0.5;
       this.swirl[o + 1] = random() - 0.5;
       this.swirl[o + 2] = random() - 0.5;
-      this.delay[i] = random() * STAGGER;
+      this.jitter[i] = random();
+      this.delay[i] = this.jitter[i] * STAGGER;
+      this.omega[i] = SPRING_MIN + random() * (SPRING_MAX - SPRING_MIN);
       this.size[i] = 1 + random() ** 3 * 1.8;
       const pick = random();
       tones[pick < TONE_SHARES[0] ? 0 : pick < TONE_SHARES[0] + TONE_SHARES[1] ? 1 : 2].push(i);
     }
-    this.current.set(this.from);
     this.toneGroups = tones.map((group) => Uint16Array.from(group));
   }
 
@@ -114,7 +141,14 @@ export class ParticleScene {
 
   goTo = (phase: number) => {
     if (phase === this.phase) return;
-    this.from.set(this.current);
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const sweep = Math.min(1, Math.max(0, (this.current[i * 3] + 1.1) / 2.2));
+      this.delay[i] = STAGGER * (0.7 * sweep + 0.3 * this.jitter[i]);
+    }
+    const stops = this.formations.length;
+    this.ballFrom = this.ballPosition >= stops - 0.5 ? this.ballPosition - stops : this.ballPosition;
+    // Leaving the last stop for the first keeps moving forward, off the end and around.
+    this.ballTarget = phase === 0 && this.ballFrom > stops - 1 ? stops : phase;
     this.previousPhase = this.phase;
     this.phase = phase;
     this.phaseStart = this.time;
@@ -137,6 +171,15 @@ export class ParticleScene {
     this.targetYaw = nx * 0.45;
     this.targetPitch = ny * 0.3;
   };
+
+  /** Binds the timeline track, which receives --ball and --ball-opacity. Returns the detach function. */
+  attachTimeline(track: HTMLElement) {
+    this.timeline = track;
+    this.updateTimeline();
+    return () => {
+      this.timeline = null;
+    };
+  }
 
   /** Binds the scene to a canvas. Returns the detach function. */
   attach(canvas: HTMLCanvasElement) {
@@ -185,6 +228,7 @@ export class ParticleScene {
     this.dpr = Math.min(window.devicePixelRatio || 1, 2);
     this.width = Math.round(this.canvas.clientWidth * this.dpr);
     this.height = Math.round(this.canvas.clientHeight * this.dpr);
+    this.dotScale = Math.min(1, Math.max(0.65, Math.min(this.canvas.clientWidth, this.canvas.clientHeight) / 480));
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     if (!this.running) this.draw();
@@ -213,6 +257,7 @@ export class ParticleScene {
     const ease = 1 - Math.exp(-dt * 4);
     this.cameraYaw += (this.targetYaw - this.cameraYaw) * ease;
     this.cameraPitch += (this.targetPitch - this.cameraPitch) * ease;
+    this.integrate(dt);
     this.draw();
     this.frame = requestAnimationFrame(this.tick);
   };
@@ -236,29 +281,59 @@ export class ParticleScene {
     return p;
   };
 
+  /**
+   * Each particle is a damped spring chasing its formation point. The spring
+   * also matches the formation's own velocity, so particles keep their
+   * momentum through a switch and track moving formations without lag.
+   */
+  private integrate(dt: number) {
+    const elapsed = this.time - this.phaseStart;
+    const incoming = this.formations[this.phase];
+    const outgoing = this.formations[this.previousPhase] ?? incoming;
+    const steps = Math.ceil(dt / MAX_STEP);
+    const h = dt / steps;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const o = i * 3;
+      const sinceSwitch = elapsed - this.delay[i];
+      const formation = sinceSwitch >= 0 ? incoming : outgoing;
+      formation.place(i, this.time, this.target, o);
+      formation.place(i, this.time - VELOCITY_PROBE, this.targetBehind, o);
+      const w = this.omega[i];
+      const stiffness = w * w;
+      const damping = 2 * DAMPING_RATIO * w;
+      const swirl =
+        sinceSwitch > 0 && sinceSwitch < SWIRL_SECONDS ? SWIRL * Math.sin((Math.PI * sinceSwitch) / SWIRL_SECONDS) : 0;
+      for (let axis = o; axis < o + 3; axis++) {
+        const target = this.target[axis];
+        const targetVelocity = (target - this.targetBehind[axis]) / VELOCITY_PROBE;
+        const push = this.swirl[axis] * swirl;
+        let p = this.current[axis];
+        let v = this.velocity[axis];
+        for (let step = 0; step < steps; step++) {
+          v += (stiffness * (target - p) + damping * (targetVelocity - v) + push) * h;
+          p += v * h;
+        }
+        this.current[axis] = p;
+        this.velocity[axis] = v;
+      }
+    }
+  }
+
+  /** Puts every particle on its formation point, at rest. */
+  private settle() {
+    const formation = this.formations[this.phase];
+    for (let i = 0; i < PARTICLE_COUNT; i++) formation.place(i, this.time, this.current, i * 3);
+    this.velocity.fill(0);
+  }
+
   private draw() {
     const ctx = this.ctx;
     if (!ctx || this.width === 0) return;
 
     // Reduced motion shows each formation settled, with time frozen.
+    if (this.reducedMotion) this.settle();
     const elapsed = this.reducedMotion ? Infinity : this.time - this.phaseStart;
     const formation = this.formations[this.phase];
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const o = i * 3;
-      formation.place(i, this.time, this.target, o);
-      const progress = clamp01((elapsed - this.delay[i]) / TRANSITION);
-      if (progress >= 1) {
-        this.current[o] = this.target[o];
-        this.current[o + 1] = this.target[o + 1];
-        this.current[o + 2] = this.target[o + 2];
-        continue;
-      }
-      const e = easeInOutCubic(progress);
-      const w = Math.sin(Math.PI * e) * SWIRL;
-      this.current[o] = this.from[o] + (this.target[o] - this.from[o]) * e + this.swirl[o] * w;
-      this.current[o + 1] = this.from[o + 1] + (this.target[o + 1] - this.from[o + 1]) * e + this.swirl[o + 1] * w;
-      this.current[o + 2] = this.from[o + 2] + (this.target[o + 2] - this.from[o + 2]) * e + this.swirl[o + 2] * w;
-    }
 
     ctx.clearRect(0, 0, this.width, this.height);
     const pointer = this.pointer;
@@ -281,17 +356,31 @@ export class ParticleScene {
         }
         ctx.globalAlpha = p.depth;
         ctx.beginPath();
-        ctx.arc(x, y, this.size[i] * p.scale * this.dpr, 0, Math.PI * 2);
+        ctx.arc(x, y, this.size[i] * p.scale * this.dpr * this.dotScale, 0, Math.PI * 2);
         ctx.fill();
       }
     });
 
     const overlayBase = { ctx, project: this.project, t: this.time, colors: this.colors, dpr: this.dpr };
     const outgoing = this.formations[this.previousPhase]?.overlay;
-    const outgoingAlpha = 1 - clamp01(elapsed / 0.4);
+    const outgoingAlpha = 1 - clamp01(elapsed / 1);
     if (outgoing && outgoingAlpha > 0) outgoing({ ...overlayBase, alpha: outgoingAlpha });
     const incomingAlpha = clamp01((elapsed - TRANSITION) / 0.8);
     if (formation.overlay && incomingAlpha > 0) formation.overlay({ ...overlayBase, alpha: incomingAlpha });
     ctx.globalAlpha = 1;
+    this.updateTimeline();
+  }
+
+  private updateTimeline() {
+    const elapsed = this.reducedMotion ? Infinity : this.time - this.phaseStart;
+    this.ballPosition =
+      elapsed < SETTLE
+        ? this.ballFrom + (this.ballTarget - this.ballFrom) * easeInOutCubic(elapsed / SETTLE)
+        : this.ballTarget + (this.reducedMotion ? 0 : BALL_CREEP * clamp01((elapsed - SETTLE) / HOLD));
+    if (!this.timeline) return;
+    const stops = this.formations.length;
+    const x = ((((this.ballPosition + 0.5) % stops) + stops) % stops) / stops;
+    this.timeline.style.setProperty("--ball", x.toFixed(4));
+    this.timeline.style.setProperty("--ball-opacity", clamp01(Math.min(x, 1 - x) / BALL_FADE).toFixed(3));
   }
 }
