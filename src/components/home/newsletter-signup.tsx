@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
@@ -9,6 +10,12 @@ import { NEWSLETTER_CONSENT_TEXT } from '@/lib/newsletter/consent';
 export function NewsletterSignup() {
   const [status, setStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // The form unmounts on success, so move focus to the confirmation instead of losing it.
+  useEffect(() => {
+    if (status === 'success') successRef.current?.focus();
+  }, [status]);
 
   async function subscribe(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -38,8 +45,6 @@ export function NewsletterSignup() {
         return;
       }
       setStatus('success');
-      setMessage('You’re subscribed. Thanks for joining!');
-      form.reset();
     } catch {
       // Network failures surface browser wording like "Failed to fetch"; show friendly copy instead.
       setStatus('error');
@@ -47,9 +52,21 @@ export function NewsletterSignup() {
     }
   }
 
+  if (status === 'success') {
+    return (
+      <div
+        ref={successRef} tabIndex={-1} role="status"
+        className="flex items-center gap-3 rounded-2xl border border-border bg-card p-6 text-card-foreground outline-none"
+      >
+        <CheckCircle className="size-7 shrink-0 text-success" aria-hidden="true" />
+        <p className="text-lg font-semibold">Subscribed! Thanks for joining.</p>
+      </div>
+    );
+  }
+
   return (
     <form onSubmit={subscribe} aria-label="Newsletter signup" aria-busy={status === 'pending'}>
-      <fieldset disabled={status === 'pending' || status === 'success'} className="min-w-0 space-y-4">
+      <fieldset disabled={status === 'pending'} className="min-w-0 space-y-4">
         <div>
           <label htmlFor="newsletter-email" className="mb-2 block text-sm font-medium text-foreground">
             Email address
@@ -61,7 +78,7 @@ export function NewsletterSignup() {
               className="h-11 min-w-0 flex-1 rounded-full px-4"
             />
             <Button type="submit" className="shrink-0">
-              {status === 'pending' ? 'Subscribing…' : status === 'success' ? 'Subscribed' : 'Subscribe'}
+              {status === 'pending' ? 'Subscribing…' : 'Subscribe'}
             </Button>
           </div>
         </div>
@@ -84,7 +101,7 @@ export function NewsletterSignup() {
           Privacy Policy
         </a>
       </p>
-      <p role="status" aria-live="polite" aria-atomic="true" className={`mt-3 min-h-6 text-sm ${status === 'error' ? 'text-destructive' : 'text-foreground'}`}>
+      <p role="status" aria-live="polite" aria-atomic="true" className="mt-3 min-h-6 text-sm text-destructive">
         {message}
       </p>
     </form>
