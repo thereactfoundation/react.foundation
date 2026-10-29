@@ -67,9 +67,12 @@ export function NewsletterSignup() {
           <input id="newsletter-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
         </div>
       </fieldset>
-      <a href="https://lfprojects.org/policies/privacy-policy/" className="mt-3 inline-block text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground">
-        Privacy Policy
-      </a>
+      <p className="mt-3 text-xs text-muted-foreground">
+        Learn more in our{' '}
+        <a href="https://lfprojects.org/policies/privacy-policy/" className="underline underline-offset-4 hover:text-foreground">
+          Privacy Policy
+        </a>
+      </p>
       <p role="status" aria-live="polite" aria-atomic="true" className={`mt-3 min-h-6 text-sm ${status === 'error' ? 'text-destructive' : 'text-foreground'}`}>
         {message}
       </p>
