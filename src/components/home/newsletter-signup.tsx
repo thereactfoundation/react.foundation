@@ -24,19 +24,26 @@ export function NewsletterSignup() {
         body: JSON.stringify({
           email: data.get('email'),
           consent: data.get('consent') === 'on',
-          website: data.get('website'),
+          website: data.get('newsletter_hp'),
         }),
       });
-      const result = await response.json();
+      // Hosting errors (e.g. a 502/504 page) are not JSON; never show their raw text.
+      const result: unknown = await response.json().catch(() => null);
+      const serverMessage = result && typeof result === 'object' && 'message' in result && typeof result.message === 'string'
+        ? result.message
+        : null;
       if (!response.ok) {
-        throw new Error(typeof result.message === 'string' ? result.message : 'Please try again in a moment.');
+        setStatus('error');
+        setMessage(serverMessage ?? 'We couldn’t save your subscription. Please try again.');
+        return;
       }
       setStatus('success');
       setMessage('You’re subscribed. Thanks for joining!');
       form.reset();
-    } catch (error) {
+    } catch {
+      // Network failures surface browser wording like "Failed to fetch"; show friendly copy instead.
       setStatus('error');
-      setMessage(error instanceof Error ? error.message : 'We couldn’t save your subscription. Please try again.');
+      setMessage('We couldn’t save your subscription. Please try again.');
     }
   }
 
@@ -62,9 +69,13 @@ export function NewsletterSignup() {
           <Checkbox name="consent" required className="mt-1 shrink-0" />
           <span>{NEWSLETTER_CONSENT_TEXT}</span>
         </label>
+        {/* Honeypot: a name autofill doesn't recognise, plus password-manager opt-outs, so real visitors leave it empty. */}
         <div className="hidden" aria-hidden="true">
-          <label htmlFor="newsletter-website">Leave this field empty</label>
-          <input id="newsletter-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+          <label htmlFor="newsletter-hp">Leave this field empty</label>
+          <input
+            id="newsletter-hp" name="newsletter_hp" type="text" tabIndex={-1} autoComplete="off"
+            data-1p-ignore="" data-lpignore="true" data-bwignore="" data-form-type="other"
+          />
         </div>
       </fieldset>
       <p className="mt-3 text-xs text-muted-foreground">

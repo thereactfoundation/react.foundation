@@ -43,7 +43,11 @@ export async function POST(request: Request) {
   }
   const input = body as Record<string, unknown>;
   // Honeypot: silently discard automated submissions without saving personal data.
-  if (input.website) return json(success);
+  // Log the discard (no personal data) so autofilled real visitors would show up in logs.
+  if (input.website) {
+    logger.warn('Newsletter signup discarded by honeypot.');
+    return json(success);
+  }
   const email = typeof input.email === 'string' ? input.email.trim().toLowerCase() : '';
   if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || input.consent !== true) {
     return json({ message: 'Enter a valid email and agree to receive the newsletter.' }, 400);

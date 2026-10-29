@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const redis = vi.hoisted(() => ({ eval: vi.fn(), hset: vi.fn() }));
 vi.mock('@/lib/redis', () => ({ getRedisClient: () => redis }));
-vi.mock('@/lib/logger', () => ({ logger: { error: vi.fn() } }));
+vi.mock('@/lib/logger', () => ({ logger: { error: vi.fn(), warn: vi.fn() } }));
 import { POST } from './route';
 
 const api = vi.fn();
