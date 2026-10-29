@@ -5,6 +5,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { BecomeContributor } from "@/components/home/become-contributor";
 import { FoundingMembers } from "@/components/home/founding-members";
 import { MemberPhotoRail } from "@/components/home/member-photo-rail";
+import { NewsletterSignup } from "@/components/home/newsletter-signup";
 import {
   HomeCommunityCTA,
   HomeMission,
@@ -61,6 +62,19 @@ export default function FoundationHome() {
           <BecomeContributor />
         </Section>
         <HomeCommunityCTA />
+        <Section measure="standard" aria-labelledby="newsletter-heading" className="pt-4 sm:pt-6">
+          <div className="grid gap-8 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <h2 id="newsletter-heading" className="max-w-lg text-3xl font-semibold leading-tight text-foreground">
+                Stay connected with the React Foundation
+              </h2>
+              <p className="mt-4 text-sm leading-6 text-muted-foreground">
+                Get news, events, and ways to get involved.
+              </p>
+            </div>
+            <NewsletterSignup />
+          </div>
+        </Section>
       </main>
     </PublicPageShell>
   );
