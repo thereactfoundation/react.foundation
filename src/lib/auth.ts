@@ -9,6 +9,10 @@ export const authOptions: NextAuthOptions = {
     GitHubProvider({
       clientId: getRequiredEnvVar('GITHUB_CLIENT_ID'),
       clientSecret: getRequiredEnvVar('GITHUB_CLIENT_SECRET'),
+      // GitHub sends this value as `iss` in OAuth callbacks (RFC 9207).
+      // Without it, openid-client rejects every callback. next-auth 4.24.14+
+      // sets the same default.
+      issuer: "https://github.com/login/oauth",
       authorization: {
         params: {
           // read:user and user:email for profile info
