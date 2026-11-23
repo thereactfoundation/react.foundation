@@ -14,15 +14,21 @@ function Nevers() {
         <p className="text-sm font-semibold text-primary">Our commitments</p>
         <h2 className="mt-4 text-3xl font-semibold leading-tight">The Foundation will never</h2>
       </div>
-      <ol className="border-t border-border">
-        {NEVERS.map((never, index) => (
-          <li key={never} className="flex gap-4 border-b border-border py-5 text-[0.9375rem] leading-6">
-            <span className="font-mono text-primary">{index + 1}</span>
-            <span>{never}</span>
-          </li>
-        ))}
-      </ol>
+      <NeverList />
     </div>
+  );
+}
+
+function NeverList({ className }: { className?: string }) {
+  return (
+    <ol className={cn("border-t border-border", className)}>
+      {NEVERS.map((never, index) => (
+        <li key={never} className="flex gap-4 border-b border-border py-5 text-[0.9375rem] leading-6">
+          <span className="font-mono text-primary">{index + 1}</span>
+          <span>{never}</span>
+        </li>
+      ))}
+    </ol>
   );
 }
 
@@ -283,9 +289,10 @@ export function VersionC() {
           <SupportGrid />
         </Step>
         <Step name="Commitments" last>
-          <Surface className="border-l-4 border-l-primary p-7 sm:p-10">
-            <Nevers />
-          </Surface>
+          <h2 className="text-3xl font-semibold leading-tight tracking-tight sm:text-[2.5rem]">
+            The Foundation will never
+          </h2>
+          <NeverList className="mt-8 max-w-3xl" />
         </Step>
       </Section>
     </>
