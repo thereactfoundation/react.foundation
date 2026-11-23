@@ -38,7 +38,7 @@ const goals = [
   {
     id: "02",
     title: "Chosen on merit",
-    claim: "Teams choose React because it is the best option, not out of habit.",
+    claim: "People, teams and agents choose React because it is the best option, not out of habit.",
     work: [
       "React Native 1.0, with clearly defined stable APIs",
       "A Foundation-run security program, with its own vulnerability reporting and CVEs",
