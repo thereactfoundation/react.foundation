@@ -28,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     buildEntry(baseUrl, '', 'daily', 1.0),
     buildEntry(baseUrl, '/about', 'monthly', 0.8),
+    buildEntry(baseUrl, '/about/mission', 'monthly', 0.8),
     buildEntry(baseUrl, '/about/board-of-directors', 'monthly', 0.7),
     buildEntry(baseUrl, '/about/technical-steering-committee', 'monthly', 0.7),
     buildEntry(baseUrl, '/impact', 'weekly', 0.9),

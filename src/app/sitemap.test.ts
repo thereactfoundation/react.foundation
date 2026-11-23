@@ -43,6 +43,7 @@ describe('sitemap', () => {
       expect.arrayContaining([
         '/',
         '/about',
+        '/about/mission',
         '/about/board-of-directors',
         '/about/technical-steering-committee',
         '/authors',
