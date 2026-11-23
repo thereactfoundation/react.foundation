@@ -7,28 +7,16 @@ import { AGREED, GOALS, GOALS_INTRO, MISSION, NEVERS, SUPPORTING, VISION } from 
 
 const label = "font-mono text-xs uppercase tracking-wider text-primary";
 
-function Nevers({ inverted = false }: { inverted?: boolean }) {
+function Nevers() {
   return (
     <div className="grid gap-10 md:grid-cols-[0.75fr_1.25fr] md:gap-16">
       <div>
         <p className="text-sm font-semibold text-primary">Our commitments</p>
-        <h2
-          className="mt-4 text-3xl font-semibold leading-tight"
-          /* globals.css colours h1–h3 outside any layer, which beats utilities */
-          style={inverted ? { color: "hsl(var(--background))" } : undefined}
-        >
-          The Foundation will never
-        </h2>
+        <h2 className="mt-4 text-3xl font-semibold leading-tight">The Foundation will never</h2>
       </div>
-      <ol className={cn("border-t", inverted ? "border-background/20" : "border-border")}>
+      <ol className="border-t border-border">
         {NEVERS.map((never, index) => (
-          <li
-            key={never}
-            className={cn(
-              "flex gap-4 border-b py-5 text-[0.9375rem] leading-6",
-              inverted ? "border-background/20" : "border-border",
-            )}
-          >
+          <li key={never} className="flex gap-4 border-b border-border py-5 text-[0.9375rem] leading-6">
             <span className="font-mono text-primary">{index + 1}</span>
             <span>{never}</span>
           </li>
@@ -291,16 +279,15 @@ export function VersionC() {
             ))}
           </div>
         </Step>
-        <Step name="Foundations" last>
+        <Step name="Foundations">
           <SupportGrid />
         </Step>
+        <Step name="Commitments" last>
+          <Surface className="border-l-4 border-l-primary p-7 sm:p-10">
+            <Nevers />
+          </Surface>
+        </Step>
       </Section>
-
-      <div className="mt-24 bg-foreground py-20 text-background sm:mt-28 sm:py-24">
-        <Section measure="standard">
-          <Nevers inverted />
-        </Section>
-      </div>
     </>
   );
 }
