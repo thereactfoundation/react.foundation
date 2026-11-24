@@ -122,7 +122,7 @@ export function VersionA() {
       </Section>
 
       <Section className="pt-20 sm:pt-24" measure="standard">
-        <p className="mb-6 text-sm font-semibold text-primary">What makes it possible</p>
+        <p className="mb-6 text-sm font-semibold text-primary">How the Foundation works</p>
         <SupportGrid />
       </Section>
 
@@ -199,7 +199,7 @@ export function VersionB() {
       </Section>
 
       <Section className="pt-24 sm:pt-28" measure="standard">
-        <p className="mb-5 text-sm font-semibold text-primary">What makes it possible</p>
+        <p className="mb-5 text-sm font-semibold text-primary">How the Foundation works</p>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {SUPPORTING.map((item) => (
             <article key={item.title} className="border-t border-border pt-4">
@@ -240,7 +240,7 @@ export function VersionC() {
       <Section className="pt-16 sm:pt-24" measure="standard">
         <p className="text-sm font-semibold text-primary">About</p>
         <h1 className="mt-4 text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
-          Where React is going, and how we get there
+          Our vision, mission and goals
         </h1>
         <p className="mt-5 max-w-xl text-sm leading-6 text-muted-foreground">
           {AGREED} Each layer serves the one above it.

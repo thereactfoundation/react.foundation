@@ -7,7 +7,7 @@ import { cn } from "@/lib/cn";
 import { VersionA, VersionB, VersionC } from "./variants";
 
 export const metadata: Metadata = {
-  title: "Vision, Mission and Goals",
+  title: "Vision, mission and goals",
   description:
     "The React Foundation's vision, mission and goals to 2028, agreed at the React Contributors Summit in London.",
 };

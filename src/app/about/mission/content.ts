@@ -34,7 +34,7 @@ export const GOALS: Goal[] = [
   {
     id: "01",
     title: "Every platform",
-    claim: "React works wherever interfaces live, on every new device from day one.",
+    claim: "React runs on every platform people build interfaces for, including new devices from the day they launch.",
     work: [
       "A shared platform contract, so desktop, TV, HarmonyOS, headsets and the web plug into React Native the same way iOS and Android do",
       "A stable native ABI for C++, Kotlin and Swift",
@@ -53,14 +53,14 @@ export const GOALS: Goal[] = [
       "A faster runtime and renderer: a shared animation backend, faster Android rendering, deeper Hermes integration",
       "React Server Components in React Native, a leaner core, and testing that works with no setup",
     ],
-    measure: "Adoption, migrations to and from React, and performance as people experience it, around the world.",
+    measure: "Adoption, migrations to and from React, and the performance people see on real devices worldwide.",
   },
   {
     id: "03",
     title: "Agents choose React",
     claim: "Ask an agent for an interface, on the web or native, and it writes good React.",
     work: [
-      "Official React skills that make any agent an expert in writing React",
+      "Official React skills that teach agents to write React well",
       "A public benchmark of how well agents write React",
       "Tools that let agents see and check their work: a React CLI, MCP, a language server and DevTools extensions",
       "WebMCP support, agreed with browser vendors",
@@ -76,13 +76,13 @@ export const SUPPORTING = [
     body: "Releases and repository health rotate across member companies, so no critical project depends on one company or one person.",
   },
   { title: "An open process", body: "Changes to React Native go through a public proposal process." },
-  { title: "Faster delivery", body: "Features reach users in weeks, not months." },
+  { title: "Faster delivery", body: "New features reach users within weeks of landing." },
 ];
 
 export const NEVERS = [
-  "Gate participation on membership. Contributions clear a bar of quality, not of who pays.",
+  "Require membership to take part, or weigh a contribution by who paid for it.",
   "Pick winners among frameworks, libraries or vendors.",
   "Let a critical project depend on one company or one person.",
-  "Decide technical direction. That belongs to React's technical leadership.",
+  "Decide technical direction, which belongs to React's technical leadership.",
   "Take on more than we can staff.",
 ];
