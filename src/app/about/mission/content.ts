@@ -48,12 +48,12 @@ export const GOALS: Goal[] = [
     title: "Chosen on merit",
     claim: "People, teams and agents choose React because it is the best option, not out of habit.",
     work: [
-      "React Native 1.0, with clearly defined stable APIs",
+      "React Native 1.0, with stable APIs",
       "A Foundation-run security program, with its own vulnerability reporting and CVEs",
       "A faster runtime and renderer: a shared animation backend, faster Android rendering, deeper Hermes integration",
-      "React Server Components in React Native, a leaner core, and testing that works with no setup",
+      "React Server Components in React Native, a smaller core package with deprecated APIs removed, and testing that works with no setup",
     ],
-    measure: "Adoption, migrations to and from React, and the performance people see on real devices worldwide.",
+    measure: "Adoption, migrations to and from React, and the performance people see on real devices.",
   },
   {
     id: "03",
@@ -73,7 +73,7 @@ export const SUPPORTING = [
   { title: "A published plan", body: "A public roadmap with named owners, kept current through the year." },
   {
     title: "Shared ownership",
-    body: "Releases and repository health rotate across member companies, so no critical project depends on one company or one person.",
+    body: "Releases and repository health rotate across member companies.",
   },
   { title: "An open process", body: "Changes to React Native go through a public proposal process." },
   { title: "Faster delivery", body: "New features reach users within weeks of landing." },

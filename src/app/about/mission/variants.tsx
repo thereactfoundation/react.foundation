@@ -243,7 +243,7 @@ export function VersionC() {
           Our vision, mission and goals
         </h1>
         <p className="mt-5 max-w-xl text-sm leading-6 text-muted-foreground">
-          {AGREED} Each layer serves the one above it.
+          {AGREED}
         </p>
       </Section>
 
