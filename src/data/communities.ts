@@ -443,7 +443,7 @@ export const REACT_COMMUNITIES: Community[] = [
     "verified": true,
     "cois_tier": "platinum",
     "cois_score": 0.9,
-    "meetup_url": "https://guild.host/web-eng-amsterdam",
+    "meetup_url": "https://luma.com/web-eng-amsterdam",
     "last_event_date": "2026-09-16",
     "created_at": "2025-10-24T14:57:54.936Z",
     "updated_at": "2026-11-24T11:14:14.000Z"
