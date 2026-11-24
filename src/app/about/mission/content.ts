@@ -46,7 +46,7 @@ export const GOALS: Goal[] = [
   {
     id: "02",
     title: "Chosen on merit",
-    claim: "People, teams and agents choose React because it is the best option, not out of habit.",
+    claim: "People and teams choose React because it is the best option, not out of habit.",
     work: [
       "React Native 1.0, with stable APIs",
       "A Foundation-run security program, with its own vulnerability reporting and CVEs",
