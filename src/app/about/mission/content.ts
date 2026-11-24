@@ -1,5 +1,26 @@
-export const VISION =
-  "Anyone can build the interface they want, to a high standard, and run it wherever it's needed.";
+/* Draft visions for the 17 Dec ratification; the preview picks one with ?vision=. */
+export const VISIONS = [
+  {
+    id: "1",
+    name: "Describe it",
+    text: "Anyone who can describe an interface can build it, and it runs everywhere.",
+  },
+  {
+    id: "2",
+    name: "Worthy of the idea",
+    text: "Anyone with an idea can build an interface worthy of it, on any screen.",
+  },
+  {
+    id: "3",
+    name: "An afternoon",
+    text: "Anyone can turn an idea into a great interface, on any device, in an afternoon.",
+  },
+  {
+    id: "4",
+    name: "Imagined",
+    text: "Every interface people can imagine, anyone can build, and it works wherever people are.",
+  },
+] as const;
 
 export const AGREED =
   "Agreed by the Governing Board at the React Contributors Summit in London, November 2026, alongside the working groups that build React.";
@@ -30,31 +51,36 @@ export const GOALS: Goal[] = [
   {
     id: "01",
     title: "Every platform",
-    claim: "React runs on every platform people build interfaces for, including new devices from the day they launch.",
+    claim:
+      "React runs on every platform people build interfaces for, including new devices from the day they launch.",
     work: [
       "A shared platform contract, so desktop, TV, HarmonyOS, headsets and the web plug into React Native the same way iOS and Android do",
       "A stable native ABI for C++, Kotlin and Swift",
       "Web APIs in React Native: Intersection and Resize Observer, DOM APIs, CSS Grid, media queries and View Transitions",
       "Support for each new iOS and Android release as it ships",
     ],
-    measure: "Platforms building on the shared contract and passing the same public tests.",
+    measure:
+      "Platforms building on the shared contract and passing the same public tests.",
   },
   {
     id: "02",
     title: "Chosen on merit",
-    claim: "People and teams choose React because it is the best option, not out of habit.",
+    claim:
+      "People and teams choose React because it is the best option, not out of habit.",
     work: [
       "React Native 1.0, with stable APIs",
       "A Foundation-run security program, with its own vulnerability reporting and CVEs",
       "A faster runtime and renderer: a shared animation backend, faster Android rendering, deeper Hermes integration",
       "React Server Components in React Native, a smaller core package with deprecated APIs removed, and testing that works with no setup",
     ],
-    measure: "Adoption, migrations to and from React, and the performance people see on real devices.",
+    measure:
+      "Adoption, migrations to and from React, and the performance people see on real devices.",
   },
   {
     id: "03",
     title: "Agents choose React",
-    claim: "Ask an agent for an interface, on the web or native, and it writes good React.",
+    claim:
+      "Ask an agent for an interface, on the web or native, and it writes good React.",
     work: [
       "Official React skills that teach agents to write React well",
       "A public benchmark of how well agents write React",
@@ -66,13 +92,22 @@ export const GOALS: Goal[] = [
 ];
 
 export const SUPPORTING = [
-  { title: "A published plan", body: "A public roadmap with named owners, kept current through the year." },
+  {
+    title: "A published plan",
+    body: "A public roadmap with named owners, kept current through the year.",
+  },
   {
     title: "Shared ownership",
     body: "Releases and repository health rotate across member companies.",
   },
-  { title: "An open process", body: "Changes to React Native go through a public proposal process." },
-  { title: "Faster delivery", body: "New features reach users within weeks of landing." },
+  {
+    title: "An open process",
+    body: "Changes to React Native go through a public proposal process.",
+  },
+  {
+    title: "Faster delivery",
+    body: "New features reach users within weeks of landing.",
+  },
 ];
 
 export const NEVERS = [
