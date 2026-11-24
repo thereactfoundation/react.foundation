@@ -152,11 +152,10 @@ export function VersionB() {
           <p className="text-sm font-semibold text-primary">Mission</p>
           <p className="text-xl font-medium leading-snug text-muted-foreground [text-wrap:pretty] sm:text-[1.75rem] sm:leading-[1.4]">
             <span className="text-foreground">The React Foundation provides open, neutral stewardship of React</span> so
-            people can rely on it as software evolves. We <span className="text-foreground">support maintainers</span>,{" "}
-            <span className="text-foreground">run a research lab</span> exploring the future of interfaces, and{" "}
-            <span className="text-foreground">help people and companies contribute</span> engineering work, expertise,
-            or funding. Together, we advance React so <span className="text-foreground">people and agents</span> can
-            efficiently build high-quality interfaces on every platform.
+            people can rely on it. We <span className="text-foreground">support maintainers</span>,{" "}
+            <span className="text-foreground">run a research lab</span>, and{" "}
+            <span className="text-foreground">help people and companies contribute</span> engineering work, expertise
+            or funding.
           </p>
         </div>
       </Section>

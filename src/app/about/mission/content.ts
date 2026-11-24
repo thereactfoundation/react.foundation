@@ -1,5 +1,5 @@
 export const VISION =
-  "Anyone can efficiently bring their ideas to life as user interfaces that fulfill their aspirations, meet their high standards, and work wherever they're needed.";
+  "Anyone can build the interface they want, to a high standard, and run it wherever it's needed.";
 
 export const AGREED =
   "Agreed by the Governing Board at the React Contributors Summit in London, November 2026, alongside the working groups that build React.";
@@ -10,15 +10,11 @@ export const GOALS_INTRO =
 export const MISSION = [
   {
     label: "Stewardship",
-    text: "The React Foundation provides open, neutral stewardship of React so people can rely on it as software evolves.",
+    text: "The React Foundation provides open, neutral stewardship of React so people can rely on it.",
   },
   {
     label: "Support and research",
-    text: "We support maintainers, run a research lab exploring the future of interfaces, and help people and companies contribute engineering work, expertise, or funding.",
-  },
-  {
-    label: "Together",
-    text: "Together, we advance React so people and agents can efficiently build high-quality interfaces on every platform.",
+    text: "We support maintainers, run a research lab, and help people and companies contribute engineering work, expertise or funding.",
   },
 ];
 
