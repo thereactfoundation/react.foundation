@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      NEXTAUTH_SECRET: ci-placeholder-secret
+      GITHUB_CLIENT_ID: ci-placeholder-id
+      GITHUB_CLIENT_SECRET: ci-placeholder-secret
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Unit tests
+        run: npm run test:unit
+
+      - name: Lint changed files
+        if: github.event_name == 'pull_request'
+        run: |
+          CHANGED_FILES=$(git diff --name-only --diff-filter=ACMR "${{ github.event.pull_request.base.sha }}...HEAD" -- '*.js' '*.jsx' '*.ts' '*.tsx' '*.mjs' '*.cjs')
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No JS/TS files changed."
+            exit 0
+          fi
+          echo "$CHANGED_FILES" | xargs npx eslint
+
+      - name: Build and bundle budgets
+        run: npm run build
