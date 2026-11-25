@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ButtonLink } from "@/components/ui/button";
 import { RfcPopover } from "@/components/home/rfc-popover";
+import { FeatureGrid, FeatureItem, SectionHeader } from "@/components/public-site/layout";
 import { ecosystemLibraries } from "@/lib/maintainer-tiers";
 
 type Action = { href: string; label: string; external?: boolean };
@@ -55,79 +56,70 @@ const contributorData: {
   },
 ];
 
+/** Content for a `Section`: header, the three pathways, and a contact line. */
 export function BecomeContributor() {
   return (
-    <section
-      id="contribute"
-      className="scroll-mt-32"
-    >
-      <div className="grid gap-10 md:grid-cols-[0.75fr_1.25fr]">
-        <div>
-          <h2 className="text-3xl font-semibold leading-tight text-foreground sm:text-4xl">
-            Become a contributor
-          </h2>
-          <p className="mt-4 text-sm leading-6 text-muted-foreground">
+    <div id="contribute" className="scroll-mt-32">
+      <SectionHeader
+        eyebrow="Ways to contribute"
+        title="Become a contributor"
+        lead={
+          <p>
             Contribute code, organize communities, create educational content, or
             support financially. Every pathway helps build a stronger ecosystem.
           </p>
-        </div>
+        }
+      />
 
-        <div className="divide-y divide-border border-y border-border">
-          {contributorData.map((item, index) => (
-            <article key={item.variant} className="grid gap-5 py-6 sm:grid-cols-[4rem_1fr]">
-              <p className="text-xs font-semibold text-primary">
-                0{index + 1}
-              </p>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {item.description}
-                </p>
-                <div className="mt-4 flex flex-wrap items-center gap-3">
+      <FeatureGrid>
+        {contributorData.map((item, index) => (
+          <FeatureItem
+            key={item.variant}
+            index={index + 1}
+            title={item.title}
+            actions={
+              <>
+                <ButtonLink
+                  href={item.primaryAction.href}
+                  variant={index === 0 ? "primary" : "secondary"}
+                  size="sm"
+                  {...(item.primaryAction.external
+                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                    : {})}
+                >
+                  {item.primaryAction.label}
+                </ButtonLink>
+                {item.variant === 'code' ? (
+                  <RfcPopover />
+                ) : item.secondaryAction ? (
                   <ButtonLink
-                    href={item.primaryAction.href}
-                    variant={index === 0 ? "primary" : "secondary"}
+                    href={item.secondaryAction.href}
+                    variant="ghost"
                     size="sm"
-                    {...(item.primaryAction.external
+                    {...(item.secondaryAction.external
                       ? { target: '_blank', rel: 'noopener noreferrer' }
                       : {})}
                   >
-                    {item.primaryAction.label}
+                    {item.secondaryAction.label}
                   </ButtonLink>
-                  {item.variant === 'code' ? (
-                    <RfcPopover />
-                  ) : item.secondaryAction ? (
-                    <ButtonLink
-                      href={item.secondaryAction.href}
-                      variant="ghost"
-                      size="sm"
-                      {...(item.secondaryAction.external
-                        ? { target: '_blank', rel: 'noopener noreferrer' }
-                        : {})}
-                    >
-                      {item.secondaryAction.label}
-                    </ButtonLink>
-                  ) : null}
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-8 border-t border-border pt-6 text-sm text-muted-foreground">
-        <p>
-          Questions about contributing?{" "}
-          <Link
-            href="mailto:info@react.foundation"
-            className="font-medium text-primary underline-offset-4 hover:underline"
+                ) : null}
+              </>
+            }
           >
-            Get in touch
-          </Link>
-        </p>
-      </div>
-    </section>
+            {item.description}
+          </FeatureItem>
+        ))}
+      </FeatureGrid>
+
+      <p className="mt-12 text-sm text-muted-foreground">
+        Questions about contributing?{" "}
+        <Link
+          href="mailto:info@react.foundation"
+          className="font-medium text-primary underline-offset-4 hover:underline"
+        >
+          Get in touch
+        </Link>
+      </p>
+    </div>
   );
 }

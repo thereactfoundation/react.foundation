@@ -1,11 +1,3 @@
-import type { LucideIcon } from "lucide-react";
-import {
-  Compass,
-  Handshake,
-  Landmark,
-  UsersRound,
-} from "lucide-react";
-
 export const summitVenue = {
   name: "Meta King's Cross",
   address: "11-21 Canal Reach, London, UK",
@@ -16,7 +8,6 @@ export const summitVenue = {
 
 export interface SummitGoal {
   description: string;
-  icon: LucideIcon;
   title: string;
 }
 
@@ -44,22 +35,18 @@ export const summitGoals: readonly SummitGoal[] = [
   {
     title: "Establish our identity",
     description: "Bring every technical working group together in person for the first time.",
-    icon: UsersRound,
   },
   {
     title: "Shape the roadmap",
     description: "Align working groups and subteams on priorities, active projects, and roadmaps.",
-    icon: Compass,
   },
   {
     title: "Build trust",
     description: "Create the relationships that make thoughtful remote collaboration work.",
-    icon: Handshake,
   },
   {
     title: "Formalize governance",
     description: "Resolve leadership, membership, and cross-cutting coordination questions.",
-    icon: Landmark,
   },
 ];
 export const summitDays: readonly SummitDay[] = [

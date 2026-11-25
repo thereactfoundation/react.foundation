@@ -14,13 +14,13 @@ export function CommunityStats({
   ];
 
   return (
-    <dl className="grid grid-cols-3 py-3 text-center">
+    <dl className="grid max-w-narrow grid-cols-3 gap-6">
       {stats.map((stat) => (
-        <div key={stat.label} className="px-2 sm:px-6">
-          <dd className="text-2xl font-semibold tracking-[-0.04em] text-foreground sm:text-3xl">
+        <div key={stat.label}>
+          <dd className="text-3xl font-semibold tracking-[-0.03em] text-foreground sm:text-4xl">
             {stat.value}
           </dd>
-          <dt className="mt-1 text-[0.6875rem] text-muted-foreground sm:text-xs">
+          <dt className="foundation-eyebrow mt-2.5 text-muted-foreground">
             {stat.label}
           </dt>
         </div>

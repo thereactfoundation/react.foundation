@@ -1,7 +1,13 @@
 import Link from "next/link";
 
 import { ButtonLink } from "@/components/ui/button";
-import { Section } from "@/components/public-site/layout";
+import {
+  CtaBand,
+  FeatureGrid,
+  FeatureItem,
+  Section,
+  SectionHeader,
+} from "@/components/public-site/layout";
 
 const pillars = [
   {
@@ -20,70 +26,57 @@ const pillars = [
 
 export function HomeMission() {
   return (
-    <Section className="border-t border-border py-20 sm:py-28">
-      <h2 className="max-w-[39rem] text-[clamp(2rem,5vw,3.15rem)] font-semibold leading-[1.08] text-foreground">
-        We exist to ensure the React ecosystem thrives.
-      </h2>
-      <div className="mt-9 grid gap-7 text-base leading-7 text-muted-foreground sm:grid-cols-2">
-        <p>
-          We support React through independent stewardship, sustainable funding, and
-          transparent governance—so the technology can remain open and accessible to
-          everyone.
-        </p>
-        <p>
-          Our work supports the people behind the technology—from core maintainers to
-          local organizers—so that the next generation can keep experimenting, teaching,
-          and creating.
-        </p>
-      </div>
-    </Section>
-  );
-}
-
-export function HomePillars() {
-  return (
-    <Section className="pb-20 sm:pb-28" measure="standard">
-      <div className="grid gap-10 md:grid-cols-3 md:gap-8">
-        {pillars.map((pillar, index) => (
-          <article key={pillar.title} className="border-t border-border pt-5">
-            <p className="text-xs font-semibold text-primary">0{index + 1}</p>
-            <h3 className="mt-5 text-xl font-semibold text-foreground">
-              {pillar.title}
-            </h3>
-            <p className="mt-3 text-sm leading-6 text-muted-foreground">
-              {pillar.body}
+    <Section>
+      <SectionHeader
+        eyebrow="Our mission"
+        title="We exist to ensure the React ecosystem thrives."
+        lead={
+          <>
+            <p>
+              We support React through independent stewardship, sustainable funding, and
+              transparent governance—so the technology can remain open and accessible to
+              everyone.
             </p>
-          </article>
+            <p>
+              Our work supports the people behind the technology—from core maintainers to
+              local organizers—so that the next generation can keep experimenting,
+              teaching, and creating.
+            </p>
+          </>
+        }
+      />
+      <FeatureGrid>
+        {pillars.map((pillar, index) => (
+          <FeatureItem key={pillar.title} index={index + 1} title={pillar.title}>
+            {pillar.body}
+          </FeatureItem>
         ))}
-      </div>
+      </FeatureGrid>
     </Section>
   );
 }
 
 export function HomeCommunityCTA() {
   return (
-    <Section className="pb-10 sm:pb-16" measure="standard">
-      <div className="rounded-panel bg-foreground px-7 py-10 text-background sm:flex sm:items-center sm:justify-between sm:px-10 sm:py-12">
-        <div className="max-w-[31rem]">
-          <h2 className="text-3xl font-semibold leading-tight !text-background sm:text-4xl">
-            A stronger React ecosystem starts with participation.
-          </h2>
-          <p className="mt-4 text-sm leading-6 text-background/70">
-            Join a community, become a member, or contribute your time and expertise.
-          </p>
-        </div>
-        <div className="mt-8 flex shrink-0 flex-wrap gap-3 sm:mt-0 sm:pl-8">
-          <ButtonLink href="/communities" variant="secondary">
-            Find a community
-          </ButtonLink>
-          <Link
-            href="/about"
-            className="inline-flex min-h-11 items-center px-3 text-sm font-semibold text-background hover:text-primary"
-          >
-            Learn more <span className="ml-2" aria-hidden>→</span>
-          </Link>
-        </div>
-      </div>
+    <Section>
+      <CtaBand
+        eyebrow="Get involved"
+        title="A stronger React ecosystem starts with participation."
+        description="Join a community, become a member, or contribute your time and expertise."
+        actions={
+          <>
+            <ButtonLink href="/communities" variant="secondary">
+              Find a community
+            </ButtonLink>
+            <Link
+              href="/about"
+              className="inline-flex min-h-11 items-center px-3 text-sm font-semibold text-background transition hover:text-primary"
+            >
+              Learn more <span className="ml-2" aria-hidden>→</span>
+            </Link>
+          </>
+        }
+      />
     </Section>
   );
 }

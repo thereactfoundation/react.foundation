@@ -23,7 +23,7 @@ export default function ErrorPage({
   return (
     <PublicPageShell>
       <main>
-        <Section className="py-20 sm:py-28">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Something went wrong"
             title="We could not load this page"
@@ -40,7 +40,7 @@ export default function ErrorPage({
             }
           />
           {process.env.NODE_ENV === "development" ? (
-            <details className="mx-auto mt-10 max-w-2xl rounded-card border border-border bg-muted p-5 text-sm">
+            <details className="mt-10 max-w-narrow rounded-card border border-border bg-muted p-5 text-sm">
               <summary className="cursor-pointer font-semibold text-foreground">
                 Development error details
               </summary>

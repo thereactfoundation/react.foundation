@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 
 import { EcosystemLibraries } from "@/components/home/ecosystem-libraries";
 import {
+  FeatureGrid,
+  FeatureItem,
   PageIntro,
   PublicPageShell,
   Section,
-  Surface,
+  SectionHeader,
+  SummaryPanel,
 } from "@/components/public-site/layout";
 import { ButtonLink } from "@/components/ui/button";
 import { ecosystemLibraries } from "@/lib/maintainer-tiers";
@@ -35,7 +38,7 @@ export default function LibrariesPage() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="pt-16 sm:pt-24">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="Libraries and tooling"
             title="Ecosystem support"
@@ -53,48 +56,34 @@ export default function LibrariesPage() {
           />
         </Section>
 
-        <Section className="pt-12 sm:pt-16" measure="standard">
-          <Surface className="grid gap-8 p-7 sm:p-10 md:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <p className="text-sm font-semibold text-primary">
-                {ecosystemLibraries.length} tracked repositories
-              </p>
-              <h2 className="mt-3 text-2xl font-semibold text-foreground">
-                A curated ecosystem list, not a leaderboard
-              </h2>
-            </div>
-            <p className="text-sm leading-6 text-muted-foreground">
-              This page restores the public list of supported React ecosystem
-              projects. Repository inclusion supports contribution recognition and
-              methodology review; it is not itself a funding announcement.
+        <Section spacing="attached">
+          <SummaryPanel
+            eyebrow={`${ecosystemLibraries.length} tracked repositories`}
+            title="A curated ecosystem list, not a leaderboard"
+          >
+            <p>
+              This page restores the public list of supported React ecosystem projects.
+              Repository inclusion supports contribution recognition and methodology
+              review; it is not itself a funding announcement.
             </p>
-          </Surface>
+          </SummaryPanel>
         </Section>
 
-        <Section className="py-20 sm:py-24" measure="standard">
-          <div className="grid gap-10 md:grid-cols-[0.75fr_1.25fr]">
-            <div>
-              <p className="text-sm font-semibold text-primary">How to read this list</p>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight text-foreground">
-                The list explains scope before scores.
-              </h2>
-            </div>
-            <div className="divide-y divide-border border-y border-border">
-              {supportNotes.map((note) => (
-                <article key={note.title} className="py-6">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {note.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    {note.body}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
+        <Section>
+          <SectionHeader
+            eyebrow="How to read this list"
+            title="The list explains scope before scores."
+          />
+          <FeatureGrid>
+            {supportNotes.map((note, index) => (
+              <FeatureItem key={note.title} index={index + 1} title={note.title}>
+                {note.body}
+              </FeatureItem>
+            ))}
+          </FeatureGrid>
         </Section>
 
-        <Section className="pb-20 sm:pb-24" measure="standard">
+        <Section>
           <EcosystemLibraries
             description={`Browse the ${ecosystemLibraries.length} tracked repositories used for contribution tracking and ecosystem support review.`}
             showMissingLibraryIssue

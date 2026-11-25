@@ -39,7 +39,7 @@ test.describe('public shell accessibility', () => {
     for (const control of [
       page.getByRole('button', { name: /toggle theme/i }),
       page.getByRole('button', { name: /open menu/i }),
-      page.getByRole('link', { name: /^sign in$/i }),
+      page.getByRole('banner').getByRole('link', { name: /^sign in$/i }),
     ]) {
       const box = await control.boundingBox();
       expect(box, 'control should be visible').not.toBeNull();

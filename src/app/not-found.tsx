@@ -9,7 +9,7 @@ export default function NotFound() {
   return (
     <PublicPageShell>
       <main>
-        <Section className="py-20 sm:py-28">
+        <Section spacing="intro">
           <PageIntro
             eyebrow="404"
             title="Page not found"

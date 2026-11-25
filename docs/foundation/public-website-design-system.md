@@ -34,11 +34,13 @@ The system is intentionally restrained:
 
 ### Composition
 
-- Public pages use a shared 64–72rem content frame.
-- Reading-heavy content is constrained to roughly 40.5rem.
-- Hero content is centered on About and Communities, and may be centered or
-  left-aligned on Home depending on viewport.
-- Sections are separated primarily with whitespace, not background gradients.
+- Every public page sits on one spine: the 64rem `standard` measure shared by
+  the header, all sections, and the footer.
+- Prose is capped at the 40.5rem `narrow` measure *inside* that spine; it is
+  never a separately centered container.
+- Only the Home hero is centered; every other page intro is left-aligned on
+  the spine.
+- Sections are separated by whitespace only — no rules, bands, or gradients.
 - Full-width visual moments such as the Home photo rail may escape the standard
   content measure.
 - The mobile frame is a responsive expression of Home, not a separate route or
@@ -108,7 +110,6 @@ replaced:
 | `Button` / `ButtonLink` | Primary, secondary, quiet, and text actions |
 | `ThemeToggleWrapper` | Light/dark/system control |
 | `ScrollReveal` | Restrained section entrances |
-| `FoundationHero` | Home hero content source |
 | `FoundingMembers` | Member-logo strip |
 | `ExecutiveMessage` | About editorial letter |
 | `BecomeContributor` | Contributor pathways |
@@ -136,7 +137,8 @@ new primitive library.
    - provides the Home, About, News, and Communities heading rhythm.
 
 3. `Section`
-   - standardizes vertical spacing and optional reading/wide measures;
+   - owns the space above it (`intro` · `section` · `attached`) and the
+     `standard`/`narrow` measure;
    - should stay structurally simple rather than becoming a visual card.
 
 4. `Surface`

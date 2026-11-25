@@ -21,12 +21,24 @@ describe('React Foundation theme contract', () => {
   });
 
   it('defines the core visual-language tokens used by every public page', () => {
-    expect(globalsCss).toContain('--foundation-content-wide: 72rem;');
-    expect(globalsCss).toContain('--foundation-content-reading: 40.5rem;');
+    expect(globalsCss).toContain('--foundation-content-standard: 64rem;');
+    expect(globalsCss).toContain('--foundation-content-narrow: 40.5rem;');
     expect(globalsCss).toContain('--foundation-page-gutter: clamp(1.25rem, 4vw, 3rem);');
-    expect(globalsCss).toContain('--foundation-section-space: clamp(4.5rem, 9vw, 8rem);');
-    expect(globalsCss).toContain('--foundation-radius-panel: 1.75rem;');
+    expect(globalsCss).toContain('--foundation-space-intro: clamp(4rem, 8vw, 6rem);');
+    expect(globalsCss).toContain('--foundation-space-section: clamp(4.5rem, 9vw, 8rem);');
+    expect(globalsCss).toContain('--foundation-space-attached: clamp(2.5rem, 4vw, 3.5rem);');
+    expect(globalsCss).toMatch(/--foundation-radius-field: 0\.625rem;/);
+    expect(globalsCss).toMatch(/--foundation-radius-card: 1rem;/);
+    expect(globalsCss).toMatch(/--foundation-radius-panel: 1\.5rem;/);
+    expect(globalsCss).toMatch(/--foundation-radius-control: 999px;/);
     expect(globalsCss).toContain('--foundation-shadow-soft:');
+  });
+
+  it('offers exactly two content widths: the standard spine and a narrow prose measure', () => {
+    expect(globalsCss).toContain('.foundation-measure-standard');
+    expect(globalsCss).toContain('--container-narrow: var(--foundation-content-narrow);');
+    expect(globalsCss).not.toMatch(/--foundation-content-(wide|reading)/);
+    expect(globalsCss).not.toMatch(/\.foundation-measure-(wide|reading)/);
   });
 
   it('maps the Figma-derived surface and text roles into Tailwind theme tokens', () => {

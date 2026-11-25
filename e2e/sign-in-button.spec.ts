@@ -4,7 +4,7 @@ test.describe('Sign in button', () => {
   test('renders without issue', async ({ page }) => {
     await page.goto('/');
 
-    const signIn = page.getByRole('link', { name: /^sign in$/i });
+    const signIn = page.getByRole('banner').getByRole('link', { name: /^sign in$/i });
     await expect(signIn).toBeVisible();
     await expect(signIn).toHaveAttribute('href', '/auth/signin');
   });
@@ -13,7 +13,7 @@ test.describe('Sign in button', () => {
     await page.goto('/');
 
     const header = page.locator('header').first();
-    const signIn = page.getByRole('link', { name: /^sign in$/i });
+    const signIn = page.getByRole('banner').getByRole('link', { name: /^sign in$/i });
     await expect(header).toBeVisible();
     await expect(signIn).toBeVisible();
 
