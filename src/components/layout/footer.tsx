@@ -10,6 +10,7 @@ const footerNav: { heading: string; links: { label: string; href: string }[] }[]
       { label: "About", href: "/about" },
       { label: "Impact", href: "/impact" },
       { label: "Communities", href: "/communities" },
+      { label: "Events", href: "/events" },
       { label: "Summit", href: "/summit" },
     ],
   },
