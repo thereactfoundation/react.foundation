@@ -19,7 +19,11 @@ describe('authOptions GitHub provider', () => {
     // GitHub adds iss=https://github.com/login/oauth to the callback (RFC 9207).
     // openid-client rejects a callback with `iss` when the provider has no issuer
     // ("issuer must be configured on the issuer"), and NextAuth then redirects to
-    // /auth/signin?error=OAuthCallback. NextAuth merges these options into the provider.
-    expect(github?.options).toMatchObject({ issuer: 'https://github.com/login/oauth' });
+    // /auth/signin?error=OAuthCallback. Check both provider options and provider
+    // defaults (next-auth 4.24.14+ sets `issuer` on the provider directly).
+    const issuer =
+      (github?.options as { issuer?: string } | undefined)?.issuer ??
+      (github as { issuer?: string } | undefined)?.issuer;
+    expect(issuer).toBe('https://github.com/login/oauth');
   });
 });
