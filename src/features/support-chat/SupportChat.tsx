@@ -218,6 +218,15 @@ function getRandomThinkingMessage(): string {
 
 export function SupportChat(): JSX.Element | null {
   const pathname = usePathname();
+
+  if (process.env.NEXT_PUBLIC_ENABLE_CHATBOT !== 'true' || pathname === '/coming-soon') {
+    return null;
+  }
+
+  return <SupportChatWidget />;
+}
+
+function SupportChatWidget(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<UIMessage[]>(INITIAL_MESSAGES);
   const [input, setInput] = useState('');
@@ -226,11 +235,6 @@ export function SupportChat(): JSX.Element | null {
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
-
-  // Hide chatbot on coming soon page
-  if (pathname === '/coming-soon') {
-    return null;
-  }
 
   useEffect(() => {
     if (!isOpen) return;
