@@ -4,8 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { UserAvatar } from "@/components/ui/user-avatar";
-import { RFDS } from "@/components/rfds";
-
+import { AccordionContent } from "@/components/rfds/accordion";
 export function ProfileLayoutClient({
   children,
   isAdmin,
@@ -81,7 +80,7 @@ export function ProfileLayoutClient({
         </button>
 
         {/* Mobile Navigation - Slide out drawer */}
-        <RFDS.AccordionContent isOpen={mobileMenuExpanded}>
+        <AccordionContent isOpen={mobileMenuExpanded}>
           <nav className="space-y-2 px-6 pb-6 pt-2">
               <Link
                 href="/profile"
@@ -125,7 +124,7 @@ export function ProfileLayoutClient({
                 </button>
               </div>
           </nav>
-        </RFDS.AccordionContent>
+        </AccordionContent>
       </div>
 
       <div className="flex gap-8">

@@ -10,7 +10,8 @@ import { useRouter } from 'next/navigation';
 import { addUserAction } from '../actions';
 import type { User, UserRole } from '@/lib/admin/types';
 import { RoleSelector } from '@/components/admin/role-selector';
-import { RFDS } from '@/components/rfds';
+import { SemanticButton } from '@/components/rfds/semantic-components';
+import { Input } from '@/components/ui/input';
 import { X } from 'lucide-react';
 import { UsersTable } from '@/components/admin/UsersTable';
 
@@ -155,7 +156,7 @@ export function UsersListClient({
                         className="inline-flex items-center gap-1 rounded-md bg-primary/20 px-2 py-1 text-sm text-primary-foreground"
                       >
                         {email}
-                        <RFDS.SemanticButton
+                        <SemanticButton
                           type="button"
                           variant="ghost"
                           size="sm"
@@ -165,13 +166,13 @@ export function UsersListClient({
                           aria-label={`Remove ${email}`}
                         >
                           <X className="h-3 w-3" />
-                        </RFDS.SemanticButton>
+                        </SemanticButton>
                       </span>
                     ))}
                   </div>
                 )}
                 {/* Email input */}
-                <RFDS.Input
+                <Input
                   type="email"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
@@ -197,7 +198,7 @@ export function UsersListClient({
               />
             </div>
           </div>
-          <RFDS.SemanticButton
+          <SemanticButton
             type="submit"
             variant="primary"
             disabled={isPending}
@@ -209,7 +210,7 @@ export function UsersListClient({
               : newEmails.length === 1
               ? 'Add 1 User'
               : 'Add User(s)'}
-          </RFDS.SemanticButton>
+          </SemanticButton>
         </form>
       </div>
 

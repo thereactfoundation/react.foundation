@@ -9,7 +9,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Eye } from 'lucide-react';
-import { RFDS, type TableColumn } from '@/components/rfds';
+import { SemanticBadge, SemanticButton } from '@/components/rfds/semantic-components';
+import { Table, type TableColumn } from '@/components/rfds/table';
 import { LibraryDetailModal } from './LibraryDetailModal';
 import { type EligibilityStatus, getEligibilityBadgeInfo } from '@/lib/ris/eligibility';
 
@@ -97,7 +98,7 @@ export function LibraryList({ libraries, showHeader = true }: LibraryListProps) 
       sortable: true,
       render: (_value: unknown, library: LibraryWithEligibility) => {
         if (!library.eligibility) {
-          return <RFDS.SemanticBadge variant="outline">Unset</RFDS.SemanticBadge>;
+          return <SemanticBadge variant="outline">Unset</SemanticBadge>;
         }
         return (
           <EligibilityBadge
@@ -160,8 +161,8 @@ export function LibraryList({ libraries, showHeader = true }: LibraryListProps) 
         </div>
       </div>
 
-      {/* Library Table using RFDS.Table */}
-      <RFDS.Table
+      {/* Library Table using Table */}
+      <Table
         data={libraries}
         columns={columns}
         searchable
@@ -190,14 +191,14 @@ function EligibilityBadge({
   };
 
   return (
-    <RFDS.SemanticBadge variant={variantMap[badgeInfo.color]}>
+    <SemanticBadge variant={variantMap[badgeInfo.color]}>
       {badgeInfo.emoji} {badgeInfo.label}
       {adjustment < 1.0 && (
         <span className="ml-1 opacity-70">
           ({(adjustment * 100).toFixed(0)}%)
         </span>
       )}
-    </RFDS.SemanticBadge>
+    </SemanticBadge>
   );
 }
 
@@ -217,7 +218,7 @@ function LibraryTableActions({
 
   return (
     <>
-      <RFDS.SemanticButton
+      <SemanticButton
         variant="ghost"
         size="sm"
         onClick={() => setIsModalOpen(true)}
@@ -226,7 +227,7 @@ function LibraryTableActions({
         aria-label="View library details"
       >
         <Eye className="h-6 w-6" />
-      </RFDS.SemanticButton>
+      </SemanticButton>
       {isModalOpen && (
         <LibraryDetailModal
           library={library}

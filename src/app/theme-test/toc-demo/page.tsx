@@ -5,8 +5,8 @@
 
 'use client';
 
-import { RFDS } from '@/components/rfds';
-
+import { ScrollReveal } from '@/components/ui/scroll-reveal';
+import { TableOfContents } from '@/components/rfds/TableOfContents';
 const sections = [
   { id: 'introduction', title: 'Introduction', level: 1 as const },
   { id: 'getting-started', title: 'Getting Started', level: 1 as const },
@@ -40,7 +40,7 @@ export default function TOCDemoPage() {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
           {/* Main Content */}
           <main className="max-w-3xl prose prose-slate dark:prose-invert">
-            <RFDS.ScrollReveal animation="fade-up">
+            <ScrollReveal animation="fade-up">
             <Section id="introduction" title="Introduction" level={1}>
               <p>
                 The TableOfContents component provides an interactive navigation sidebar that automatically
@@ -52,18 +52,18 @@ export default function TOCDemoPage() {
                 theming conventions, meaning it automatically adapts to light and dark modes.
               </p>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="getting-started" title="Getting Started" level={1}>
               <p>
                 To use the TableOfContents component, you&apos;ll need to import it from the RFDS package and
                 provide it with an array of sections to track.
               </p>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="installation" title="Installation" level={2}>
               <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
                 <code>{`import { RFDS } from '@/components/rfds';
@@ -74,9 +74,9 @@ const sections = [
 ];`}</code>
               </pre>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="configuration" title="Configuration" level={2}>
               <p>
                 The component requires minimal configuration. Simply pass in your sections array and
@@ -88,9 +88,9 @@ const sections = [
                 <li>Ensure corresponding HTML elements have matching IDs</li>
               </ul>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="basic-usage" title="Basic Usage" level={1}>
               <p>
                 Here&apos;s a complete example of using the TableOfContents component in your page:
@@ -99,20 +99,20 @@ const sections = [
                 <code>{`<div className="grid grid-cols-[1fr,250px]">
   <main>{/* Your content */}</main>
   <aside>
-    <RFDS.TableOfContents sections={sections} />
+    <TableOfContents sections={sections} />
   </aside>
 </div>`}</code>
               </pre>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="props" title="Props" level={2}>
               <p>The TableOfContents component accepts the following props:</p>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="sections-prop" title="Sections Prop" level={3}>
               <p>
                 <strong>Type:</strong> <code>TOCSection[]</code>
@@ -122,9 +122,9 @@ const sections = [
                 the indentation (1 = least indented, 3 = most indented).
               </p>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="title-prop" title="Title Prop" level={3}>
               <p>
                 <strong>Type:</strong> <code>string</code>
@@ -136,17 +136,17 @@ const sections = [
                 The heading text displayed above the table of contents.
               </p>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="advanced-usage" title="Advanced Usage" level={1}>
               <p>
                 The TableOfContents component includes several advanced features that work automatically.
               </p>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="sticky-positioning" title="Sticky Positioning" level={2}>
               <p>
                 The component uses CSS sticky positioning to remain visible while scrolling. It automatically
@@ -154,9 +154,9 @@ const sections = [
                 long tables of contents.
               </p>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="scroll-tracking" title="Scroll Tracking" level={2}>
               <p>
                 Using the Intersection Observer API, the component tracks which section is currently visible
@@ -168,17 +168,17 @@ const sections = [
                 accurate highlighting even when multiple sections are visible simultaneously.
               </p>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="accessibility" title="Accessibility" level={1}>
               <p>
                 The TableOfContents component is built with accessibility in mind.
               </p>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="keyboard-navigation" title="Keyboard Navigation" level={2}>
               <p>
                 All TOC links are keyboard accessible. You can navigate using:
@@ -189,9 +189,9 @@ const sections = [
                 <li>Focus indicators are clearly visible</li>
               </ul>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="screen-readers" title="Screen Readers" level={2}>
               <p>
                 The component includes proper ARIA attributes:
@@ -202,9 +202,9 @@ const sections = [
                 <li>Semantic HTML with proper heading hierarchy</li>
               </ul>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="examples" title="Examples" level={1}>
               <p>
                 This page itself is an example! Notice how the table of contents on the right (or above on
@@ -216,9 +216,9 @@ const sections = [
                 that section.
               </p>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="fade-up" delay={50}>
+            <ScrollReveal animation="fade-up" delay={50}>
             <Section id="conclusion" title="Conclusion" level={1}>
               <p>
                 The TableOfContents component is a powerful addition to the RFDS that makes long-form content
@@ -230,11 +230,11 @@ const sections = [
                 and utilities available in the RFDS package.
               </p>
             </Section>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
           </main>
 
           {/* Table of Contents Sidebar */}
-          <RFDS.TableOfContents sections={sections} title="On this page" className="w-80 flex-shrink-0" />
+          <TableOfContents sections={sections} title="On this page" className="w-80 flex-shrink-0" />
         </div>
       </div>
     </div>

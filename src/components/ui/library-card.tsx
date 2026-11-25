@@ -1,6 +1,6 @@
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { LibraryIcon } from "@/lib/library-icons";
-import { formatRIS, getRISColorClass } from "@/lib/ris";
+import { formatRIS, getRISColorClass } from "@/lib/ris/format";
 
 interface LibraryCardProps {
   owner: string;

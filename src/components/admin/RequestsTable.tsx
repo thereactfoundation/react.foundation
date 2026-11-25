@@ -8,7 +8,10 @@
 
 import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { RFDS, type TableColumn } from '@/components/rfds';
+import { SemanticBadge, SemanticButton } from '@/components/rfds/semantic-components';
+import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
+import { Table, type TableColumn } from '@/components/rfds/table';
 import type { AccessRequest } from '@/lib/admin/access-requests-service';
 import {
   approveRequestAction,
@@ -179,10 +182,10 @@ export function RequestsTable({ requests, highlightId }: RequestsTableProps) {
         const config = statusConfig[req.status] || statusConfig.pending;
         const { Icon } = config;
         return (
-          <RFDS.SemanticBadge variant={config.variant} className="inline-flex items-center gap-1.5">
+          <SemanticBadge variant={config.variant} className="inline-flex items-center gap-1.5">
             <Icon className="h-3 w-3" />
             <span>{config.label}</span>
-          </RFDS.SemanticBadge>
+          </SemanticBadge>
         );
       },
       accessor: (req: AccessRequest) => req.status,
@@ -223,7 +226,7 @@ export function RequestsTable({ requests, highlightId }: RequestsTableProps) {
         if (isReplying) {
           return (
             <div className="space-y-2 min-w-[300px]">
-              <RFDS.Textarea
+              <Textarea
                 className="w-full text-sm"
                 rows={3}
                 placeholder="Let them know what to expect next..."
@@ -233,7 +236,7 @@ export function RequestsTable({ requests, highlightId }: RequestsTableProps) {
                 }
                 disabled={isPending}
               />
-              <RFDS.Input
+              <Input
                 type="text"
                 className="w-full text-sm"
                 placeholder="e.g. Wave 2"
@@ -244,22 +247,22 @@ export function RequestsTable({ requests, highlightId }: RequestsTableProps) {
                 disabled={isPending}
               />
               <div className="flex gap-2">
-                <RFDS.SemanticButton
+                <SemanticButton
                   variant="primary"
                   size="sm"
                   onClick={() => handleReplySubmit(req.id)}
                   disabled={isPending}
                 >
                   Send Reply
-                </RFDS.SemanticButton>
-                <RFDS.SemanticButton
+                </SemanticButton>
+                <SemanticButton
                   variant="ghost"
                   size="sm"
                   onClick={() => setReplyingTo(null)}
                   disabled={isPending}
                 >
                   Cancel
-                </RFDS.SemanticButton>
+                </SemanticButton>
               </div>
               {error && replyingTo === req.id && (
                 <p className="text-xs text-destructive">{error}</p>
@@ -272,9 +275,9 @@ export function RequestsTable({ requests, highlightId }: RequestsTableProps) {
           return (
             <div className="flex items-center gap-1 justify-end">
               {req.bucket && (
-                <RFDS.SemanticBadge variant="outline" className="text-xs">
+                <SemanticBadge variant="outline" className="text-xs">
                   {req.bucket}
-                </RFDS.SemanticBadge>
+                </SemanticBadge>
               )}
             </div>
           );
@@ -283,7 +286,7 @@ export function RequestsTable({ requests, highlightId }: RequestsTableProps) {
         return (
           <div className="flex flex-col gap-2 items-end min-w-[200px]">
             <div className="flex gap-1">
-              <RFDS.SemanticButton
+              <SemanticButton
                 variant="success"
                 size="sm"
                 onClick={() => handleApprove(req.id, 'user')}
@@ -292,8 +295,8 @@ export function RequestsTable({ requests, highlightId }: RequestsTableProps) {
                 title="Approve as User"
               >
                 <UserIcon className="h-3 w-3" />
-              </RFDS.SemanticButton>
-              <RFDS.SemanticButton
+              </SemanticButton>
+              <SemanticButton
                 variant="secondary"
                 size="sm"
                 onClick={() => handleApprove(req.id, 'admin')}
@@ -302,8 +305,8 @@ export function RequestsTable({ requests, highlightId }: RequestsTableProps) {
                 title="Approve as Admin"
               >
                 <Crown className="h-3 w-3" />
-              </RFDS.SemanticButton>
-              <RFDS.SemanticButton
+              </SemanticButton>
+              <SemanticButton
                 variant="ghost"
                 size="sm"
                 onClick={() => handleReply(req.id)}
@@ -312,8 +315,8 @@ export function RequestsTable({ requests, highlightId }: RequestsTableProps) {
                 title="Reply & Bucket"
               >
                 <MessageSquare className="h-3 w-3" />
-              </RFDS.SemanticButton>
-              <RFDS.SemanticButton
+              </SemanticButton>
+              <SemanticButton
                 variant="destructive"
                 size="sm"
                 onClick={() => handleDeny(req.id)}
@@ -322,9 +325,9 @@ export function RequestsTable({ requests, highlightId }: RequestsTableProps) {
                 title="Deny Request"
               >
                 <XCircle className="h-3 w-3" />
-              </RFDS.SemanticButton>
+              </SemanticButton>
             </div>
-            <RFDS.SemanticButton
+            <SemanticButton
               variant="ghost"
               size="sm"
               onClick={() => handleResendNotification(req.id)}
@@ -333,7 +336,7 @@ export function RequestsTable({ requests, highlightId }: RequestsTableProps) {
             >
               <Mail className="h-3 w-3 mr-1" />
               Resend Email
-            </RFDS.SemanticButton>
+            </SemanticButton>
           </div>
         );
       },
@@ -352,7 +355,7 @@ export function RequestsTable({ requests, highlightId }: RequestsTableProps) {
           {status}
         </div>
       )}
-      <RFDS.Table
+      <Table
         data={requests}
         columns={columns}
         searchable
