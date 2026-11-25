@@ -57,6 +57,7 @@ Add before/after if applicable.
 - [ ] Tests included and passing
 - [ ] No console logs or debug code
 - [ ] No unresolved TODOs introduced
+- [ ] Every commit is signed off (`git commit -s`)
 - [ ] CI passing
 
 ---

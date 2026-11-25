@@ -76,6 +76,16 @@ Use clear, structured messages:
 Fix: resolve map popup navigation bug (#47)
 ```
 
+Sign off every commit with `git commit -s`. This adds a `Signed-off-by` line for the [Developer Certificate of Origin](https://developercertificate.org/). The DCO check on each PR fails if a commit has no `Signed-off-by` line, or if its email does not match the commit author.
+
+To sign off commits that are already on your branch:
+
+```bash
+# Replace 2 with the number of commits on your branch
+git rebase --signoff HEAD~2
+git push --force-with-lease
+```
+
 ### 6. Pull Request Requirements
 
 Every PR must:
@@ -85,6 +95,7 @@ Every PR must:
 - Include a clear summary
 - Include a test plan
 - Add or update tests
+- Have every commit signed off (DCO)
 - Pass CI
 
 ---
