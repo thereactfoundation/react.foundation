@@ -9,6 +9,7 @@
     "bundle:budget": "node scripts/bundle-budget.mjs",
     "start": "next start",
     "lint": "eslint",
+    "test:unit": "vitest run --project unit",
     "test:e2e": "playwright test",
     "shopify:location": "node scripts/get-shopify-location.mjs",
     "shopify:seed": "node scripts/seed-shopify-v2.mjs",
