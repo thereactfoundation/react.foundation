@@ -602,6 +602,13 @@ async function handleToolCalls(
 }
 
 export async function POST(request: NextRequest) {
+  if (process.env.NEXT_PUBLIC_ENABLE_CHATBOT !== 'true') {
+    return NextResponse.json(
+      { error: 'Chat assistant is currently unavailable.' },
+      { status: 503, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+
   try {
     // Get user session to check if they're authenticated with GitHub
     const session = await getServerSession(authOptions);
