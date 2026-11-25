@@ -3,13 +3,13 @@
  * Displays detailed breakdown of a library's React Impact Score
  */
 
-import { type LibraryScore } from '@/lib/ris';
+import { type LibraryScore } from '@/lib/ris/types';
 import {
   formatRIS,
   formatAllocation,
   getRISColorClass,
   getComponentColorClass,
-} from '@/lib/ris';
+} from '@/lib/ris/format';
 import { StatCard } from '@/components/rfds/stat-card';
 
 interface RISScoreBreakdownProps {

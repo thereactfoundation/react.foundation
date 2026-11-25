@@ -3,7 +3,7 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ecosystemLibraries } from "@/lib/maintainer-tiers";
 import { LibraryCard } from "@/components/ui/library-card";
 import { libraryDisplayNames } from "@/lib/library-icons";
-import { type LibraryScore } from "@/lib/ris";
+import { type LibraryScore } from "@/lib/ris/types";
 
 interface EcosystemLibrariesProps {
   id?: string;

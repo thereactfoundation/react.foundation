@@ -4,7 +4,10 @@ import {
   MapPin,
 } from "lucide-react";
 
-import { RFDS } from "@/components/rfds";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { SemanticCard, SemanticBadge } from "@/components/rfds/semantic-components";
+import { ButtonLink } from "@/components/ui/button";
+import { Footer } from "@/components/layout/footer";
 import {
   faqItems,
   summitDays,
@@ -60,28 +63,28 @@ export default function SummitPage() {
 
       <section id="why" className="scroll-mt-36 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <RFDS.ScrollReveal animation="fade-up">
+          <ScrollReveal animation="fade-up">
             <SectionHeading
               eyebrow="Why we’re gathering"
               title="A Foundation becomes real when its people meet."
               description="This is our first chance to meet in person, connect across groups, and decide what comes next."
             />
-          </RFDS.ScrollReveal>
+          </ScrollReveal>
 
           <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {summitGoals.map((goal, index) => {
               const Icon = goal.icon;
               return (
-                <RFDS.ScrollReveal key={goal.title} animation="fade-up" delay={index * 90}>
-                  <RFDS.SemanticCard variant="outlined" hover className="group h-full overflow-hidden p-6">
+                <ScrollReveal key={goal.title} animation="fade-up" delay={index * 90}>
+                  <SemanticCard variant="outlined" hover className="group h-full overflow-hidden p-6">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary transition-transform group-hover:-translate-y-1">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </div>
                     <p className="mt-7 font-mono text-xs text-muted-foreground">0{index + 1}</p>
                     <h3 className="mt-2 text-lg font-semibold text-foreground">{goal.title}</h3>
                     <p className="mt-3 text-sm leading-6 text-muted-foreground">{goal.description}</p>
-                  </RFDS.SemanticCard>
-                </RFDS.ScrollReveal>
+                  </SemanticCard>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -90,18 +93,18 @@ export default function SummitPage() {
 
       <section id="program" className="scroll-mt-36 border-y border-border/60 bg-muted/35 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <RFDS.ScrollReveal animation="fade-up">
+          <ScrollReveal animation="fade-up">
             <SectionHeading
               eyebrow="Program at a glance"
               title="Program"
               description="Travel days bookend three days together in London: one plenary day followed by two days dedicated to working groups."
             />
-          </RFDS.ScrollReveal>
+          </ScrollReveal>
 
           <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
             {summitDays.map((summitDay, index) => (
-              <RFDS.ScrollReveal key={summitDay.day} animation="fade-up" delay={index * 80}>
-                <RFDS.SemanticCard
+              <ScrollReveal key={summitDay.day} animation="fade-up" delay={index * 80}>
+                <SemanticCard
                   variant="outlined"
                   className={`h-full p-6 ${summitDay.isTravel ? "border-dashed border-border/70 bg-transparent" : "bg-card"}`}
                 >
@@ -121,8 +124,8 @@ export default function SummitPage() {
                       {summitDay.audience}
                     </p>
                   ) : null}
-                </RFDS.SemanticCard>
-              </RFDS.ScrollReveal>
+                </SemanticCard>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -131,19 +134,19 @@ export default function SummitPage() {
       <section id="joining" className="scroll-mt-36 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-20">
-            <RFDS.ScrollReveal animation="slide-right">
+            <ScrollReveal animation="slide-right">
               <SectionHeading
                 eyebrow="Joining the Summit"
                 title="An invite-only working Summit."
                 description="Attendance is invite only for members of the React Foundation working groups."
               />
-              <RFDS.SemanticBadge variant="outline" className="mt-7 border-primary/30">
+              <SemanticBadge variant="outline" className="mt-7 border-primary/30">
                 Invite only
-              </RFDS.SemanticBadge>
-            </RFDS.ScrollReveal>
+              </SemanticBadge>
+            </ScrollReveal>
 
-            <RFDS.ScrollReveal animation="slide-left" delay={100}>
-              <RFDS.SemanticCard variant="outlined" className="p-7 sm:p-9">
+            <ScrollReveal animation="slide-left" delay={100}>
+              <SemanticCard variant="outlined" className="p-7 sm:p-9">
                 <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                   Self-nominations
                 </p>
@@ -153,7 +156,7 @@ export default function SummitPage() {
                 <p className="mt-4 text-base leading-7 text-muted-foreground">
                   Folks can self-nominate using the form below.
                 </p>
-                <RFDS.ButtonLink
+                <ButtonLink
                   href="https://forms.gle/HwUngQcCnWhbuBoR6"
                   target="_blank"
                   rel="noreferrer"
@@ -161,30 +164,30 @@ export default function SummitPage() {
                   className="mt-7 border-primary/30 bg-primary/5 hover:bg-primary/10"
                 >
                   Self-nomination form
-                </RFDS.ButtonLink>
-              </RFDS.SemanticCard>
-            </RFDS.ScrollReveal>
+                </ButtonLink>
+              </SemanticCard>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       <section id="plan" className="scroll-mt-36 border-y border-border/60 bg-muted/35 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <RFDS.ScrollReveal animation="fade-up">
+          <ScrollReveal animation="fade-up">
             <SectionHeading
               eyebrow="Plan your Summit"
               title="Logistics"
               description="The dates and venue are confirmed: Meta King's Cross, London."
             />
-          </RFDS.ScrollReveal>
+          </ScrollReveal>
 
           <div className="mt-14 grid gap-5 lg:grid-cols-3">
-            <RFDS.SemanticCard variant="outlined" className="p-7 lg:col-span-2">
+            <SemanticCard variant="outlined" className="p-7 lg:col-span-2">
               <div className="flex items-center justify-between gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                   <MapPin className="h-6 w-6" aria-hidden="true" />
                 </div>
-                <RFDS.SemanticBadge variant="success">Venue confirmed</RFDS.SemanticBadge>
+                <SemanticBadge variant="success">Venue confirmed</SemanticBadge>
               </div>
               <div className="mt-7 grid gap-8 md:grid-cols-[minmax(0,1fr)_18rem] md:items-start">
                 <div>
@@ -204,16 +207,16 @@ export default function SummitPage() {
                 </div>
                 <LondonMap />
               </div>
-            </RFDS.SemanticCard>
+            </SemanticCard>
 
-            <RFDS.SemanticCard variant="outlined" className="p-7">
+            <SemanticCard variant="outlined" className="p-7">
               <Clock3 className="h-6 w-6 text-primary" aria-hidden="true" />
               <h3 className="mt-6 text-xl font-semibold text-foreground">Before you book</h3>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">
                 Plan to arrive on Monday 9 November and depart on Friday 13 November.
               </p>
               <SummitCalendarMenu variant="secondary" size="sm" className="mt-6" />
-            </RFDS.SemanticCard>
+            </SemanticCard>
           </div>
 
         </div>
@@ -222,14 +225,14 @@ export default function SummitPage() {
       <section id="faq" className="scroll-mt-36 py-24 sm:py-32">
         <div className="mx-auto grid max-w-7xl gap-14 px-6 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:px-12">
           <div className="lg:sticky lg:top-40 lg:self-start">
-            <RFDS.ScrollReveal animation="fade-up">
+            <ScrollReveal animation="fade-up">
               <SectionHeading
                 eyebrow="Participant FAQ"
                 title="The details, in one place."
                 description="This is the source of truth for Summit participants. Confirmed information is stated plainly; open logistics are marked as such."
               />
               <p className="mt-6 text-xs text-muted-foreground">Last updated 2 October 2026</p>
-            </RFDS.ScrollReveal>
+            </ScrollReveal>
           </div>
 
           <SummitFaq items={faqItems} />
@@ -237,17 +240,17 @@ export default function SummitPage() {
       </section>
 
       <section className="border-t border-border/60 bg-muted/35 py-24">
-        <RFDS.ScrollReveal animation="scale" className="mx-auto max-w-4xl px-6 text-center sm:px-8">
-          <RFDS.SemanticBadge variant="outline" className="border-primary/30 bg-background/50">10–12 November · London</RFDS.SemanticBadge>
+        <ScrollReveal animation="scale" className="mx-auto max-w-4xl px-6 text-center sm:px-8">
+          <SemanticBadge variant="outline" className="border-primary/30 bg-background/50">10–12 November · London</SemanticBadge>
           <h2 className="mt-7 text-4xl font-semibold tracking-tight text-foreground sm:text-6xl">Let’s shape what comes next.</h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
             Bring your context and expertise to help build the future of React.
           </p>
-          <RFDS.ButtonLink href="#program" size="lg" className="mt-9">Review the program</RFDS.ButtonLink>
-        </RFDS.ScrollReveal>
+          <ButtonLink href="#program" size="lg" className="mt-9">Review the program</ButtonLink>
+        </ScrollReveal>
       </section>
 
-      <RFDS.Footer />
+      <Footer />
     </main>
   );
 }

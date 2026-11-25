@@ -82,11 +82,11 @@ export function ThemeProvider({
     [themeStore]
   );
 
-  const effectiveTheme = getEffectiveTheme(theme);
+  const effectiveTheme = hasMounted ? getEffectiveTheme(theme) : 'light';
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, effectiveTheme }}>
-      {hasMounted ? children : <div style={{ visibility: 'hidden' }}>{children}</div>}
+      {children}
     </ThemeContext.Provider>
   );
 }

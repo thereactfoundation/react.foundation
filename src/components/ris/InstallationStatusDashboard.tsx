@@ -9,8 +9,9 @@
 import { useEffect, useState } from 'react';
 import type { LibraryInstallationStatus } from '@/app/api/ris/installations/route';
 import { getEligibilityBadgeInfo, type EligibilityStatus } from '@/lib/ris/eligibility';
-import { RFDS } from '@/components/rfds';
-
+import { SearchInput } from '@/components/rfds/search-input';
+import { StatCard as RfdsStatCard } from '@/components/rfds/stat-card';
+import { SemanticButton } from '@/components/rfds/semantic-components';
 interface InstallationStatusResponse {
   success: boolean;
   summary: {
@@ -188,7 +189,7 @@ export function InstallationStatusDashboard() {
           </FilterButton>
         </div>
 
-        <RFDS.SearchInput
+        <SearchInput
           placeholder="Search libraries..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -317,7 +318,7 @@ function StatCard({
   highlight?: boolean;
 }) {
   return (
-    <RFDS.StatCard
+    <RfdsStatCard
       label={label}
       value={value.toString()}
       icon={icon}
@@ -338,13 +339,13 @@ function FilterButton({
   children: React.ReactNode;
 }) {
   return (
-    <RFDS.SemanticButton
+    <SemanticButton
       variant={active ? 'primary' : 'ghost'}
       size="sm"
       onClick={onClick}
     >
       {children}
-    </RFDS.SemanticButton>
+    </SemanticButton>
   );
 }
 
@@ -360,7 +361,7 @@ function SortButton({
   children: React.ReactNode;
 }) {
   return (
-    <RFDS.SemanticButton
+    <SemanticButton
       variant="ghost"
       size="sm"
       onClick={onClick}
@@ -372,7 +373,7 @@ function SortButton({
           {direction === 'asc' ? '↑' : '↓'}
         </span>
       )}
-    </RFDS.SemanticButton>
+    </SemanticButton>
   );
 }
 

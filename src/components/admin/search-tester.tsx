@@ -6,8 +6,9 @@
 'use client';
 
 import { useState } from 'react';
-import { RFDS } from '@/components/rfds';
-
+import { SemanticCard, SemanticButton, SemanticAlert, SemanticBadge } from '@/components/rfds/semantic-components';
+import { SearchInput } from '@/components/rfds/search-input';
+import { Pill } from '@/components/ui/pill';
 interface SearchResult {
   id: string;
   source: string;
@@ -65,7 +66,7 @@ export function SearchTester() {
   };
 
   return (
-    <RFDS.SemanticCard variant="outlined" className="p-6">
+    <SemanticCard variant="outlined" className="p-6">
       <h3 className="text-lg font-semibold text-foreground mb-4">
         🔍 Search Tester
       </h3>
@@ -76,20 +77,20 @@ export function SearchTester() {
       {/* Search Input */}
       <div className="space-y-3 mb-6">
         <div className="flex gap-2">
-          <RFDS.SearchInput
+          <SearchInput
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSearch(query)}
             placeholder="Enter search query..."
             className="flex-1"
           />
-          <RFDS.SemanticButton
+          <SemanticButton
             variant="primary"
             onClick={() => handleSearch(query)}
             disabled={loading || !query.trim()}
           >
             {loading ? 'Searching...' : 'Search'}
-          </RFDS.SemanticButton>
+          </SemanticButton>
         </div>
 
         {/* Sample Queries */}
@@ -104,7 +105,7 @@ export function SearchTester() {
               }}
               className="cursor-pointer"
             >
-              <RFDS.Pill>{sampleQuery}</RFDS.Pill>
+              <Pill>{sampleQuery}</Pill>
             </button>
           ))}
         </div>
@@ -112,9 +113,9 @@ export function SearchTester() {
 
       {/* Error */}
       {error && (
-        <RFDS.SemanticAlert variant="destructive" className="mb-4">
+        <SemanticAlert variant="destructive" className="mb-4">
           {error}
-        </RFDS.SemanticAlert>
+        </SemanticAlert>
       )}
 
       {/* Results */}
@@ -130,13 +131,13 @@ export function SearchTester() {
           </div>
 
           {response.resultCount === 0 ? (
-            <RFDS.SemanticAlert variant="warning">
-              No results found. The vector store may be empty or the query didn't match any content.
-            </RFDS.SemanticAlert>
+            <SemanticAlert variant="warning">
+              No results found. The vector store may be empty or the query didn&apos;t match any content.
+            </SemanticAlert>
           ) : (
             <div className="space-y-3">
               {response.results.map((result, index) => (
-                <RFDS.SemanticCard
+                <SemanticCard
                   key={result.id}
                   variant="outlined"
                   className="p-4 hover:border-primary/50 transition-colors"
@@ -160,19 +161,19 @@ export function SearchTester() {
                         {result.contentLength} chars • Score: {result.score.toFixed(4)}
                       </p>
                     </div>
-                    <RFDS.SemanticBadge variant={result.score > 0.8 ? 'default' : 'outline'}>
+                    <SemanticBadge variant={result.score > 0.8 ? 'default' : 'outline'}>
                       {result.score > 0.8 ? 'High' : result.score > 0.6 ? 'Med' : 'Low'} relevance
-                    </RFDS.SemanticBadge>
+                    </SemanticBadge>
                   </div>
                   <div className="text-sm text-muted-foreground bg-muted/30 p-3 rounded">
                     {result.contentPreview}
                   </div>
-                </RFDS.SemanticCard>
+                </SemanticCard>
               ))}
             </div>
           )}
         </div>
       )}
-    </RFDS.SemanticCard>
+    </SemanticCard>
   );
 }

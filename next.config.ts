@@ -25,6 +25,21 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.react.foundation',
+          },
+        ],
+        destination: 'https://react.foundation/:path*',
+        permanent: true,
+      },
+    ];
+  },
   outputFileTracingIncludes: {
     // This is the route PATH, not a file path:
     '/api/admin/ingest': ['node_modules/jsdom/**'],

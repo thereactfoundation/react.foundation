@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { RFDS } from '@/components/rfds';
+import { SemanticBadge, SemanticButton } from '@/components/rfds/semantic-components';
 import type { CommunitySubmission } from '@/types/community-submission';
 
 interface PendingSubmissionsTableProps {
@@ -86,12 +86,12 @@ export function PendingSubmissionsTable({ submissions }: PendingSubmissionsTable
                 {s.city}, {s.country}
               </p>
             </div>
-            <RFDS.SemanticBadge variant={
+            <SemanticBadge variant={
               s.verification_status === 'pending' ? 'warning' :
               s.verification_status === 'rejected' ? 'destructive' : 'success'
             }>
               {s.verification_status}
-            </RFDS.SemanticBadge>
+            </SemanticBadge>
           </div>
 
           <p className="text-sm text-foreground">{s.description}</p>
@@ -120,41 +120,41 @@ export function PendingSubmissionsTable({ submissions }: PendingSubmissionsTable
                     onChange={(e) => setRejectReason(e.target.value)}
                     className="flex-1 px-3 py-1.5 text-sm border border-border rounded-lg bg-background text-foreground"
                   />
-                  <RFDS.SemanticButton
+                  <SemanticButton
                     variant="destructive"
                     size="sm"
                     onClick={() => handleReject(s.id)}
                     disabled={isBusy(s.id)}
                   >
                     {rejectingId === s.id ? 'Rejecting...' : 'Confirm'}
-                  </RFDS.SemanticButton>
-                  <RFDS.SemanticButton
+                  </SemanticButton>
+                  <SemanticButton
                     variant="secondary"
                     size="sm"
                     onClick={() => { setRejectFormId(null); setRejectReason(''); }}
                     disabled={rejectingId === s.id}
                   >
                     Cancel
-                  </RFDS.SemanticButton>
+                  </SemanticButton>
                 </div>
               ) : (
                 <>
-                  <RFDS.SemanticButton
+                  <SemanticButton
                     variant="primary"
                     size="sm"
                     onClick={() => handleApprove(s.id)}
                     disabled={isBusy(s.id)}
                   >
                     {approvingId === s.id ? 'Approving...' : 'Approve'}
-                  </RFDS.SemanticButton>
-                  <RFDS.SemanticButton
+                  </SemanticButton>
+                  <SemanticButton
                     variant="destructive"
                     size="sm"
                     onClick={() => { setRejectFormId(s.id); setRejectReason(''); setErrorMsg(null); }}
                     disabled={isBusy(s.id)}
                   >
                     Reject
-                  </RFDS.SemanticButton>
+                  </SemanticButton>
                 </>
               )}
             </div>

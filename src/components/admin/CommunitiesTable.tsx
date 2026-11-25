@@ -6,7 +6,8 @@
 
 'use client';
 
-import { RFDS, type TableColumn } from '@/components/rfds';
+import { SemanticBadge } from '@/components/rfds/semantic-components';
+import { Table, type TableColumn } from '@/components/rfds/table';
 import type { Community } from '@/types/community';
 
 export interface CommunitiesTableProps {
@@ -45,9 +46,9 @@ export function CommunitiesTable({ communities }: CommunitiesTableProps) {
         };
         const config = statusConfig[community.status] || statusConfig.inactive;
         return (
-          <RFDS.SemanticBadge variant={config.variant}>
+          <SemanticBadge variant={config.variant}>
             {config.label}
-          </RFDS.SemanticBadge>
+          </SemanticBadge>
         );
       },
       accessor: (community: Community) => community.status,
@@ -84,9 +85,9 @@ export function CommunitiesTable({ communities }: CommunitiesTableProps) {
           bronze: 'default',
         };
         return (
-          <RFDS.SemanticBadge variant={tierColors[community.cois_tier] || 'default'}>
+          <SemanticBadge variant={tierColors[community.cois_tier] || 'default'}>
             {community.cois_tier.charAt(0).toUpperCase() + community.cois_tier.slice(1)}
-          </RFDS.SemanticBadge>
+          </SemanticBadge>
         );
       },
       accessor: (community: Community) => {
@@ -101,7 +102,7 @@ export function CommunitiesTable({ communities }: CommunitiesTableProps) {
       align: 'center',
       render: (_value: unknown, community: Community) => {
         return community.verified ? (
-          <RFDS.SemanticBadge variant="success">✓ Verified</RFDS.SemanticBadge>
+          <SemanticBadge variant="success">✓ Verified</SemanticBadge>
         ) : (
           <span className="text-muted-foreground text-sm">—</span>
         );
@@ -111,7 +112,7 @@ export function CommunitiesTable({ communities }: CommunitiesTableProps) {
   ];
 
   return (
-    <RFDS.Table
+    <Table
       data={communities}
       columns={columns}
       searchable

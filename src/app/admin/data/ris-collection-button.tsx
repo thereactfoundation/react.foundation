@@ -5,8 +5,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { RFDS } from '@/components/rfds';
-
+import { SemanticButton } from '@/components/rfds/semantic-components';
 interface ActiveLibrary {
   library: string; // Owner/repo format
   source?: string; // Current data source being collected
@@ -164,7 +163,7 @@ export function RISCollectionButton() {
   return (
     <div className="space-y-3">
       <div className="flex gap-3">
-        <RFDS.SemanticButton
+        <SemanticButton
           onClick={() => handleStartCollection(false)}
           disabled={isRunning}
           variant="primary"
@@ -172,15 +171,15 @@ export function RISCollectionButton() {
           title="Prioritizes new libraries first, then updates existing data"
         >
           {isRunning ? '🔄 Running...' : '▶️ Start Collection (Smart)'}
-        </RFDS.SemanticButton>
-        <RFDS.SemanticButton
+        </SemanticButton>
+        <SemanticButton
           onClick={() => handleStartCollection(true)}
           disabled={isRunning}
           variant="destructive"
           className="flex-1"
         >
           {isRunning ? '🔄 Running...' : '🔥 Force Full Refresh'}
-        </RFDS.SemanticButton>
+        </SemanticButton>
       </div>
 
       {status && (
@@ -257,7 +256,7 @@ export function RISCollectionButton() {
                 {new Date(status.rateLimitResetAt).toLocaleTimeString()}
               </p>
               <p className="text-xs mt-1 opacity-70">
-                Collection will automatically restart at this time. You can also manually click "Start Collection" after the reset time.
+                Collection will automatically restart at this time. You can also manually click &quot;Start Collection&quot; after the reset time.
               </p>
             </div>
           )}
@@ -269,14 +268,14 @@ export function RISCollectionButton() {
           <div className="flex items-center justify-between">
             <span>❌ {error}</span>
             {error.includes('already in progress') && (
-              <RFDS.SemanticButton
+              <SemanticButton
                 variant="ghost"
                 size="sm"
                 onClick={handleReleaseLock}
                 className="ml-2 text-xs"
               >
                 Release Lock
-              </RFDS.SemanticButton>
+              </SemanticButton>
             )}
           </div>
         </div>
