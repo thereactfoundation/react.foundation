@@ -3,7 +3,7 @@
 import { CalendarDays, ChevronDown, Download, ExternalLink } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 
-import { RFDS } from "@/components/rfds";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { summitVenue } from "./summit-data";
 
@@ -75,7 +75,7 @@ export function SummitCalendarMenu({
 
   return (
     <div ref={containerRef} className={cn("relative", className)}>
-      <RFDS.Button
+      <Button
         ref={buttonRef}
         type="button"
         variant={variant}
@@ -94,7 +94,7 @@ export function SummitCalendarMenu({
           )}
           aria-hidden="true"
         />
-      </RFDS.Button>
+      </Button>
 
       {isOpen ? (
         <div

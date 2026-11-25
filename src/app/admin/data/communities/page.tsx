@@ -3,7 +3,7 @@ import { getRedisClient } from '@/lib/redis';
 import { getCommunities, migrateFromOldFormat } from '@/lib/redis-communities';
 import { getSubmissions } from '@/lib/redis-community-submissions';
 import type { CommunitySubmission } from '@/types/community-submission';
-import { RFDS } from '@/components/rfds';
+import { StatCard } from '@/components/rfds/stat-card';
 import { MigrationButton } from './migration-button';
 import { CommunitiesTable } from '@/components/admin/CommunitiesTable';
 import { PendingSubmissionsTable } from '@/components/admin/PendingSubmissionsTable';
@@ -178,7 +178,7 @@ function InfoCard({
   detail?: string;
 }) {
   return (
-    <RFDS.StatCard
+    <StatCard
       label={label}
       value={value}
       detail={detail}

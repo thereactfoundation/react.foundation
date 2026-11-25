@@ -6,8 +6,7 @@
 import { getRedisClient } from '@/lib/redis';
 import { UserManagementService } from '@/lib/admin/user-management-service';
 import { AccessRequestsService } from '@/lib/admin/access-requests-service';
-import { RFDS } from '@/components/rfds';
-
+import { StatCard as RfdsStatCard } from '@/components/rfds/stat-card';
 export const dynamic = 'force-dynamic';
 
 async function getOverviewData() {
@@ -316,7 +315,7 @@ function StatCard({
   icon: string;
 }) {
   return (
-    <RFDS.StatCard
+    <RfdsStatCard
       label={label}
       value={value}
       icon={icon}
@@ -339,7 +338,7 @@ function InfoCard({
   color?: 'primary' | 'success' | 'destructive';
 }) {
   return (
-    <RFDS.StatCard
+    <RfdsStatCard
       label={label}
       value={value}
       detail={detail}

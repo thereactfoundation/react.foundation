@@ -5,7 +5,7 @@ import {
   UsersRound,
 } from "lucide-react";
 
-import { RFDS } from "@/components/rfds";
+import { ButtonLink } from "@/components/ui/button";
 import { SummitCalendarMenu } from "./summit-calendar-menu";
 import { SummitMotion } from "./summit-motion";
 
@@ -34,10 +34,10 @@ export function SummitHero() {
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
-              <RFDS.ButtonLink href="#program" size="lg">
+              <ButtonLink href="#program" size="lg">
                 Explore the program
                 <ArrowDown className="h-4 w-4" aria-hidden="true" />
-              </RFDS.ButtonLink>
+              </ButtonLink>
               <SummitCalendarMenu variant="tertiary" />
             </div>
 

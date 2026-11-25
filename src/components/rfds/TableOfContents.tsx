@@ -14,7 +14,6 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ListTree, ChevronRight, Search, PanelRightOpen, PanelRightClose, ArrowUp } from 'lucide-react';
 
 export interface TOCSection {
@@ -209,40 +208,29 @@ export function TableOfContents({
       </div>
 
       {/* Mobile overlay drawer */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/50 lg:hidden"
-            onClick={() => setMobileOpen(false)}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/50 transition-opacity lg:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+      {mobileOpen && (
+        <aside
+          className="fixed bottom-0 right-0 top-0 z-50 w-[84%] max-w-sm bg-card backdrop-blur-xl ring-1 ring-border p-4 overflow-y-auto transition-transform lg:hidden"
+        >
+          <TOCInner
+            title={title}
+            headings={filtered}
+            activeId={activeId}
+            setQuery={setQuery}
+            query={query}
+            onItemClick={(id) => {
+              handleClick(id);
+              setMobileOpen(false);
+            }}
           />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.aside
-            initial={{ x: 320 }}
-            animate={{ x: 0 }}
-            exit={{ x: 320 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 30 }}
-            className="fixed bottom-0 right-0 top-0 z-50 w-[84%] max-w-sm bg-card backdrop-blur-xl ring-1 ring-border p-4 overflow-y-auto lg:hidden"
-          >
-            <TOCInner
-              title={title}
-              headings={filtered}
-              activeId={activeId}
-              setQuery={setQuery}
-              query={query}
-              onItemClick={(id) => {
-                handleClick(id);
-                setMobileOpen(false);
-              }}
-            />
-          </motion.aside>
-        )}
-      </AnimatePresence>
+        </aside>
+      )}
 
       {/* Desktop sticky panel */}
       <aside
@@ -259,26 +247,18 @@ export function TableOfContents({
             />
           </button>
 
-          <AnimatePresence initial={false}>
-            {open && (
-              <motion.div
-                key="toc"
-                initial={{ opacity: 0, y: -4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -4 }}
-                className="p-4"
-              >
-                <TOCInner
-                  title={title}
-                  headings={filtered}
-                  activeId={activeId}
-                  setQuery={setQuery}
-                  query={query}
-                  onItemClick={handleClick}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {open && (
+            <div className="p-4 transition-opacity">
+              <TOCInner
+                title={title}
+                headings={filtered}
+                activeId={activeId}
+                setQuery={setQuery}
+                query={query}
+                onItemClick={handleClick}
+              />
+            </div>
+          )}
         </div>
       </aside>
 
@@ -297,20 +277,15 @@ function BackToTop() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  if (!visible) return null;
+
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.button
-          initial={{ y: 40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 40, opacity: 0 }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-4 left-4 z-40 inline-flex items-center gap-2 rounded-full border border-border bg-card/90 px-3 py-2 text-sm font-medium text-foreground backdrop-blur-xl shadow-lg ring-1 ring-border hover:bg-card transition"
-          aria-label="Back to top"
-        >
-          <ArrowUp className="h-4 w-4" /> Top
-        </motion.button>
-      )}
-    </AnimatePresence>
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className="fixed bottom-4 left-4 z-40 inline-flex items-center gap-2 rounded-full border border-border bg-card/90 px-3 py-2 text-sm font-medium text-foreground backdrop-blur-xl shadow-lg ring-1 ring-border hover:bg-card transition"
+      aria-label="Back to top"
+    >
+      <ArrowUp className="h-4 w-4" /> Top
+    </button>
   );
 }

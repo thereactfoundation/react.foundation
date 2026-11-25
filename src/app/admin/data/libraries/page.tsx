@@ -8,7 +8,7 @@ import { Suspense } from 'react';
 import { getRedisClient, getCachedQuarterlyAllocation, getLastUpdated } from '@/lib/redis';
 import { ecosystemLibraries } from '@/lib/maintainer-tiers';
 import { getBulkLibraryEligibility } from '@/lib/admin/library-eligibility-service';
-import { RFDS } from '@/components/rfds';
+import { StatCard } from '@/components/rfds/stat-card';
 import { RISCollectionButton } from '../ris-collection-button';
 import { LibraryApprovalQueue } from '@/components/admin/LibraryApprovalQueue';
 import { LibraryList, type LibraryWithEligibility } from '@/components/admin/LibraryList';
@@ -272,7 +272,7 @@ function InfoCard({
   color?: 'primary' | 'success' | 'destructive';
 }) {
   return (
-    <RFDS.StatCard
+    <StatCard
       label={label}
       value={value}
       detail={detail}

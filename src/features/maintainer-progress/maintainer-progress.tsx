@@ -9,8 +9,7 @@ import {
   ecosystemLibraries,
   maintainerTiers,
 } from "@/lib/maintainer-tiers";
-import { RFDS } from "@/components/rfds";
-
+import { StatCard as RfdsStatCard } from "@/components/rfds/stat-card";
 import { useMaintainerProgress } from "./context";
 import { TrackedLibraryBadge } from "./tracked-library-badge";
 import { UsernameInput } from "./username-input";
@@ -299,7 +298,7 @@ export function MaintainerProgress() {
 
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
-    <RFDS.StatCard
+    <RfdsStatCard
       label={label}
       value={formatter.format(value)}
       variant="outlined"

@@ -55,12 +55,15 @@ export {
   useRISAllocationFromAPI,
   useCollectionStatus,
   useCollectRISData,
-  // Utilities
+} from './hooks';
+
+// Pure formatting utilities
+export {
   formatRIS,
   formatAllocation,
   getRISColorClass,
   getComponentColorClass,
-} from './hooks';
+} from './format';
 
 export type { CategoryStats, ComponentStats } from './hooks';
 

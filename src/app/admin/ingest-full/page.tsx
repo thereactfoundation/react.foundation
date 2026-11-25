@@ -6,7 +6,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { RFDS } from '@/components/rfds';
+import { SemanticButton } from '@/components/rfds/semantic-components';
+import { Checkbox } from '@/components/ui/checkbox';
 import { SearchTester } from '@/components/admin/search-tester';
 
 interface IngestionResult {
@@ -241,14 +242,14 @@ export default function IngestFullPage() {
 
       {/* Action Button */}
       {!progress && (
-        <RFDS.SemanticButton
+        <SemanticButton
           variant="primary"
           onClick={handleIngest}
           disabled={ingesting}
           className="w-full"
         >
           {ingesting ? '⏳ Running Ingestion...' : '🚀 Start Full Ingestion'}
-        </RFDS.SemanticButton>
+        </SemanticButton>
       )}
 
       {/* Error Display */}
@@ -283,7 +284,7 @@ export default function IngestFullPage() {
                   📝 Live Logs ({progress.logs.length})
                 </p>
                 <label className="flex items-center gap-2 text-xs text-muted-foreground cursor-pointer">
-                  <RFDS.Checkbox
+                  <Checkbox
                     checked={autoScroll}
                     onChange={(e) => setAutoScroll(e.target.checked)}
                     className="w-4 h-4"
@@ -395,7 +396,7 @@ export default function IngestFullPage() {
 
           {/* Actions */}
           {progress.status !== 'running' && (
-            <RFDS.SemanticButton
+            <SemanticButton
               variant="secondary"
               onClick={() => {
                 setProgress(null);
@@ -406,7 +407,7 @@ export default function IngestFullPage() {
               className="w-full mt-4"
             >
               Run Another Ingestion
-            </RFDS.SemanticButton>
+            </SemanticButton>
           )}
         </div>
       )}

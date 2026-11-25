@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useSyncExternalStore } from "react";
-import { RFDS } from "@/components/rfds";
+import { SemanticButton } from "@/components/rfds/semantic-components";
+import { Input } from "@/components/ui/input";
 import { createLocalStorageStore } from "@/lib/local-storage-store";
 
 interface UsernameInputProps {
@@ -68,7 +69,7 @@ export function UsernameInput({ githubLogin, onUsernameChange, isPending }: User
         </p>
         <div className="flex items-center justify-between rounded-lg border border-border/15 bg-background/60 px-3 py-2 text-sm text-foreground/80">
           <span>{githubLogin}</span>
-          <RFDS.SemanticButton
+          <SemanticButton
             variant="ghost"
             size="sm"
             onClick={() => onUsernameChange(githubLogin)}
@@ -76,7 +77,7 @@ export function UsernameInput({ githubLogin, onUsernameChange, isPending }: User
             className="text-xs uppercase tracking-[0.2em]"
           >
             {isPending ? "Refreshing…" : "Refresh"}
-          </RFDS.SemanticButton>
+          </SemanticButton>
         </div>
       </div>
     );
@@ -91,14 +92,14 @@ export function UsernameInput({ githubLogin, onUsernameChange, isPending }: User
         </p>
         <div className="flex items-center justify-between rounded-lg border border-border/15 bg-background/60 px-3 py-2 text-sm text-foreground/80">
           <span>{storedUsername}</span>
-          <RFDS.SemanticButton
+          <SemanticButton
             variant="ghost"
             size="sm"
             onClick={() => setShowCustomInput(true)}
             className="text-xs uppercase tracking-[0.2em]"
           >
             Change
-          </RFDS.SemanticButton>
+          </SemanticButton>
         </div>
       </div>
     );
@@ -112,7 +113,7 @@ export function UsernameInput({ githubLogin, onUsernameChange, isPending }: User
           Enter your GitHub username
         </p>
         <form onSubmit={handleCustomUsernameSubmit} className="flex flex-col gap-2">
-          <RFDS.Input
+          <Input
             type="text"
             value={customUsername}
             onChange={(e) => setCustomUsername(e.target.value)}
@@ -120,7 +121,7 @@ export function UsernameInput({ githubLogin, onUsernameChange, isPending }: User
             autoFocus
           />
           <div className="flex gap-2">
-            <RFDS.SemanticButton
+            <SemanticButton
               type="submit"
               variant="primary"
               size="sm"
@@ -128,8 +129,8 @@ export function UsernameInput({ githubLogin, onUsernameChange, isPending }: User
               className="flex-1 text-xs uppercase tracking-[0.2em]"
             >
               {isPending ? "Checking..." : "Check"}
-            </RFDS.SemanticButton>
-            <RFDS.SemanticButton
+            </SemanticButton>
+            <SemanticButton
               type="button"
               variant="ghost"
               size="sm"
@@ -140,7 +141,7 @@ export function UsernameInput({ githubLogin, onUsernameChange, isPending }: User
               className="text-xs uppercase tracking-[0.2em]"
             >
               Cancel
-            </RFDS.SemanticButton>
+            </SemanticButton>
           </div>
         </form>
       </div>
@@ -153,13 +154,13 @@ export function UsernameInput({ githubLogin, onUsernameChange, isPending }: User
       <p className="text-xs text-foreground/60">
         Track your React ecosystem contributions
       </p>
-      <RFDS.SemanticButton
+      <SemanticButton
         variant="secondary"
         onClick={() => setShowCustomInput(true)}
         className="w-full"
       >
         Enter GitHub Username
-      </RFDS.SemanticButton>
+      </SemanticButton>
     </div>
   );
 }

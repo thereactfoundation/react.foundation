@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { RFDS } from '@/components/rfds';
-
+import { SemanticButton } from '@/components/rfds/semantic-components';
 export function MigrationButton() {
   const [migrating, setMigrating] = useState(false);
   const [result, setResult] = useState<string | null>(null);
@@ -24,8 +23,9 @@ export function MigrationButton() {
       } else {
         setResult(`❌ Failed: ${data.error}`);
       }
-    } catch (err: any) {
-      setResult(`❌ Error: ${err.message}`);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      setResult(`❌ Error: ${message}`);
     } finally {
       setMigrating(false);
     }
@@ -33,13 +33,13 @@ export function MigrationButton() {
 
   return (
     <div className="space-y-2">
-      <RFDS.SemanticButton
+      <SemanticButton
         variant="warning"
         onClick={handleMigrate}
         disabled={migrating}
       >
         {migrating ? 'Migrating...' : 'Trigger Migration Now'}
-      </RFDS.SemanticButton>
+      </SemanticButton>
       {result && (
         <p className={`text-sm ${result.includes('✅') ? 'text-success-foreground' : 'text-destructive'}`}>
           {result}

@@ -7,7 +7,8 @@
 
 import { useEffect, useRef, useState, type RefObject } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { RFDS } from '@/components/rfds';
+import { SemanticButton } from '@/components/rfds/semantic-components';
+import { Checkbox } from '@/components/ui/checkbox';
 import { SortDropdown } from '@/components/ui/sort-dropdown';
 import type { CommunityFilters as Filters, CommunityStatusFilter, EventType } from '@/types/community';
 
@@ -131,14 +132,14 @@ export function CommunityFilters() {
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold text-foreground">Filters</h3>
         {hasActiveFilters && (
-          <RFDS.SemanticButton
+          <SemanticButton
             variant="ghost"
             size="sm"
             onClick={clearFilters}
             className="text-sm"
           >
             Clear all
-          </RFDS.SemanticButton>
+          </SemanticButton>
         )}
       </div>
 
@@ -177,7 +178,7 @@ export function CommunityFilters() {
           {(['meetup', 'conference', 'workshop', 'hackathon', 'virtual'] as EventType[]).map(
             (type) => (
               <label key={type} className="flex items-center gap-2 cursor-pointer group">
-                <RFDS.Checkbox
+                <Checkbox
                   checked={filters.event_types?.includes(type) || false}
                   onChange={() => toggleEventType(type)}
                   className="w-4 h-4"
@@ -226,9 +227,9 @@ export function CommunityFilters() {
       </div> */}
 
       {/* Apply button (for mobile) */}
-      <RFDS.SemanticButton variant="primary" className="w-full lg:hidden">
+      <SemanticButton variant="primary" className="w-full lg:hidden">
         Apply Filters
-      </RFDS.SemanticButton>
+      </SemanticButton>
     </div>
   );
 }

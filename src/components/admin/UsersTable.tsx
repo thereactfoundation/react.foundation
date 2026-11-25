@@ -7,7 +7,8 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { RFDS, type TableColumn } from '@/components/rfds';
+import { SemanticButton, SemanticBadge } from '@/components/rfds/semantic-components';
+import { Table, type TableColumn } from '@/components/rfds/table';
 import { RoleSelector } from '@/components/admin/role-selector';
 import type { User, UserRole } from '@/lib/admin/types';
 import { ROLE_LABELS } from '@/lib/admin/types';
@@ -122,22 +123,22 @@ export function UsersTable({ users, currentUserEmail, onUpdate }: UsersTableProp
                 disabled={isPending}
               />
               <div className="flex gap-2">
-                <RFDS.SemanticButton
+                <SemanticButton
                   variant="primary"
                   size="sm"
                   onClick={() => handleSaveRoles(user.email)}
                   disabled={isPending}
                 >
                   Save
-                </RFDS.SemanticButton>
-                <RFDS.SemanticButton
+                </SemanticButton>
+                <SemanticButton
                   variant="ghost"
                   size="sm"
                   onClick={handleCancelEdit}
                   disabled={isPending}
                 >
                   Cancel
-                </RFDS.SemanticButton>
+                </SemanticButton>
               </div>
               {error && editingUser === user.email && (
                 <p className="text-xs text-destructive">{error}</p>
@@ -164,12 +165,12 @@ export function UsersTable({ users, currentUserEmail, onUpdate }: UsersTableProp
                   library_manager: 'success',
                 };
               return (
-                <RFDS.SemanticBadge
+                <SemanticBadge
                   key={role}
                   variant={roleColors[role] || 'default'}
                 >
                   {ROLE_LABELS[role]}
-                </RFDS.SemanticBadge>
+                </SemanticBadge>
               );
             })}
           </div>
@@ -195,7 +196,7 @@ export function UsersTable({ users, currentUserEmail, onUpdate }: UsersTableProp
 
         return (
           <div className="flex items-center gap-2 justify-end">
-            <RFDS.SemanticButton
+            <SemanticButton
               variant="ghost"
               size="sm"
               onClick={() => handleEditRoles(user.email, user.roles)}
@@ -205,8 +206,8 @@ export function UsersTable({ users, currentUserEmail, onUpdate }: UsersTableProp
               aria-label="Edit user roles"
             >
               <Pencil className="h-4 w-4" />
-            </RFDS.SemanticButton>
-            <RFDS.SemanticButton
+            </SemanticButton>
+            <SemanticButton
               variant="ghost"
               size="sm"
               onClick={() => handleRemoveUser(user.email)}
@@ -216,7 +217,7 @@ export function UsersTable({ users, currentUserEmail, onUpdate }: UsersTableProp
               aria-label="Remove user"
             >
               <Trash2 className="h-4 w-4" />
-            </RFDS.SemanticButton>
+            </SemanticButton>
           </div>
         );
       },
@@ -224,7 +225,7 @@ export function UsersTable({ users, currentUserEmail, onUpdate }: UsersTableProp
   ];
 
   return (
-    <RFDS.Table
+    <Table
       data={users}
       columns={columns}
       searchable
