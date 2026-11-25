@@ -82,6 +82,9 @@ export default function AboutPage() {
               <h2 className="mt-4 text-3xl font-semibold leading-tight text-foreground sm:text-4xl">
                 Keep React open, supported, and ready for what comes next.
               </h2>
+              <ButtonLink href="/about/mission" variant="secondary" className="mt-6">
+                Our vision, mission and goals
+              </ButtonLink>
             </div>
             <div className="divide-y divide-border border-y border-border">
               {commitments.map((commitment) => (
