@@ -107,11 +107,10 @@ export async function deleteChunksIndex(redis: Redis): Promise<void> {
  * Get index statistics
  *
  * @param redis - Redis client
+ * @param indexName - Index to describe
  * @returns Index info or null
  */
-export async function getIndexInfo(redis: Redis): Promise<Record<string, unknown> | null> {
-  const indexName = 'rf:chunks-idx';
-
+export async function getIndexInfo(redis: Redis, indexName: string): Promise<Record<string, unknown> | null> {
   try {
     const info = await redis.call('FT.INFO', indexName) as unknown[];
 
