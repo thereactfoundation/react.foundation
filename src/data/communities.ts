@@ -428,14 +428,14 @@ export const REACT_COMMUNITIES: Community[] = [
         "role": "Organizer"
       }
     ],
-    "founded_date": "2016-01-01",
+    "founded_date": "2026-11-25",
     "event_types": [
       "meetup",
       "conference"
     ],
-    "description": "We bring together developers and tech enthusiasts through regular meetups covering JavaScript, React, frontend development, web technologies, developer tools, and the latest trends in web engineering. Being the oldest ReactJS community in BeNeLux it gathers Front-end developers across the globe in the tech heart of Europe. With internationally recognized speakers, amazing attendee crowd and a top location.",
-    "member_count": 4500,
-    "typical_attendance": 50,
+    "description": "We bring together developers and tech enthusiasts through regular meetups covering JavaScript, React, frontend development, web technologies, developer tools, and the latest trends in web engineering. The meetup brings together the React Amsterdam and AmsterdamJS communities.",
+    "member_count": 1300,
+    "typical_attendance": 80,
     "meeting_frequency": "irregular",
     "primary_language": "English",
     "status": "active",
@@ -444,9 +444,9 @@ export const REACT_COMMUNITIES: Community[] = [
     "cois_tier": "platinum",
     "cois_score": 0.9,
     "meetup_url": "https://luma.com/web-eng-amsterdam",
-    "last_event_date": "2026-09-16",
-    "created_at": "2025-10-24T14:57:54.936Z",
-    "updated_at": "2026-11-24T11:14:14.000Z"
+    "last_event_date": "2026-11-25",
+    "created_at": "2026-11-24T11:14:14.000Z",
+    "updated_at": "2026-11-26T16:07:48.572Z"
   },
   {
     "id": "react-atl",
