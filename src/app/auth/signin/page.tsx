@@ -53,7 +53,7 @@ function SignInShell({ callbackUrl }: { callbackUrl: string | null }) {
             </p>
           </Surface>
 
-          <p className="mt-8 text-center text-sm">
+          <p className="mt-8 text-sm">
             <Link
               href="/"
               className="text-muted-foreground underline-offset-4 transition hover:text-foreground hover:underline"
