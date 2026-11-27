@@ -15,6 +15,9 @@ describe('REACT_COMMUNITIES', () => {
         timezone: 'America/Detroit',
         verified: true,
         verification_status: 'verified',
+        approved_by: 'sethwebster@gmail.com',
+        approved_at: '2026-06-02T15:17:45.621Z',
+        description: expect.stringContaining('Hybrid format, formal meetups 1-2 times a year'),
       })
     );
   });

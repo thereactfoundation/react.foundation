@@ -3,7 +3,7 @@
  * Seeds Redis with community data from single source
  */
 
-import { isSeeded, seedCommunities } from './redis-communities';
+import { ensureCommunitiesSynced, isSeeded, seedCommunities } from './redis-communities';
 import { REACT_COMMUNITIES } from '@/data/communities';
 
 let seedingInProgress = false;
@@ -29,6 +29,7 @@ export async function autoSeedCommunities(): Promise<void> {
     const alreadySeeded = await isSeeded();
 
     if (alreadySeeded) {
+      await ensureCommunitiesSynced();
       console.log('✅ Communities already seeded in Redis');
       seedingComplete = true;
       return;

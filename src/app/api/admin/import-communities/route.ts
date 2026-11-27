@@ -7,10 +7,38 @@
 import { NextResponse } from 'next/server';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { UserManagementService } from '@/lib/admin/user-management-service';
 import type { Community } from '@/types/community';
 import { forceSeed } from '@/lib/redis-communities';
 
-const CITY_COORDINATES: Record<string, any> = {
+interface CityCoordinate {
+  lat: number;
+  lng: number;
+  timezone: string;
+  country: string;
+  region?: string;
+}
+
+interface RawMeetupItem {
+  id: string;
+  name: string;
+  location: string;
+  members: number;
+  totalEvents?: number;
+  status: string;
+  hasHackathons?: boolean;
+  organizers: string[];
+  dateFounded?: string;
+  description: string;
+  meetupFrequency: string;
+  platform?: string;
+  website?: string;
+  lastEventYear?: string;
+}
+
+const CITY_COORDINATES: Record<string, CityCoordinate> = {
   'Tirana, Albania': { lat: 41.3275, lng: 19.8187, timezone: 'Europe/Tirane', country: 'Albania' },
   'Buenos Aires, Argentina': { lat: -34.6037, lng: -58.3816, timezone: 'America/Argentina/Buenos_Aires', country: 'Argentina' },
   'Brisbane, Australia': { lat: -27.4698, lng: 153.0251, timezone: 'Australia/Brisbane', region: 'Queensland', country: 'Australia' },
@@ -74,16 +102,32 @@ function assignTier(members: number, totalEvents: number, status: string): {tier
   return { score };
 }
 
-export async function POST(request: Request) {
+export async function POST() {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.email) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const isAdmin = await UserManagementService.isAdmin(session.user.email);
+    if (!isAdmin) {
+      return NextResponse.json(
+        { success: false, error: 'Admin access required' },
+        { status: 403 }
+      );
+    }
+
     console.log('📥 Starting JSON import...');
 
     // Read JSON file
     const jsonPath = join(process.cwd(), 'data', 'normalized-meetups-data.json');
-    const jsonData = JSON.parse(readFileSync(jsonPath, 'utf-8'));
+    const jsonData = JSON.parse(readFileSync(jsonPath, 'utf-8')) as RawMeetupItem[];
 
     // Transform
-    const communities: Community[] = jsonData.map((item: any) => {
+    const communities: Community[] = jsonData.map((item) => {
       const locationData = CITY_COORDINATES[item.location] || {
         lat: 0, lng: 0, timezone: 'UTC',
         country: item.location.split(',').pop()?.trim() || 'Unknown',
@@ -146,11 +190,11 @@ export async function POST(request: Request) {
       }
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('❌ Import failed:', error);
     return NextResponse.json({
       success: false,
-      error: error.message,
+      error: error instanceof Error ? error.message : 'Import failed',
     }, { status: 500 });
   }
 }
