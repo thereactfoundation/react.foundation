@@ -389,7 +389,7 @@ export const REACT_COMMUNITIES: Community[] = [
     "typical_attendance": 110,
     "meeting_frequency": "quarterly",
     "primary_language": "English",
-    "status": "active",
+    "status": "inactive",
     "invite_only": false,
     "verified": true,
     "cois_tier": "platinum",
@@ -399,6 +399,54 @@ export const REACT_COMMUNITIES: Community[] = [
     "last_event_date": "2024-11-28",
     "created_at": "2025-10-24T14:57:54.936Z",
     "updated_at": "2025-10-24T14:57:54.936Z"
+  },
+  {
+    "id": "web-engineering-amsterdam",
+    "name": "Web Engineering Amsterdam",
+    "slug": "web-engineering-amsterdam",
+    "city": "Amsterdam",
+    "country": "Netherlands",
+    "timezone": "Europe/Amsterdam",
+    "coordinates": {
+      "lat": 52.3676,
+      "lng": 4.9041
+    },
+    "organizers": [
+      {
+        "id": "shiralizadeh",
+        "name": "Mohamad Shiralizadeh",
+        "role": "Organizer"
+      },
+      {
+        "id": "vadjs",
+        "name": "Vadim Zhamkov",
+        "role": "Organizer"
+      },
+      {
+        "id": "karlhorky",
+        "name": "Karl Horky",
+        "role": "Organizer"
+      }
+    ],
+    "founded_date": "2026-11-25",
+    "event_types": [
+      "meetup",
+      "conference"
+    ],
+    "description": "We bring together developers and tech enthusiasts through regular meetups covering JavaScript, React, frontend development, web technologies, developer tools, and the latest trends in web engineering. The meetup brings together the React Amsterdam and AmsterdamJS communities.",
+    "member_count": 1300,
+    "typical_attendance": 80,
+    "meeting_frequency": "irregular",
+    "primary_language": "English",
+    "status": "active",
+    "invite_only": false,
+    "verified": true,
+    "cois_tier": "platinum",
+    "cois_score": 0.9,
+    "meetup_url": "https://luma.com/web-eng-amsterdam",
+    "last_event_date": "2026-11-25",
+    "created_at": "2026-11-24T11:14:14.000Z",
+    "updated_at": "2026-11-26T16:07:48.572Z"
   },
   {
     "id": "react-atl",
