@@ -7,9 +7,21 @@
 import { NextResponse } from 'next/server';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { UserManagementService } from '@/lib/admin/user-management-service';
 import { REACT_COMMUNITIES } from '@/data/communities';
 import type { Community } from '@/types/community';
 import { forceSeed } from '@/lib/redis-communities';
+
+interface RawMeetupItem {
+  name: string;
+  location: string;
+  members: number;
+  status: string;
+  dateFounded?: string;
+  description: string;
+}
 
 function slugify(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -19,8 +31,24 @@ function normalizeName(name: string): string {
   return name.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
 }
 
-export async function POST(request: Request) {
+export async function POST() {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.email) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const isAdmin = await UserManagementService.isAdmin(session.user.email);
+    if (!isAdmin) {
+      return NextResponse.json(
+        { success: false, error: 'Admin access required' },
+        { status: 403 }
+      );
+    }
+
     console.log('🔄 Starting merge...');
 
     // Source 1: Manual data
@@ -28,7 +56,7 @@ export async function POST(request: Request) {
 
     // Source 2: JSON data
     const jsonPath = join(process.cwd(), 'data', 'normalized-meetups-data.json');
-    const jsonData = JSON.parse(readFileSync(jsonPath, 'utf-8'));
+    const jsonData = JSON.parse(readFileSync(jsonPath, 'utf-8')) as RawMeetupItem[];
 
     // Deduplicate
     const communityMap = new Map<string, Community>();
@@ -40,7 +68,7 @@ export async function POST(request: Request) {
 
     // Add JSON communities if not duplicate
     let added = 0;
-    jsonData.forEach((item: any) => {
+    jsonData.forEach((item) => {
       const key = normalizeName(item.name);
       if (!communityMap.has(key)) {
         // Simple transform for new ones
@@ -95,11 +123,11 @@ export async function POST(request: Request) {
       stats,
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('❌ Merge failed:', error);
     return NextResponse.json({
       success: false,
-      error: error.message,
+      error: error instanceof Error ? error.message : 'Merge failed',
     }, { status: 500 });
   }
 }

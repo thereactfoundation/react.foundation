@@ -2550,7 +2550,7 @@ export const REACT_COMMUNITIES: Community[] = [
     "event_types": [
       "meetup"
     ],
-    "description": "Michigan-based React community getting started in Grand Rapids, with fuller public description and links forthcoming.",
+    "description": "Group to discuss React and its best practices, all levels welcome. Focus on professional development, learning, and fellowship :) \n\nHybrid format, formal meetups 1-2 times a year",
     "member_count": 0,
     "typical_attendance": 0,
     "meeting_frequency": "irregular",
@@ -2559,8 +2559,11 @@ export const REACT_COMMUNITIES: Community[] = [
     "invite_only": false,
     "verified": true,
     "verification_status": "verified",
-    "created_at": "2026-05-15T20:22:40.000Z",
-    "updated_at": "2026-05-15T20:22:40.000Z"
+    "cois_tier": "none",
+    "approved_by": "sethwebster@gmail.com",
+    "approved_at": "2026-06-02T15:17:45.621Z",
+    "created_at": "2026-06-02T15:17:45.621Z",
+    "updated_at": "2026-06-02T15:17:45.621Z"
   },
   {
     "id": "community-c6a17e06-3b4e-413c-896e-08abe8ddeec6",

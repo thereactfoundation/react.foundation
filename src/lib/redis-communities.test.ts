@@ -45,6 +45,18 @@ class MockRedis {
     return added;
   }
 
+  async srem(key: string, ...values: string[]): Promise<number> {
+    const set = this.sets.get(key);
+    if (!set) return 0;
+    let removed = 0;
+    for (const value of values) {
+      if (set.delete(value)) {
+        removed += 1;
+      }
+    }
+    return removed;
+  }
+
   pipeline() {
     const commands: Array<() => Promise<unknown>> = [];
     return {
@@ -54,6 +66,10 @@ class MockRedis {
       },
       sadd: (key: string, ...values: string[]) => {
         commands.push(() => this.sadd(key, ...values));
+        return this;
+      },
+      srem: (key: string, ...values: string[]) => {
+        commands.push(() => this.srem(key, ...values));
         return this;
       },
       del: (key: string) => {
@@ -102,11 +118,11 @@ const baseCommunity = (overrides: Partial<Community>): Community => ({
 
 describe('forceSeed', () => {
   beforeEach(async () => {
-    await redis.del('communities:index', 'communities:seeded', 'communities:all');
     const existingIds = await redis.smembers('communities:index');
     for (const id of existingIds) {
       await redis.del(`communities:${id}`);
     }
+    await redis.del('communities:index', 'communities:seeded', 'communities:seed-hash', 'communities:all');
     vi.resetModules();
   });
 
@@ -204,11 +220,53 @@ describe('forceSeed', () => {
       description: 'Updated description',
     });
   });
+
+  it('deduplicates a runtime-approved community once promoted to source under a new id with the same slug', async () => {
+    const runtimeCommunity = baseCommunity({
+      id: 'community-4e34826d-7d46-4fd5-b0d3-dd1bebd5a11a',
+      name: 'React Michigan',
+      slug: 'react-michigan',
+      approved_by: 'admin@example.com',
+      approved_at: '2026-06-02T15:17:45.621Z',
+    });
+    const otherRuntimeCommunity = baseCommunity({
+      id: 'community-runtime-only',
+      name: 'React Mars',
+      slug: 'react-mars',
+      approved_by: 'admin@example.com',
+      approved_at: '2026-06-03T10:00:00.000Z',
+    });
+
+    for (const community of [runtimeCommunity, otherRuntimeCommunity]) {
+      await redis.set(`communities:${community.id}`, JSON.stringify(community));
+      await redis.sadd('communities:index', community.id);
+    }
+    await redis.set('communities:seeded', 'true');
+
+    const canonicalCommunity = baseCommunity({
+      id: 'react-michigan',
+      name: 'React Michigan',
+      slug: 'react-michigan',
+      approved_by: 'admin@example.com',
+      approved_at: '2026-06-02T15:17:45.621Z',
+    });
+
+    const { forceSeed, getCommunities, getCommunityById } = await import('./redis-communities');
+    await forceSeed([canonicalCommunity]);
+
+    await expect(getCommunityById('community-4e34826d-7d46-4fd5-b0d3-dd1bebd5a11a')).resolves.toBeNull();
+    const communities = await getCommunities();
+    expect(communities.map((c) => c.id).sort()).toEqual(['community-runtime-only', 'react-michigan']);
+  });
 });
 
 describe('public community reads', () => {
   beforeEach(async () => {
-    await redis.del('communities:index', 'communities:seeded', 'communities:all');
+    const existingIds = await redis.smembers('communities:index');
+    for (const id of existingIds) {
+      await redis.del(`communities:${id}`);
+    }
+    await redis.del('communities:index', 'communities:seeded', 'communities:seed-hash', 'communities:all');
     vi.resetModules();
   });
 
@@ -220,5 +278,40 @@ describe('public community reads', () => {
       slug: 'react-bangalore',
       status: 'active',
     });
+  });
+
+  it('auto-syncs stale seeded Redis data when communities:seed-hash is missing or outdated while preserving runtime-approved communities', async () => {
+    const stalePune = baseCommunity({
+      id: 'reactjs-friends-pune',
+      name: 'ReactJS & Friends',
+      slug: 'reactjs-friends-pune',
+    });
+    const runtimeApproved = baseCommunity({
+      id: 'community-runtime-new',
+      name: 'React Moon',
+      slug: 'react-moon',
+      approved_by: 'admin@example.com',
+      approved_at: '2026-11-27T00:00:00.000Z',
+    });
+
+    for (const community of [stalePune, runtimeApproved]) {
+      await redis.set(`communities:${community.id}`, JSON.stringify(community));
+      await redis.sadd('communities:index', community.id);
+    }
+    await redis.set('communities:seeded', 'true');
+    await redis.set('communities:seed-hash', 'outdated-hash');
+
+    const { getCommunityBySlug } = await import('./redis-communities');
+
+    await expect(getCommunityBySlug('react-pune')).resolves.toMatchObject({
+      id: 'react-pune',
+      name: 'React Pune',
+    });
+    await expect(getCommunityBySlug('reactjs-friends-pune')).resolves.toBeNull();
+    await expect(getCommunityBySlug('react-moon')).resolves.toMatchObject({
+      id: 'community-runtime-new',
+      name: 'React Moon',
+    });
+    expect(await redis.get('communities:seed-hash')).not.toBe('outdated-hash');
   });
 });

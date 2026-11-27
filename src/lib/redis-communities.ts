@@ -14,15 +14,73 @@
  * - No need to load all communities for single operations
  */
 
+import { createHash } from 'crypto';
 import type { Community } from '@/types/community';
 import { REACT_COMMUNITIES } from '@/data/communities';
 
 const COMMUNITIES_INDEX_KEY = 'communities:index';
 const COMMUNITY_KEY_PREFIX = 'communities:';
 const SEEDED_FLAG_KEY = 'communities:seeded';
+const SEED_HASH_KEY = 'communities:seed-hash';
+
+export function computeCommunitiesHash(communities: Community[]): string {
+  return createHash('sha256').update(JSON.stringify(communities)).digest('hex');
+}
+
+const CANONICAL_SEED_HASH = computeCommunitiesHash(REACT_COMMUNITIES);
+let verifiedSeedHash: string | null = null;
+let syncInFlight: Promise<void> | null = null;
 
 function getCommunityKey(id: string): string {
   return `${COMMUNITY_KEY_PREFIX}${id}`;
+}
+
+/**
+ * Ensure already-seeded Redis data stays in sync with src/data/communities.ts.
+ * Re-seeds automatically when the canonical dataset hash changes across deploys
+ * while preserving runtime-approved communities not yet in source.
+ */
+export async function ensureCommunitiesSynced(): Promise<void> {
+  if (verifiedSeedHash === CANONICAL_SEED_HASH) {
+    return;
+  }
+
+  if (syncInFlight) {
+    await syncInFlight;
+    return;
+  }
+
+  syncInFlight = (async () => {
+    try {
+      const redis = await getRedis();
+      if (!redis) return;
+
+      const storedHash = await redis.get(SEED_HASH_KEY);
+      if (storedHash === CANONICAL_SEED_HASH) {
+        verifiedSeedHash = CANONICAL_SEED_HASH;
+        return;
+      }
+
+      const indexExists = await redis.exists(COMMUNITIES_INDEX_KEY);
+      const oldDataExists = await redis.exists('communities:all');
+      if (!indexExists && !oldDataExists) {
+        return;
+      }
+
+      if (oldDataExists && !indexExists) {
+        await migrateFromOldFormat();
+      }
+
+      await forceSeed(REACT_COMMUNITIES);
+      verifiedSeedHash = CANONICAL_SEED_HASH;
+    } catch (error) {
+      console.error('❌ Error syncing communities with source data:', error);
+    } finally {
+      syncInFlight = null;
+    }
+  })();
+
+  await syncInFlight;
 }
 
 /**
@@ -88,10 +146,12 @@ export async function seedCommunities(communities: Community[]): Promise<void> {
       pipeline.sadd(COMMUNITIES_INDEX_KEY, ...ids);
     }
 
-    // Set seeded flag
+    // Set seeded flag and canonical dataset hash
     pipeline.set(SEEDED_FLAG_KEY, 'true');
+    pipeline.set(SEED_HASH_KEY, CANONICAL_SEED_HASH);
 
     await pipeline.exec();
+    verifiedSeedHash = CANONICAL_SEED_HASH;
 
     console.log(`✅ Successfully seeded ${communities.length} communities`);
   } catch (error) {
@@ -108,6 +168,8 @@ export async function seedCommunities(communities: Community[]): Promise<void> {
  */
 export async function getCommunitiesFromRedis(): Promise<Community[] | null> {
   try {
+    await ensureCommunitiesSynced();
+
     const redis = await getRedis();
     if (!redis) return null;
 
@@ -343,6 +405,8 @@ export async function deleteCommunity(communityId: string): Promise<void> {
  */
 export async function getCommunityById(id: string): Promise<Community | null> {
   try {
+    await ensureCommunitiesSynced();
+
     const redis = await getRedis();
     if (!redis) return null;
 
@@ -374,6 +438,8 @@ export async function getCommunitiesPaginated(
   pageSize: number = 50
 ): Promise<{ communities: Community[]; total: number; page: number; pageSize: number }> {
   try {
+    await ensureCommunitiesSynced();
+
     const redis = await getRedis();
     if (!redis) {
       return { communities: [], total: 0, page, pageSize };
@@ -415,20 +481,28 @@ export async function forceSeed(communities: Community[]): Promise<void> {
     console.log('🔄 Re-seeding source communities while preserving runtime additions...');
 
     const incomingIds = new Set(communities.map((community) => community.id));
+    const incomingSlugs = new Set(communities.map((community) => community.slug));
     const existingIds = await redis.smembers(COMMUNITIES_INDEX_KEY);
 
     const staleIds = existingIds.filter((id) => !incomingIds.has(id));
     const staleCommunities = await Promise.all(
       staleIds.map(async (id) => {
         const raw = await redis.get(getCommunityKey(id));
-        return raw ? { id, community: JSON.parse(raw) as Community } : null;
+        if (!raw) return null;
+        try {
+          return { id, community: JSON.parse(raw) as Community };
+        } catch {
+          return null;
+        }
       })
     );
 
     const preservedIds = staleCommunities
       .filter(
         (entry): entry is { id: string; community: Community } =>
-          entry !== null && Boolean(entry.community.approved_by || entry.community.approved_at)
+          entry !== null &&
+          Boolean(entry.community.approved_by || entry.community.approved_at) &&
+          !incomingSlugs.has(entry.community.slug)
       )
       .map((entry) => entry.id);
 
@@ -445,7 +519,7 @@ export async function forceSeed(communities: Community[]): Promise<void> {
     }
 
     if (removableIds.length > 0) {
-      pipeline.del(COMMUNITIES_INDEX_KEY);
+      pipeline.srem(COMMUNITIES_INDEX_KEY, ...removableIds);
     }
 
     if (incomingIds.size > 0) {
@@ -458,8 +532,10 @@ export async function forceSeed(communities: Community[]): Promise<void> {
 
     pipeline.del('communities:all');
     pipeline.set(SEEDED_FLAG_KEY, 'true');
+    pipeline.set(SEED_HASH_KEY, CANONICAL_SEED_HASH);
 
     await pipeline.exec();
+    verifiedSeedHash = CANONICAL_SEED_HASH;
 
     console.log(
       `✅ Force re-seed completed (${communities.length} source communities, ${preservedIds.length} runtime preserved, ${removableIds.length} stale removed)`
